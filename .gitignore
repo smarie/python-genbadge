@@ -50,6 +50,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+genbadge/_version.py
 
 # Translations
 *.mo
@@ -105,7 +106,7 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
+venv*/
 ENV/
 env.bak/
 venv.bak/
@@ -127,3 +128,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PyCharm development
+/.idea
+
+# OSX
+.DS_Store
+
+# JUnit and coverage reports
+docs/reports
+
+# ODSClient cache
+.odsclient

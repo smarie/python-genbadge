@@ -1,0 +1,21 @@
+site_name: genbadge
+# site_description: 'A short description of my project'
+repo_url: https://github.com/smarie/python-genbadge
+docs_dir: .
+site_dir: ../site
+nav:
+    - Home: index.md
+    - Why fields: why.md
+    - API reference: api_reference.md
+    - Changelog: changelog.md
+
+theme: material  # readthedocs  mkdocs
+
+markdown_extensions:
+  - pymdownx.highlight  # see https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#highlight
+  - pymdownx.superfences # same as above as well as code blocks inside other blocks
+  - admonition  # to add notes such as http://squidfunk.github.io/mkdocs-material/extensions/admonition/
+#  - codehilite:
+#      guess_lang: false
+  - toc:
+      permalink: true

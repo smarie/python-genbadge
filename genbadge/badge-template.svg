@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ total_width }}" height="20" role="img" aria-label="{{ title }}">
+	<title>{{ title }}</title>
+	<linearGradient id="s" x2="0" y2="100%">
+		<stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+		<stop offset="1" stop-opacity=".1"/>
+	</linearGradient>
+	<clipPath id="r">
+		<rect width="{{ total_width }}" height="20" rx="3" fill="#fff"/>
+	</clipPath>
+	<g clip-path="url(#r)">
+		<rect width="{{ left_width }}" height="20" fill="{{ label_color }}"/>
+		<rect x="{{ left_width }}" width="{{ right_width }}" height="20" fill="#97ca00"/>
+		<rect width="{{ total_width }}" height="20" fill="url(#s)"/>
+	</g>
+	<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110">
+		<text aria-hidden="true" x="{{ left_x }}" y="{{ left_shadow_margin }}" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{{ left_out_text_length }}">{{ left_text }}</text>
+		<text x="{{ left_x }}" y="{{ left_text_margin }}" transform="scale(.1)" fill="#fff" textLength="{{ left_out_text_length }}">{{ left_text }}</text>
+		<text aria-hidden="true" x="{{ right_x }}" y="{{ right_shadow_margin }}" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{{ right_out_text_length }}">{{ right_text }}</text>
+		<text x="{{ right_x }}" y="{{ right_text_margin }}" transform="scale(.1)" fill="#fff" textLength="{{ right_out_text_length }}">{{ right_text }}</text>
+	</g>
+</svg>
