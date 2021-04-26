@@ -47,6 +47,9 @@ class Folders:
     site_reports = site / "reports"
     reports_root = root / "docs" / "reports"
     test_reports = reports_root / "junit"
+    test_xml = test_reports / "junit.xml"
+    test_html = test_reports / "report.html"
+    test_badge = test_reports / "junit-badge.svg"
     coverage_reports = reports_root / "coverage"
     coverage_xml = coverage_reports / "coverage.xml"
 
@@ -108,8 +111,8 @@ def tests(session: PowerSession, coverage, pkg_specs):
 
         # --coverage + junit html reports
         session.run2("coverage run --source {pkg_name} "
-                     "-m pytest --junitxml={dst}/junit.xml --html={dst}/report.html -v {pkg_name}/tests/"
-                     "".format(pkg_name=pkg_name, dst=Folders.test_reports))
+                     "-m pytest --junitxml={test_xml} --html={test_html} -v {pkg_name}/tests/"
+                     "".format(pkg_name=pkg_name, test_xml=Folders.test_xml, test_html=Folders.test_html))
         # session.run2("coverage report")  # this shows in terminal + fails under XX%, same as --cov-report term --cov-fail-under=70  # noqa
         session.run2("coverage xml -o {covxml}".format(covxml=Folders.coverage_xml))
         session.run2("coverage html -d {dst}".format(dst=Folders.coverage_reports))
@@ -118,7 +121,8 @@ def tests(session: PowerSession, coverage, pkg_specs):
 
         # --generates the badge for the test results and fail build if less than x% tests pass
         nox_logger.info("Generating badge for tests coverage")
-        session.run2("python ci_tools/generate-junit-badge.py 100 %s" % Folders.test_reports)
+        # Use our own package to generate the badge
+        session.run2("genbadge junit -i %s -o %s -t 100" % (Folders.test_xml, Folders.test_badge))
 
 
 @power_session(python=[PY37])
