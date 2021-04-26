@@ -19,9 +19,11 @@ def genbadge():
 
 
 @genbadge.command(name="junit")
-@click.option('-f', '--input_file', type=click.File('rt'))
+@click.option('-i', '--input_file', type=click.File('rt'))
 @click.option('-o', '--output_file', type=click.Path())
 @click.option('-t', '--threshold', type=int)
+# TODO -w --webshield
+# TODO -s --stdout
 def gen_junit_badge(
         input_file=None,
         output_file=None,

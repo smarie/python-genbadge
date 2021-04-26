@@ -1,11 +1,21 @@
 from PIL import ImageFont
 
 try:
+    from pathlib import Path
+except ImportError:  # pragma: no cover
+    from pathlib2 import Path  # python 2
+
+try:
     # python 3
     from urllib.parse import quote_plus
 except ImportError:
     # python 2
     from urllib import quote_plus
+
+try:
+    from typing import Union
+except ImportError:  # pragma: no cover
+    pass
 
 from pkg_resources import resource_string
 
@@ -29,14 +39,22 @@ class Badge:
                  left_txt,   # type: str
                  right_txt,  # type: str
                  color,      # type: str
-                 title=None  # type: str
                  ):
         self.left_txt = left_txt
         self.right_txt = right_txt
         self.color = color
-        self.title = title
 
-    def as_svg(self, shields_version=False):
+    def __repr__(self):
+        return "[ %s | %s ]  color: %s" % (self.left_txt, self.right_txt, self.color)
+
+    def as_svg(self,
+               shields_version=False  # type: bool
+               ):
+        """Return a string containing the SVG representation of this badge
+
+        :param shields_version:
+        :return:
+        """
         if not shields_version:
             # generate from our local file template
             return get_svg_badge(label_txt=self.left_txt, msg_txt=self.right_txt, color=self.color)
@@ -47,7 +65,24 @@ class Badge:
             response = requests.get(url, stream=True)
             return response.text
 
-    def write_to(self, path, shields_version=False):
+    def write_to(self,
+                 path,                  # type: Union[str, Path]
+                 shields_version=False  # type: bool
+                 ):
+        """Write the SVG representation of this badge to the given file
+
+        :param path:
+        :param shields_version:
+        :return:
+        """
+        # convert to a Path
+        if isinstance(path, str):
+            path = Path(path)
+
+        # create parent dirs if needed
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        # finally write to
         with open(str(path), mode="wb") as f:
             f.write(self.as_svg(shields_version=shields_version).encode("utf-8"))
 
