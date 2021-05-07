@@ -78,7 +78,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
     # session.run2("pip uninstall pytest-asyncio --yes")
 
     # install all requirements
-    session.install_reqs(setup=True, install=True, tests=True, versions_dct=pkg_specs)
+    session.install_reqs(setup=True, install=True, tests=True, extras=("all",), versions_dct=pkg_specs)
 
     # install CI-only dependencies
     # if install_ci_deps:
@@ -103,7 +103,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
     # finally run all tests
     if not coverage:
         # simple: pytest only
-        session.run2("python -m pytest -v %s/tests/" % pkg_name)
+        session.run2("python -m pytest --cache-clear -v %s/tests/" % pkg_name)
     else:
         # coverage + junit html reports + badge generation
         session.install_reqs(phase="coverage", phase_reqs=["coverage", "pytest-html", "requests", "xunitparser"],
@@ -111,7 +111,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
 
         # --coverage + junit html reports
         session.run2("coverage run --source {pkg_name} "
-                     "-m pytest --junitxml={test_xml} --html={test_html} -v {pkg_name}/tests/"
+                     "-m pytest --cache-clear --junitxml={test_xml} --html={test_html} -v {pkg_name}/tests/"
                      "".format(pkg_name=pkg_name, test_xml=Folders.test_xml, test_html=Folders.test_html))
         # session.run2("coverage report")  # this shows in terminal + fails under XX%, same as --cov-report term --cov-fail-under=70  # noqa
         session.run2("coverage xml -o {covxml}".format(covxml=Folders.coverage_xml))
@@ -122,7 +122,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
         # --generates the badge for the test results and fail build if less than x% tests pass
         nox_logger.info("Generating badge for tests coverage")
         # Use our own package to generate the badge
-        session.run2("genbadge junit -i %s -o %s -t 100" % (Folders.test_xml, Folders.test_badge))
+        session.run2("genbadge tests -i %s -o %s -t 100" % (Folders.test_xml, Folders.test_badge))
 
 
 @power_session(python=[PY37])
