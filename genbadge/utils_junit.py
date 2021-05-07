@@ -28,13 +28,17 @@ class TestStats(object):
         return self.runned - self.skipped - self.failed
 
     @property
-    def total(self):
+    def total_with_skipped(self):
         return self.runned + self.errors
+
+    @property
+    def total_without_skipped(self):
+        return self.runned - self.skipped + self.errors
 
     @property
     def success_percentage(self):
         if self.runned > 0:
-            return floor(self.success * 100 / self.total)
+            return floor(self.success * 100 / self.total_without_skipped)
         else:
             return 100
 
@@ -92,6 +96,6 @@ def get_tests_badge(
     color = get_color(test_stats)
 
     # right_txt = "%s%%" % test_stats.success_percentage
-    right_txt = "%s/%s" % (test_stats.success, test_stats.total)
+    right_txt = "%s/%s" % (test_stats.success, test_stats.total_without_skipped)
 
     return Badge(left_txt="tests", right_txt=right_txt, color=color)

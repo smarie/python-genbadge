@@ -18,28 +18,42 @@ def genbadge():
     pass
 
 
-@genbadge.command(name="junit")
-@click.option('-i', '--input_file', type=click.File('rt'))
-@click.option('-o', '--output_file', type=click.Path())
-@click.option('-t', '--threshold', type=int)
-# TODO -w --webshield
+@genbadge.command(name="tests",
+                  short_help="Generate a badge for the test results (e.g. from a junit.xml).")
+@click.option('-i', '--input_file', type=click.File('rt'), help="")
+@click.option('-o', '--output_file', type=click.Path(), help="")
+@click.option('-t', '--threshold', type=int, help="")
+# TODO -w --web-shields / -l --local-svg
 # TODO -s --stdout
-def gen_junit_badge(
+# TODO -f --format
+def gen_tests_badge(
         input_file=None,
         output_file=None,
         threshold=None
 ):
     """
+    This command generates a badge for the test results, from an XML file in the
+    junit format. Such a file can be for example generated from pytest using the
+    --junitxml flag.
 
-    :param junit_xml_file:
-    :param dest_folder:
-    :param threshold:
-    :return:
+    By default the input file is the relative `./reports/junit/junit.xml` and
+    the output file is `./tests-badge.svg`. You can change these settings with
+    the `-i/--input_file` and `-o/--output-file` options.
+
+    The resulting badge will by default look like this: [tests | 6/12]
+    where 6 is the number of tests that have run successfully, and 12 is the
+    total number of tests minus the number of skipped tests. You can change the
+    appearance of the badge with the --format option (not implemented, todo).
+
+    The success percentage is defined as 6/12 = 50.0%. You can use the
+    `-t/--threshold` flag to setup a minimum success percentage required. If the
+    success percentage is below the threshold, an error will be raised and the
+    badge will not be generated.
     """
     from genbadge.utils_junit import get_test_stats, get_tests_badge
 
     # output file
-    DEFAULT_BADGE_FILE = "junit-badge.svg"
+    DEFAULT_BADGE_FILE = "tests-badge.svg"
     if output_file is None:
         output_file_path = Path(DEFAULT_BADGE_FILE)
     else:
@@ -63,12 +77,12 @@ def gen_junit_badge(
     click.echo("""Test Stats parsed successfully.
  - Source file: %r
  - Nb tests: Total (%s) = Success (%s) + Skipped (%s) + Failed (%s) + Errors (%s)
- - Success percentage: %.2f%%
-""" % (input_file_path, test_stats.total, test_stats.success, test_stats.skipped, test_stats.failed, test_stats.errors,
-       test_stats.success_percentage))
+ - Success percentage: %.2f%% (%s / %s) (Skipped tests are excluded)
+""" % (input_file_path, test_stats.total_with_skipped, test_stats.success, test_stats.skipped, test_stats.failed,
+       test_stats.errors, test_stats.success_percentage, test_stats.success, test_stats.total_without_skipped))
 
     # sanity check
-    if test_stats.total != test_stats.success + test_stats.skipped + test_stats.failed + test_stats.errors:
+    if test_stats.total_with_skipped != test_stats.success + test_stats.skipped + test_stats.failed + test_stats.errors:
         raise click.exceptions.UsageError("Inconsistent junit results: the sum of all kind of tests is not equal to the"
                                           " total. Please report this issue if you think your file is correct. Details:"
                                           " %r" % test_stats)
@@ -84,7 +98,7 @@ def gen_junit_badge(
     badge = get_tests_badge(test_stats)
     badge.write_to(output_file_path)
 
-    click.echo("JUnit badge created: %r" % str(output_file_path.absolute().as_posix()))
+    click.echo("Tests badge created: %r" % str(output_file_path.absolute().as_posix()))
 
 
 # @genbadge.command(name="flake8")

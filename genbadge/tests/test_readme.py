@@ -18,7 +18,7 @@ def test_help():
     """Test that `genbadge` provides the right help"""
 
     runner = CliRunner()
-    result = runner.invoke(genbadge, [])
+    result = runner.invoke(genbadge, [], catch_exceptions=False)
 
     assert result.exit_code == 0
     print(result.output)
@@ -33,23 +33,23 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  junit  :param junit_xml_file: :param dest_folder: :param threshold: :return:
+  tests  Generate a badge for the test results (e.g. from a junit.xml).
 """
 
 
 @pytest.mark.parametrize("variant", ["default", "custom", "custom_shortargs", "custom_absolute"])
 def test_junit(monkeypatch, tmpdir, variant):
-    """Test that `genbadge junit` works correctly"""
+    """Test that `genbadge tests` works correctly"""
 
     # change the working directory to tmpdir
     currentfolder = Path(str(tmpdir))  # TESTS_FOLDER
     monkeypatch.chdir(str(currentfolder))
 
     # create the various arguments
-    args = ["junit"]
+    args = ["tests"]
     if variant == "default":
         infile = currentfolder / "reports" / "junit" / "junit.xml"
-        outfile = currentfolder / "junit-badge.svg"
+        outfile = currentfolder / "tests-badge.svg"
         infile_path_for_msg = str(infile.absolute().as_posix())
     elif variant in ("custom", "custom_shortargs", "custom_absolute"):
         shortargs = "shortargs" in variant
@@ -70,11 +70,11 @@ def test_junit(monkeypatch, tmpdir, variant):
     infile_source = TESTS_FOLDER / "reports" / "junit" / "junit.xml"
     copy(str(infile_source), str(infile))
 
-    # execute "genbadge junit" with the appropriate arguments
+    # execute "genbadge tests" with the appropriate arguments
     runner = CliRunner()
     print("Executing command in tmp folder %s" % (currentfolder,))
     print("\n> genbadge %s\n" % (" ".join(args),))
-    result = runner.invoke(genbadge, args)
+    result = runner.invoke(genbadge, args, catch_exceptions=False)
     print(result.output)
     assert result.exit_code == 0
 
@@ -83,9 +83,9 @@ def test_junit(monkeypatch, tmpdir, variant):
 Test Stats parsed successfully.
  - Source file: %r
  - Nb tests: Total (6) = Success (2) + Skipped (1) + Failed (2) + Errors (1)
- - Success percentage: 33.00%%
+ - Success percentage: 40.00%% (2 / 5) (Skipped tests are excluded)
 
-JUnit badge created: %r
+Tests badge created: %r
 """ % (infile_path_for_msg, outfile_path_for_msg)
 
     assert outfile.exists()
