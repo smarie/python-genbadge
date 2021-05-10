@@ -5,11 +5,22 @@
 
 from io import TextIOWrapper
 from math import floor
-from typing import Union
 
-import xunitparser
+try:
+    from typing import Union
+except ImportError:
+    pass
 
-from genbadge.utils_badge import Badge
+try:
+    # xunitparser is an optional dependency, do not fail if it cant be loaded
+    import xunitparser
+except ImportError as e:
+    class FakeXunitParserImport(object):
+        def __getattribute__(self, item):
+            raise ImportError("Could not import `xunitparser` module, please install it")
+    xunitparser = FakeXunitParserImport()
+
+from .utils_badge import Badge
 
 
 class TestStats(object):

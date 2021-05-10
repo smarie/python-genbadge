@@ -6,6 +6,9 @@ except ImportError:  # pragma: no cover
 import click
 
 
+from .utils_junit import get_test_stats, get_tests_badge
+
+
 @click.group()
 def genbadge():
     """
@@ -23,13 +26,14 @@ def genbadge():
 @click.option('-i', '--input_file', type=click.File('rt'), help="")
 @click.option('-o', '--output_file', type=click.Path(), help="")
 @click.option('-t', '--threshold', type=int, help="")
-# TODO -w --web-shields / -l --local-svg
+@click.option('-w/-l', '--webshields/--local', type=bool, help="", default=True)
 # TODO -s --stdout
 # TODO -f --format
 def gen_tests_badge(
         input_file=None,
         output_file=None,
-        threshold=None
+        threshold=None,
+        webshields=None
 ):
     """
     This command generates a badge for the test results, from an XML file in the
@@ -50,8 +54,6 @@ def gen_tests_badge(
     success percentage is below the threshold, an error will be raised and the
     badge will not be generated.
     """
-    from genbadge.utils_junit import get_test_stats, get_tests_badge
-
     # output file
     DEFAULT_BADGE_FILE = "tests-badge.svg"
     if output_file is None:
@@ -96,7 +98,7 @@ def gen_tests_badge(
     # Old way: call shields.io.   download_badge(test_stats, dest_folder=dest_folder or ".")
     # New way: use the template
     badge = get_tests_badge(test_stats)
-    badge.write_to(output_file_path)
+    badge.write_to(output_file_path, shields_version=webshields)
 
     click.echo("Tests badge created: %r" % str(output_file_path.absolute().as_posix()))
 
