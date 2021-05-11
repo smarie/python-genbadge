@@ -211,7 +211,7 @@ def preferred_width_of(txt, font_name, font_size):
     except (IOError, OSError):
         # Font not found: use the embedded font file from the package
         font_path = resource_filename("genbadge", font_file)
-        if not os.exists(font_path):
+        if not os.path.exists(font_path):
             # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
             import genbadge
             reload(genbadge)
