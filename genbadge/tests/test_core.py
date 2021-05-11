@@ -1,6 +1,6 @@
 import pytest
 
-from genbadge.utils_badge import Badge
+from genbadge import Badge
 
 
 @pytest.mark.parametrize("shields_version", [False],  # TODO, True],
