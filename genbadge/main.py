@@ -8,6 +8,11 @@ import click
 
 from .utils_junit import get_test_stats, get_tests_badge
 
+try:
+    FileNotFoundError
+except NameError:
+    FileNotFoundError = IOError
+
 
 @click.group()
 def genbadge():
@@ -23,9 +28,9 @@ def genbadge():
 
 @genbadge.command(name="tests",
                   short_help="Generate a badge for the test results (e.g. from a junit.xml).")
-@click.option('-i', '--input_file', type=click.File('rt'), help="")
-@click.option('-o', '--output_file', type=click.Path(), help="")
-@click.option('-t', '--threshold', type=int, help="")
+@click.option('-i', '--input-file', type=click.File('rt'), help="")
+@click.option('-o', '--output-file', type=click.Path(), help="")
+@click.option('-t', '--threshold', type=float, help="")
 @click.option('-w/-l', '--webshields/--local', type=bool, help="", default=True)
 # TODO -s --stdout
 # TODO -f --format
@@ -72,12 +77,16 @@ def gen_tests_badge(
     if isinstance(input_file, str):
         input_file_path = Path(input_file).absolute().as_posix()
     else:
-        input_file_path = input_file.name
+        input_file_path = getattr(input_file, "name", "<stdin>")
 
     # First retrieve the success percentage from the junit xml
-    test_stats = get_test_stats(junit_xml_file=input_file)
-    click.echo("""Test Stats parsed successfully.
- - Source file: %r
+    try:
+        test_stats = get_test_stats(junit_xml_file=input_file)
+    except FileNotFoundError:
+        raise click.exceptions.FileError(input_file, hint="File not found")
+
+    # TODO if verbose and not stdout
+    click.echo("""Test statistics parsed successfully from %r
  - Nb tests: Total (%s) = Success (%s) + Skipped (%s) + Failed (%s) + Errors (%s)
  - Success percentage: %.2f%% (%s / %s) (Skipped tests are excluded)
 """ % (input_file_path, test_stats.total_with_skipped, test_stats.success, test_stats.skipped, test_stats.failed,
@@ -85,14 +94,17 @@ def gen_tests_badge(
 
     # sanity check
     if test_stats.total_with_skipped != test_stats.success + test_stats.skipped + test_stats.failed + test_stats.errors:
-        raise click.exceptions.UsageError("Inconsistent junit results: the sum of all kind of tests is not equal to the"
-                                          " total. Please report this issue if you think your file is correct. Details:"
-                                          " %r" % test_stats)
+        raise click.exceptions.ClickException(
+            "Inconsistent junit results: the sum of all kind of tests is not equal to the total. Please report this "
+            "issue if you think your file is correct. Details: %r" % test_stats
+        )
 
     # Validate against the threshold
     if threshold is not None and test_stats.success_percentage < threshold:
-        raise click.exceptions.UsageError("Success percentage %s%% is strictly lower than required threshold %s%%"
-                                          % (test_stats.success_percentage, threshold))
+        raise click.exceptions.ClickException(
+            "Success percentage %s%% is strictly lower than required threshold %s%%"
+            % (float(test_stats.success_percentage), threshold)
+        )
 
     # Generate the badge
     # Old way: call shields.io.   download_badge(test_stats, dest_folder=dest_folder or ".")
@@ -100,7 +112,7 @@ def gen_tests_badge(
     badge = get_tests_badge(test_stats)
     badge.write_to(output_file_path, shields_version=webshields)
 
-    click.echo("Tests badge created: %r" % str(output_file_path.absolute().as_posix()))
+    click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path.absolute().as_posix()))
 
 
 # @genbadge.command(name="flake8")
