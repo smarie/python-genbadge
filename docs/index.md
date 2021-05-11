@@ -174,10 +174,10 @@ yields
 By default no svg is generated: this is a purely abstract badge. You can make it a real badge with the following code:
 
 ```python
-b.write_to("tmp_badge.svg", shields_version=False)
+b.write_to("tmp_badge.svg", use_shields=False)
 ```
 
-Note the optional `shields_version` boolean flag that is used to switch between querying `shields.io` (`True`, default) or using a local SVG file template (`False`, but maybe less bullet-proof).
+Note the optional `use_shields` boolean flag that is used to switch between querying `shields.io` (`True`, default) or using a local SVG file template (`False`, but maybe less bullet-proof).
 
 
 ## See Also

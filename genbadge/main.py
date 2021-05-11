@@ -110,7 +110,7 @@ def gen_tests_badge(
     # Old way: call shields.io.   download_badge(test_stats, dest_folder=dest_folder or ".")
     # New way: use the template
     badge = get_tests_badge(test_stats)
-    badge.write_to(output_file_path, shields_version=webshields)
+    badge.write_to(output_file_path, use_shields=webshields)
 
     click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path.absolute().as_posix()))
 

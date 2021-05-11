@@ -3,9 +3,9 @@ import pytest
 from genbadge import Badge
 
 
-@pytest.mark.parametrize("shields_version", [False],  # TODO, True],
-                         ids="shields_version={}".format)
-def test_genbadge(tmpdir, shields_version):
+@pytest.mark.parametrize("use_shields", [False],  # TODO, True],
+                         ids="use_shields={}".format)
+def test_genbadge(tmpdir, use_shields):
     """Test that the `Badge` class works as expected"""
 
     b = Badge(left_txt="verytring", right_txt="1XYZ", color="green")
@@ -36,10 +36,10 @@ def test_genbadge(tmpdir, shields_version):
 		<text x="825.0" y="140" transform="scale(.1)" fill="#fff" textLength="310">1XYZ</text>
 	</g>
 </svg>"""  # noqa
-    assert standardize_xml("\n" + b.as_svg(shields_version=shields_version)) == standardize_xml(refsvg_str)
+    assert standardize_xml("\n" + b.as_svg(use_shields=use_shields)) == standardize_xml(refsvg_str)
 
     # Write to file
-    b.write_to(str(tmpdir / "tmp_badge.svg"), shields_version=shields_version)
+    b.write_to(str(tmpdir / "tmp_badge.svg"), use_shields=use_shields)
     with open(str(tmpdir / "tmp_badge.svg"), mode="rt") as f:
         svgtxt = f.read()
     assert standardize_xml("\n" + svgtxt) == standardize_xml(refsvg_str)

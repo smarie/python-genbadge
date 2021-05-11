@@ -48,14 +48,14 @@ class Badge:
         return "[ %s | %s ]  color: %s" % (self.left_txt, self.right_txt, self.color)
 
     def as_svg(self,
-               shields_version=False  # type: bool
+               use_shields=False  # type: bool
                ):
         """Return a string containing the SVG representation of this badge
 
-        :param shields_version:
+        :param use_shields:
         :return:
         """
-        if not shields_version:
+        if not use_shields:
             # generate from our local file template
             return get_svg_badge(label_txt=self.left_txt, msg_txt=self.right_txt, color=self.color)
         else:
@@ -67,12 +67,12 @@ class Badge:
 
     def write_to(self,
                  path,                  # type: Union[str, Path]
-                 shields_version=False  # type: bool
+                 use_shields=False  # type: bool
                  ):
         """Write the SVG representation of this badge to the given file
 
         :param path:
-        :param shields_version:
+        :param use_shields:
         :return:
         """
         # convert to a Path
@@ -84,7 +84,7 @@ class Badge:
 
         # finally write to
         with open(str(path), mode="wb") as f:
-            f.write(self.as_svg(shields_version=shields_version).encode("utf-8"))
+            f.write(self.as_svg(use_shields=use_shields).encode("utf-8"))
 
 
 def get_svg_badge(
