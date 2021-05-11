@@ -1,3 +1,6 @@
+import sys
+import platform
+
 import pytest
 
 from genbadge import Badge
@@ -7,6 +10,10 @@ from genbadge import Badge
                          ids="use_shields={}".format)
 def test_genbadge(tmpdir, use_shields):
     """Test that the `Badge` class works as expected"""
+
+    if use_shields is False and sys.version_info < (3,) and platform.system != "Windows":
+        pytest.skip("On Linux the embedded ttf font file is needed, and because of the path change pkg_resources does"
+                    "not manage to find the file on python 2")
 
     b = Badge(left_txt="verytring", right_txt="1XYZ", color="green")
 
