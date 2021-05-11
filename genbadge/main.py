@@ -121,7 +121,7 @@ def _process_infile(input_file, default_in_file):
     """Common in file processor"""
 
     if input_file is None:
-        input_file = DEFAULT_INPUT_FILE
+        input_file = default_in_file
 
     if isinstance(input_file, str):
         input_file_path = Path(input_file).absolute().as_posix()
