@@ -1,5 +1,8 @@
-import pytest
 import platform
+from distutils.version import LooseVersion
+import PIL
+
+import pytest
 
 from genbadge import Badge
 from genbadge.utils_badge import get_local_badge_template
@@ -21,7 +24,7 @@ def test_genbadge(tmpdir, use_shields):
     assert repr(b) == "[ verytring | 1XYZ ]  color: green"
 
     # SVG representation
-    if platform.system() == "Windows":
+    if platform.system() == "Windows" or LooseVersion(PIL.__version__) < "8.0":
         ref_nbs = dict(left_width=63, right_width=41, tot_width=104, left_x=325.0, left_txt_length=530, right_x=825.0, right_txt_length=310)
     else:
         ref_nbs = dict(left_width=61, right_width=39, tot_width=100, left_x=315.0, left_txt_length=510, right_x=795.0, right_txt_length=290)
