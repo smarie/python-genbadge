@@ -5,8 +5,6 @@ docs_dir: .
 site_dir: ../site
 nav:
     - Home: index.md
-    - Why fields: why.md
-    - API reference: api_reference.md
     - Changelog: changelog.md
 
 theme: material  # readthedocs  mkdocs
