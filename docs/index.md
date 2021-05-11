@@ -91,7 +91,9 @@ Now you can generate a badge similar to this one [![Tests Status](./reports/juni
 
 By default it assumes that
 
- - the input file can be found at `./reports/junit/junit.xml`. You can change this with the `-i/--input-file` flag. Note that from `click` documentation `-` can theoretically be used to denote `stdin` but there is no available example yet (let me know !)
+ - the input file can be found at `./reports/junit/junit.xml`. You can change this with the `-i/--input-file` flag. 
+   
+    - `-` can be used to denote `<stdin>`: e.g. `genbadge tests -i - < junit.xml`.
 
  - the output file will be at `./tests-badge.svg`. You can change it with the `-o/--output-file` flag
 
