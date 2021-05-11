@@ -1,3 +1,5 @@
+import os
+
 from PIL import ImageFont
 
 try:
@@ -101,8 +103,7 @@ def get_svg_badge(
     all_text = "%s: %s" % (label_txt, msg_txt) if label_txt else ("%s" % msg_txt)
 
     # Same principle as in shields.io
-    template_path = "badge-template.svg"
-    template = resource_string(__name__, template_path).decode('utf8')
+    template = get_local_badge_template()
 
     horiz_padding = 5
     vertical_margin = 0
@@ -173,6 +174,20 @@ def get_svg_badge(
     return template
 
 
+def get_local_badge_template():
+    """Reads the SVG file template fgrom the package resources"""
+    template_path = "badge-template.svg"
+    try:
+        template = resource_string("genbadge", template_path).decode('utf8')
+    except IOError:
+        # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
+        import genbadge
+        reload(genbadge)
+        template = resource_string("genbadge", template_path).decode('utf8')
+
+    return template
+
+
 def get_color(color_str):
     try:
         color_hexa = COLORS[color_str]
@@ -191,11 +206,18 @@ def preferred_width_of(txt, font_name, font_size):
     # Increase chances of pixel grid alignment.
     font_file = "%s.ttf" % font_name.lower()
     try:
-        # Try from name only
+        # Try from name only - this works if the font is known by the OS
         font = ImageFont.truetype(font=font_file, size=font_size)
     except OSError:
-        # not found: use the embedded one in the package
-        font_path = resource_filename(__name__, font_file)
+        # Font not found: use the embedded font file from the package
+        font_path = resource_filename("genbadge", font_file)
+        if not os.exists(font_path):
+            # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
+            import genbadge
+            reload(genbadge)
+            font_path = resource_filename("genbadge", font_file)
+
         font = ImageFont.truetype(font=font_path, size=font_size)
+
     width = font.getsize(txt)[0]
     return round_up_to_odd(width)

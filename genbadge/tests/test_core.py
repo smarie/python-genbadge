@@ -1,19 +1,18 @@
-import sys
-import platform
-
 import pytest
 
 from genbadge import Badge
+from genbadge.utils_badge import get_local_badge_template
 
 
-@pytest.mark.parametrize("use_shields", [False],  # TODO, True],
+def test_access_pkg_resources():
+    """Make sure accessing the resource from the package is ok"""
+    get_local_badge_template()
+
+
+@pytest.mark.parametrize("use_shields", [False],  # TODO True but the contents are slightly different
                          ids="use_shields={}".format)
 def test_genbadge(tmpdir, use_shields):
     """Test that the `Badge` class works as expected"""
-
-    if use_shields is False and sys.version_info < (3,) and platform.system != "Windows":
-        pytest.skip("On Linux the embedded ttf font file is needed, and because of the path change pkg_resources does"
-                    "not manage to find the file on python 2")
 
     b = Badge(left_txt="verytring", right_txt="1XYZ", color="green")
 

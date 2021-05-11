@@ -79,12 +79,10 @@ def test_junit(monkeypatch, tmpdir, variant):
     currentfolder = Path(str(tmpdir))  # TESTS_FOLDER
 
     # change the working directory to tmpdir
-    # Note: this has a side-effect on python 2 with pip install in dev mode where the module absolute paths seem lost
-    # so the "local" mode (using the svg template) is not available
     monkeypatch.chdir(str(currentfolder))
 
-    # create the various arguments
-    args = ["tests"]
+    # create the various arguments. Use local template for faster exec
+    args = ["tests", "-l"]
     if variant == "default":
         infile = currentfolder / "reports" / "junit" / "junit.xml"
         outfile = currentfolder / "tests-badge.svg"
