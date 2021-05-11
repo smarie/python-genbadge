@@ -1,0 +1,817 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+    
+    
+      
+        <title>genbadge</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#genbadge" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="genbadge" class="md-header__button md-logo" aria-label="genbadge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            genbadge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/smarie/python-genbadge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="genbadge" class="md-nav__button md-logo" aria-label="genbadge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    genbadge
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/smarie/python-genbadge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    Installing
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full" class="md-nav__link">
+    Full
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimal" class="md-nav__link">
+    Minimal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tests-badge" class="md-nav__link">
+    1. Tests badge
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Tests badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite-a-test-report" class="md-nav__link">
+    Prerequisite: a test report
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisite: a test report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-pytest" class="md-nav__link">
+    a. pytest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-other-frameworks" class="md-nav__link">
+    b. Other frameworks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-badge" class="md-nav__link">
+    Generating the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-badge" class="md-nav__link">
+    Using the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failing-on-threshold" class="md-nav__link">
+    Failing on threshold
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-coverage-badge" class="md-nav__link">
+    2. Coverage badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-flake8-badge" class="md-nav__link">
+    3. Flake8 badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-low-level-api" class="md-nav__link">
+    4. Low-level API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    See Also
+  </a>
+  
+    <nav class="md-nav" aria-label="See Also">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    Others
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#want-to-contribute" class="md-nav__link">
+    Want to contribute ?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="why.md" class="md-nav__link">
+        Why fields
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference.md" class="md-nav__link">
+        API reference
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    Installing
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full" class="md-nav__link">
+    Full
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimal" class="md-nav__link">
+    Minimal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tests-badge" class="md-nav__link">
+    1. Tests badge
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Tests badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite-a-test-report" class="md-nav__link">
+    Prerequisite: a test report
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisite: a test report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-pytest" class="md-nav__link">
+    a. pytest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-other-frameworks" class="md-nav__link">
+    b. Other frameworks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-badge" class="md-nav__link">
+    Generating the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-badge" class="md-nav__link">
+    Using the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failing-on-threshold" class="md-nav__link">
+    Failing on threshold
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-coverage-badge" class="md-nav__link">
+    2. Coverage badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-flake8-badge" class="md-nav__link">
+    3. Flake8 badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-low-level-api" class="md-nav__link">
+    4. Low-level API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    See Also
+  </a>
+  
+    <nav class="md-nav" aria-label="See Also">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    Others
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#want-to-contribute" class="md-nav__link">
+    Want to contribute ?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/smarie/python-genbadge/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="genbadge">genbadge<a class="headerlink" href="#genbadge" title="Permanent link">&para;</a></h1>
+<p><em>Generate badges for tools that do not provide one.</em></p>
+<p><a href="https://pypi.python.org/pypi/genbadge/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/genbadge.svg" /></a> <a href="https://github.com/smarie/python-genbadge/actions/workflows/base.yml"><img alt="Build Status" src="https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg" /></a> <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> <a href="https://codecov.io/gh/smarie/python-genbadge"><img alt="codecov" src="https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg" /></a></p>
+<p><a href="https://smarie.github.io/python-genbadge/"><img alt="Documentation" src="https://img.shields.io/badge/doc-latest-blue.svg" /></a> <a href="https://pypi.python.org/pypi/genbadge/"><img alt="PyPI" src="https://img.shields.io/pypi/v/genbadge.svg" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads" src="https://pepy.tech/badge/genbadge" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads per week" src="https://pepy.tech/badge/genbadge/week" /></a> <a href="https://github.com/smarie/python-genbadge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/smarie/python-genbadge.svg" /></a></p>
+<p><code>genbadge</code> provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for <code>tests</code> (<code>pytest</code> or other <code>junit.xml</code>-generating framework), <code>coverage</code> and <code>flake8</code>. </p>
+<p>Badges are either generated using the <a href="https://shields.io/">shields.io</a> HTTP REST API, or with an equivalent local SVG template.</p>
+<h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
+<h3 id="full">Full<a class="headerlink" href="#full" title="Permanent link">&para;</a></h3>
+<p>In order for all comandline features to work, you should install <code>genbadge</code> with the extra dependencies:</p>
+<div class="highlight"><pre><span></span><code>&gt; pip install genbadge<span class="o">[</span>all<span class="o">]</span>
+</code></pre></div>
+<p>This is equivalent to <code>pip install genbadge[tests,coverage,flake8]</code>. Alternatively you can install dependencies for only a subset of commands for example <code>pip install genbadge[tests,flake8]</code>.</p>
+<h3 id="minimal">Minimal<a class="headerlink" href="#minimal" title="Permanent link">&para;</a></h3>
+<p><code>genbadge</code> core only requires <code>click</code> (the CLI framework), <code>pillow</code> (for SVG file templating) and <code>requests</code> (to call the <a href="https://shields.io/">shields.io</a> API). You can install it using</p>
+<div class="highlight"><pre><span></span><code>&gt; pip install genbadge
+</code></pre></div>
+<p>This will only allow you to use the low-level <a href="#4-low-level-api">API</a>.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>Once installed, <code>genbadge</code> is available as a commandline utility. You can get some help with:</p>
+<div class="highlight"><pre><span></span><code>&gt; genbadge
+
+Usage: genbadge <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+
+  Commandline utility to generate badges. To get <span class="nb">help</span> on each <span class="nb">command</span> use:
+
+      genbadge &lt;cmd&gt; --help
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  tests  Generate a badge <span class="k">for</span> the <span class="nb">test</span> results <span class="o">(</span>e.g. from a junit.xml<span class="o">)</span>.
+</code></pre></div>
+<h3 id="1-tests-badge">1. Tests badge<a class="headerlink" href="#1-tests-badge" title="Permanent link">&para;</a></h3>
+<h4 id="prerequisite-a-test-report">Prerequisite: a test report<a class="headerlink" href="#prerequisite-a-test-report" title="Permanent link">&para;</a></h4>
+<h5 id="a-pytest">a. <code>pytest</code><a class="headerlink" href="#a-pytest" title="Permanent link">&para;</a></h5>
+<p>If you use <code>pytest</code>, you can use some options to generate test reports:</p>
+<ul>
+<li>
+<p>with <code>--junitxml=path/to/junit.xml</code> a junit-format report is generated. This is the file that we'll need to generate the badge.</p>
+</li>
+<li>
+<p>with <code>--html=path/to/report.html</code> a detailed HTML report is generated. This is not required to generate the badge, but you might wish to use it so that users navigate to it when they will click on your badge. </p>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Security concerns</p>
+<p>Test reports might contain secrets (keys, env variables, OS user names containing employee numbers, etc.), so always review them carefully before publishing them !</p>
+</div>
+<p>Let's run this in your project:</p>
+<div class="highlight"><pre><span></span><code>&gt; pytest --junitxml<span class="o">=</span>reports/junit/junit.xml --html<span class="o">=</span>reports/junit/report.html
+</code></pre></div>
+<p>You can check that the two files are correctly generated before moving forward.</p>
+<h5 id="b-other-frameworks">b. Other frameworks<a class="headerlink" href="#b-other-frameworks" title="Permanent link">&para;</a></h5>
+<p>Any <code>junit.xml</code> input file would be accepted so other language users (e.g. java) can get this working for them as well.</p>
+<h4 id="generating-the-badge">Generating the badge<a class="headerlink" href="#generating-the-badge" title="Permanent link">&para;</a></h4>
+<p>Now you can generate a badge similar to this one <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> with the following command:</p>
+<div class="highlight"><pre><span></span><code>&gt; genbadge tests
+</code></pre></div>
+<p>By default it assumes that</p>
+<ul>
+<li>
+<p>the input file can be found at <code>./reports/junit/junit.xml</code>. You can change this with the <code>-i/--input-file</code> flag. </p>
+<ul>
+<li><code>-</code> can be used to denote <code>&lt;stdin&gt;</code>: e.g. <code>genbadge tests -i - &lt; junit.xml</code>.</li>
+</ul>
+</li>
+<li>
+<p>the output file will be at <code>./tests-badge.svg</code>. You can change it with the <code>-o/--output-file</code> flag</p>
+</li>
+<li>
+<p>the badge should be generated using <code>shields.io</code> (requires an internet connection). If you prefer you can use <code>-l/--local</code> to use the included SVG file template (less mature but seems to work)</p>
+</li>
+</ul>
+<p>In addition to generating the badge, executing the command will also display some messages:</p>
+<div class="highlight"><pre><span></span><code>Test statistics parsed successfully from <span class="s1">&#39;(...)/reports/junit/junit.xml&#39;</span>
+ - Nb tests: Total <span class="o">(</span><span class="m">6</span><span class="o">)</span> <span class="o">=</span> Success <span class="o">(</span><span class="m">2</span><span class="o">)</span> + Skipped <span class="o">(</span><span class="m">1</span><span class="o">)</span> + Failed <span class="o">(</span><span class="m">2</span><span class="o">)</span> + Errors <span class="o">(</span><span class="m">1</span><span class="o">)</span>
+ - Success percentage: <span class="m">40</span>.00% <span class="o">(</span><span class="m">2</span> / <span class="m">5</span><span class="o">)</span> <span class="o">(</span>Skipped tests are excluded<span class="o">)</span>
+
+SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;</span>
+</code></pre></div>
+<p>The resulting badge will by default look like this: <code>[tests | 2/5]</code> where 2 is the number of tests that have run successfully, and 5 is the total number of tests <em>minus the number of skipped tests</em>. The success percentage, defined as this ratio multiplied by 100, is displayed and can be further used to fail on threshold, see <a href="#failing-on-threshold">below</a>.</p>
+<p>Finally, the color of the badge depends on the success percentage.</p>
+<ul>
+<li>Less than 50%: red</li>
+<li>less than 75%: orange</li>
+<li>less than 90%: green</li>
+<li>higher: bright green</li>
+</ul>
+<h4 id="using-the-badge">Using the badge<a class="headerlink" href="#using-the-badge" title="Permanent link">&para;</a></h4>
+<p>To include the resulting badge in your documentation and make it point to the generated <code>report.html</code>, you can for example use the following markdown:</p>
+<p><code>[![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744)](./reports/junit/report.html)</code></p>
+<p>It will render as follows: <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a></p>
+<p>Note that the query part of the image url <code>?dummy=8484744</code> is a trick so that the github pages web server does not try to add an extra cache layer to the badge. Maybe this is not useful anymore with new versions of github, if you know the answer let me know !</p>
+<div class="admonition warning">
+<p class="admonition-title">Security concerns</p>
+<p>Test reports might contain secrets (keys, env variables, OS user names containing employee numbers, etc.), so always review them carefully before publishing them !</p>
+</div>
+<h4 id="failing-on-threshold">Failing on threshold<a class="headerlink" href="#failing-on-threshold" title="Permanent link">&para;</a></h4>
+<p>You might wish the command to fail if the success percentage is not high enough.</p>
+<p>This may be done using the <code>-t/--threshold</code> flag:</p>
+<div class="highlight"><pre><span></span><code>&gt; genbadge tests -t <span class="m">90</span>
+</code></pre></div>
+<p>will fail and return an exit code of <code>1</code> if the success percentage is strictly lower than 90%.</p>
+<p>The success percentage is defined as the number of tests that have run successfully, divided by the total number of tests <em>minus the number of skipped tests</em>, times 100. So for 6 tests run, if 2 tests ran successfully and 1 was skipped then the success percentage is <code>2 / (6 - 1) * 100</code> which gives <code>40%</code>.</p>
+<h3 id="2-coverage-badge">2. Coverage badge<a class="headerlink" href="#2-coverage-badge" title="Permanent link">&para;</a></h3>
+<p>TODO</p>
+<h3 id="3-flake8-badge">3. Flake8 badge<a class="headerlink" href="#3-flake8-badge" title="Permanent link">&para;</a></h3>
+<p>TODO</p>
+<h3 id="4-low-level-api">4. Low-level API<a class="headerlink" href="#4-low-level-api" title="Permanent link">&para;</a></h3>
+<p>You can create a badge with the <code>Badge</code> class.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">genbadge</span> <span class="kn">import</span> <span class="n">Badge</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">Badge</span><span class="p">(</span><span class="n">left_txt</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="n">right_txt</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+<p>yields</p>
+<div class="highlight"><pre><span></span><code>[ foo | bar ]  color: green
+</code></pre></div>
+<p>By default no svg is generated: this is a purely abstract badge. You can make it a real badge with the following code:</p>
+<div class="highlight"><pre><span></span><code><span class="n">b</span><span class="o">.</span><span class="n">write_to</span><span class="p">(</span><span class="s2">&quot;tmp_badge.svg&quot;</span><span class="p">,</span> <span class="n">use_shields</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>Note the optional <code>use_shields</code> boolean flag that is used to switch between querying <code>shields.io</code> (<code>True</code>, default) or using a local SVG file template (<code>False</code>, but maybe less bullet-proof).</p>
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<p>Other badge generation projects exist:</p>
+<ul>
+<li><a href="https://github.com/dbrgn/coverage-badge"><code>coverage-badge</code></a>, see in particular this <a href="https://github.com/dbrgn/coverage-badge/issues/7">discussion</a></li>
+<li><a href="https://github.com/alex-rudakov/flake8-svg-badge"><code>flake8-svg-badge</code></a> that seems abandoned</li>
+</ul>
+<h3 id="others">Others<a class="headerlink" href="#others" title="Permanent link">&para;</a></h3>
+<p><em>Do you like this library ? You might also like <a href="https://github.com/smarie/OVERVIEW#python">my other python libraries</a></em> </p>
+<h2 id="want-to-contribute">Want to contribute ?<a class="headerlink" href="#want-to-contribute" title="Permanent link">&para;</a></h2>
+<p>Details on the github page: <a href="https://github.com/smarie/python-genbadge">https://github.com/smarie/python-genbadge</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+      
+        <a href="changelog/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Changelog
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      
+    
+  </body>
+</html>
