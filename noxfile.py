@@ -78,6 +78,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
     # session.run2("pip uninstall pytest-asyncio --yes")
 
     # install all requirements
+    # session.install_reqs(phase="pip", phase_reqs=("pip",), versions_dct=pkg_specs)
     session.install_reqs(setup=True, install=True, tests=True, extras=("all",), versions_dct=pkg_specs)
 
     # install CI-only dependencies
