@@ -17,7 +17,7 @@ try:
 except ImportError:  # pragma: no cover
     pass
 
-from pkg_resources import resource_string
+from pkg_resources import resource_string, resource_filename
 
 
 COLORS = {
@@ -189,6 +189,13 @@ def round_up_to_odd(val):
 
 def preferred_width_of(txt, font_name, font_size):
     # Increase chances of pixel grid alignment.
-    font = ImageFont.truetype(font="%s.ttf" % font_name.lower(), size=font_size)
+    font_file = "%s.ttf" % font_name.lower()
+    try:
+        # Try from name only
+        font = ImageFont.truetype(font=font_file, size=font_size)
+    except OSError:
+        # not found: use the embedded one in the package
+        font_path = resource_filename(__name__, font_file)
+        font = ImageFont.truetype(font=font_path, size=font_size)
     width = font.getsize(txt)[0]
     return round_up_to_odd(width)
