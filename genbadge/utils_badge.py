@@ -208,7 +208,7 @@ def preferred_width_of(txt, font_name, font_size):
     try:
         # Try from name only - this works if the font is known by the OS
         font = ImageFont.truetype(font=font_file, size=font_size)
-    except OSError:
+    except (IOError, OSError):
         # Font not found: use the embedded font file from the package
         font_path = resource_filename("genbadge", font_file)
         if not os.exists(font_path):
