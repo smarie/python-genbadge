@@ -1,3 +1,5 @@
+import platform
+import sys
 from shutil import copy
 
 import pytest
@@ -157,6 +159,10 @@ Error: Success percentage 40.0% is strictly lower than required threshold {}%
 @pytest.mark.parametrize("use_shields,shortarg",
                          [(None, None), (False, False), (False, True), (True, False), (True, True)])
 def test_local_remote(use_shields, shortarg, tmpdir):
+
+    if use_shields is False and sys.version_info < (3,) and platform.system != "Windows":
+        pytest.skip("On Linux the embedded ttf font file is needed, and because of the path change pkg_resources does"
+                    "not manage to find the file on python 2")
 
     # from pytest path to pathlib path
     destfolder = Path(str(tmpdir))
