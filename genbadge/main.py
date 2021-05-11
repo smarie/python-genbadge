@@ -32,7 +32,7 @@ def genbadge():
 @click.option('-o', '--output-file', type=click.Path(), help="")
 @click.option('-t', '--threshold', type=float, help="")
 @click.option('-w/-l', '--webshields/--local', type=bool, help="", default=True)
-# TODO -s --stdout
+# TODO -s --stdout or support '-' for -o
 # TODO -f --format
 def gen_tests_badge(
         input_file=None,
@@ -59,25 +59,9 @@ def gen_tests_badge(
     success percentage is below the threshold, an error will be raised and the
     badge will not be generated.
     """
-    # output file
-    DEFAULT_BADGE_FILE = "tests-badge.svg"
-    if output_file is None:
-        output_file_path = Path(DEFAULT_BADGE_FILE)
-    else:
-        output_file_path = Path(output_file)
-        if output_file_path.is_dir():
-            output_file_path = output_file_path / DEFAULT_BADGE_FILE
-    # if output_file_path.exists():
-    #     answer = input("")
-
-    # input file and its name
-    if input_file is None:
-        input_file = 'reports/junit/junit.xml'
-
-    if isinstance(input_file, str):
-        input_file_path = Path(input_file).absolute().as_posix()
-    else:
-        input_file_path = getattr(input_file, "name", "<stdin>")
+    # Process i/o files
+    input_file, input_file_path = _process_infile(input_file, "reports/junit/junit.xml")
+    output_file_path = _process_outfile(output_file, "tests-badge.svg")
 
     # First retrieve the success percentage from the junit xml
     try:
@@ -107,8 +91,6 @@ def gen_tests_badge(
         )
 
     # Generate the badge
-    # Old way: call shields.io.   download_badge(test_stats, dest_folder=dest_folder or ".")
-    # New way: use the template
     badge = get_tests_badge(test_stats)
     badge.write_to(output_file_path, use_shields=webshields)
 
@@ -133,6 +115,33 @@ def gen_tests_badge(
 #         click.echo("Api key found for platform url '%s': %s" % (url_used, apikey))
 #     else:
 #         click.echo("No api key registered for platform url '%s'" % (url_used, ))
+
+
+def _process_infile(input_file, default_in_file):
+    """Common in file processor"""
+
+    if input_file is None:
+        input_file = DEFAULT_INPUT_FILE
+
+    if isinstance(input_file, str):
+        input_file_path = Path(input_file).absolute().as_posix()
+    else:
+        input_file_path = getattr(input_file, "name", "<stdin>")
+
+    return input_file, input_file_path
+
+
+def _process_outfile(output_file, default_out_file):
+    """Common out file processor"""
+
+    if output_file is None:
+        output_file_path = Path(default_out_file)
+    else:
+        output_file_path = Path(output_file)
+        if output_file_path.is_dir():
+            output_file_path = output_file_path / default_out_file
+
+    return output_file_path
 
 
 if __name__ == '__main__':
