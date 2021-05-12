@@ -78,8 +78,9 @@ def gen_tests_badge(
     except FileNotFoundError:
         raise click.exceptions.FileError(input_file, hint="File not found")
 
-    # TODO if verbose and not stdout
-    click.echo("""Test statistics parsed successfully from %r
+    # TODO if verbose
+    if not is_stdout:
+        click.echo("""Test statistics parsed successfully from %r
  - Nb tests: Total (%s) = Success (%s) + Skipped (%s) + Failed (%s) + Errors (%s)
  - Success percentage: %.2f%% (%s / %s) (Skipped tests are excluded)
 """ % (input_file_path, test_stats.total_with_skipped, test_stats.success, test_stats.skipped, test_stats.failed,
@@ -103,7 +104,8 @@ def gen_tests_badge(
     badge = get_tests_badge(test_stats)
     badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
-    click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path))
+    if not is_stdout:
+        click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path))
 
 
 @genbadge.command(name="coverage",
@@ -143,8 +145,9 @@ def gen_coverage_badge(
     except FileNotFoundError:
         raise click.exceptions.FileError(input_file, hint="File not found")
 
-    # TODO if verbose and not stdout
-    click.echo("""Coverage results parsed successfully from %(ifp)r
+    # TODO if verbose
+    if not is_stdout:
+        click.echo("""Coverage results parsed successfully from %(ifp)r
  - Branch coverage: %(bcp).2f%% (%(bc)s/%(bv)s)
  - Line coverage: %(lcp).2f%% (%(lc)s/%(lv)s)
  - Total coverage: %(tcp).2f%% ((%(bc)s+%(lc)s)/(%(bv)s+%(lv)s))
@@ -156,7 +159,8 @@ def gen_coverage_badge(
     badge = get_coverage_badge(cov_stats)
     badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
-    click.echo("SUCCESS - Coverage badge created: %r" % str(output_file_path))
+    if not is_stdout:
+        click.echo("SUCCESS - Coverage badge created: %r" % str(output_file_path))
 
 
 # @genbadge.command(name="flake8")
