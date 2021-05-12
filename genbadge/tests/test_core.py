@@ -4,9 +4,18 @@ import PIL
 
 import pytest
 
+try:
+    from pathlib import Path
+except ImportError:  # pragma: no cover
+    from pathlib2 import Path  # python 2
+
+
 from genbadge import Badge
 from genbadge.utils_badge import get_local_badge_template
 from genbadge.utils_coverage import parse_cov
+
+
+TESTS_FOLDER = Path(__file__).parent.absolute()
 
 
 def test_access_pkg_resources():
@@ -69,5 +78,5 @@ def standardize_xml(xmltxt):
 
 def test_parse_cov():
     """Check that we can parse a coverage.xml file successfully"""
-    res = parse_cov("reports/coverage/coverage.xml")
+    res = parse_cov(str(TESTS_FOLDER / "reports/coverage/coverage.xml"))
     assert res.line_rate == 0.1781
