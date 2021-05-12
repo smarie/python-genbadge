@@ -68,25 +68,28 @@ class Badge:
             return response.text
 
     def write_to(self,
-                 path,                  # type: Union[str, Path]
+                 path_or_stream,              # type: Union[TextIO, str, Path]
                  use_shields=False  # type: bool
                  ):
         """Write the SVG representation of this badge to the given file
 
-        :param path:
+        :param path_or_stream:
         :param use_shields:
         :return:
         """
         # convert to a Path
-        if isinstance(path, str):
-            path = Path(path)
+        if isinstance(path_or_stream, str):
+            path_or_stream = Path(path_or_stream)
 
         # create parent dirs if needed
-        path.parent.mkdir(parents=True, exist_ok=True)
+        if isinstance(path_or_stream, Path):
+            path_or_stream.parent.mkdir(parents=True, exist_ok=True)
 
-        # finally write to
-        with open(str(path), mode="wb") as f:
-            f.write(self.as_svg(use_shields=use_shields).encode("utf-8"))
+            # finally write to
+            with open(str(path_or_stream), mode="wb") as f:
+                f.write(self.as_svg(use_shields=use_shields).encode("utf-8"))
+        else:
+            path_or_stream.write(self.as_svg(use_shields=use_shields).encode("utf-8"))
 
 
 def get_svg_badge(
