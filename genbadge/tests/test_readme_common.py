@@ -160,9 +160,11 @@ def test_file_not_found(monkeypatch, tmpdir, cmd):
     # default input file: the error is raised by us as a click.exceptions.FileError (exit code 1)
     result = _invoke_genbadge([cmd.name])
     assert result.exit_code == 1
-    assert "\n" + result.output == """
-Error: Could not open file %s: File not found
-""" % cmd.default_infile
+    expected = """
+Error: Could not open file %r: File not found
+"""
+    # note: unfortunately click seems to have changed the display here, we should support single quotes around file name
+    assert "\n" + result.output in (expected % cmd.default_infile, expected.replace("%r", "%s") % cmd.default_infile)
 
     # different non-existent input file: the error is raised by click from click.File as a BadParameterError (code 2)
     result = _invoke_genbadge([cmd.name, "-i", "unknown.file"])
