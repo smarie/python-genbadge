@@ -13,16 +13,24 @@ class CoverageStats(object):
     Contains the results from parsing the coverage.xml.
     """
     def __init__(self,
-                 branch_rate=None, branches_covered=None, branches_valid=None,
-                 complexity=None, line_rate=None, lines_covered=None, lines_valid=None
+                 branches_covered=None, branches_valid=None,
+                 complexity=None, lines_covered=None, lines_valid=None
                  ):
-        self.branch_rate = branch_rate
+        self.complexity = complexity
+
         self.branches_covered = branches_covered
         self.branches_valid = branches_valid
-        self.complexity = complexity
-        self.line_rate = line_rate
+
         self.lines_covered = lines_covered
         self.lines_valid = lines_valid
+
+    @property
+    def branch_rate(self):
+        return self.branches_covered / self.branches_valid
+
+    @property
+    def line_rate(self):
+        return self.lines_covered / self.lines_valid
 
     @property
     def branch_coverage(self):
@@ -31,6 +39,14 @@ class CoverageStats(object):
     @property
     def line_coverage(self):
         return self.line_rate * 100
+
+    @property
+    def total_rate(self):
+        return (self.lines_covered + self.branches_covered) / (self.lines_valid + self.branches_valid)
+
+    @property
+    def total_coverage(self):
+        return self.total_rate * 100
 
 
 def get_coverage_stats(coverage_xml_file):
@@ -58,11 +74,11 @@ def get_color(
 ):
     """ Returns the badge color to use depending on the coverage rate """
 
-    if cov_stats.line_coverage < 50:
+    if cov_stats.total_coverage < 50:
         color = 'red'
-    elif cov_stats.line_coverage < 75:
+    elif cov_stats.total_coverage < 75:
         color = 'orange'
-    elif cov_stats.line_coverage < 90:
+    elif cov_stats.total_coverage < 90:
         color = 'green'
     else:
         color = 'brightgreen'
@@ -78,7 +94,7 @@ def get_coverage_badge(
 
     color = get_color(cov_stats)
 
-    right_txt = "%.2f%%" % (cov_stats.line_coverage,)
+    right_txt = "%.2f%%" % (cov_stats.total_coverage,)
 
     return Badge(left_txt="coverage", right_txt=right_txt, color=color)
 
@@ -100,15 +116,19 @@ class CovParser(object):
         cov = CoverageStats()
         assert root.tag == 'coverage'
 
-        cov.branch_rate = float(root.attrib.get('branch-rate'))
+        cov.complexity = float(root.attrib.get('complexity'))
+
         cov.branches_covered = int(root.attrib.get('branches-covered'))
         cov.branches_valid = int(root.attrib.get('branches-valid'))
 
-        cov.complexity = float(root.attrib.get('complexity'))
-
-        cov.line_rate = float(root.attrib.get('line-rate'))
         cov.lines_covered = int(root.attrib.get('lines-covered'))
         cov.lines_valid = int(root.attrib.get('lines-valid'))
+
+        # recompute the rates for more precision, but make sure that's correct
+        branch_rate = float(root.attrib.get('branch-rate'))
+        assert int(cov.branch_rate * 1000) == int(branch_rate * 1000)
+        line_rate = float(root.attrib.get('line-rate'))
+        assert int(cov.line_rate * 1000) == int(line_rate * 1000)
 
         # for el in root:
         #     if el.tag == 'sources':

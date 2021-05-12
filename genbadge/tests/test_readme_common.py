@@ -81,6 +81,7 @@ COV_CMD = CmdReference(
 Coverage results parsed successfully from %r
  - Branch coverage: 5.56%% (1/18)
  - Line coverage: 17.81%% (13/73)
+ - Total coverage: 15.38%% ((1+13)/(18+73))
 
 SUCCESS - Coverage badge created: %r
 """,

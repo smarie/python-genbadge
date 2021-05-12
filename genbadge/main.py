@@ -130,11 +130,13 @@ def gen_coverage_badge(
         raise click.exceptions.FileError(input_file, hint="File not found")
 
     # TODO if verbose and not stdout
-    click.echo("""Coverage results parsed successfully from %r
- - Branch coverage: %.2f%% (%s/%s)
- - Line coverage: %.2f%% (%s/%s)
-""" % (input_file_path, cov_stats.branch_coverage, cov_stats.branches_covered, cov_stats.branches_valid,
-       cov_stats.line_coverage, cov_stats.lines_covered, cov_stats.lines_valid))
+    click.echo("""Coverage results parsed successfully from %(ifp)r
+ - Branch coverage: %(bcp).2f%% (%(bc)s/%(bv)s)
+ - Line coverage: %(lcp).2f%% (%(lc)s/%(lv)s)
+ - Total coverage: %(tcp).2f%% ((%(bc)s+%(lc)s)/(%(bv)s+%(lv)s))
+""" % dict(ifp=input_file_path, tcp=cov_stats.total_coverage,
+           bcp=cov_stats.branch_coverage, bc=cov_stats.branches_covered, bv=cov_stats.branches_valid,
+           lcp=cov_stats.line_coverage, lc=cov_stats.lines_covered, lv=cov_stats.lines_valid))
 
     # Generate the badge
     badge = get_coverage_badge(cov_stats)

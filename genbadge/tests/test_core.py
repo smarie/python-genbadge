@@ -79,4 +79,17 @@ def standardize_xml(xmltxt):
 def test_parse_cov():
     """Check that we can parse a coverage.xml file successfully"""
     res = parse_cov(str(TESTS_FOLDER / "reports/coverage/coverage.xml"))
-    assert res.line_rate == 0.1781
+
+    assert res.branches_valid == 18
+    assert res.branches_covered == 1
+    assert res.branch_rate == res.branches_covered / res.branches_valid
+
+    assert res.lines_valid == 73
+    assert res.lines_covered == 13
+    assert res.line_rate == res.lines_covered / res.lines_valid
+
+    assert res.branch_coverage == res.branch_rate * 100
+    assert res.line_coverage == res.line_rate * 100
+
+    assert res.total_rate == ((res.lines_covered + res.branches_covered) / (res.branches_valid + res.lines_valid))
+    assert res.total_coverage == 100 * res.total_rate
