@@ -8,9 +8,9 @@
 
 `genbadge` provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for 
 
- - `tests`: `pytest` or other `junit.xml`-generating framework,
- - `coverage`: python coverage or other `coverage.xml`-generating framework, 
- - `flake8`. 
+ - [`tests`](#1-tests-badge): `pytest` or other `junit.xml`-generating framework,
+ - [`coverage`](#2-coverage-badge): python `coverage` or other `coverage.xml`-generating framework, 
+ - [`flake8`](#3-flake8-badge). 
 
 Badges are either generated using the [shields.io](https://shields.io/) HTTP REST API, or with an equivalent local SVG template.
 
@@ -100,6 +100,8 @@ By default it assumes that
     - `-` can be used to denote `<stdin>`: e.g. `genbadge tests -i - < junit.xml`.
 
  - the output file will be at `./tests-badge.svg`. You can change it with the `-o/--output-file` flag
+
+    - `-` can be used to denote `<stdout>`: e.g. `genbadge tests -o - > badge.svg`.
 
  - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
 
@@ -193,6 +195,8 @@ By default it assumes that
     - `-` can be used to denote `<stdin>`: e.g. `genbadge coverage -i - < junit.xml`.
 
  - the output file will be at `./coverage-badge.svg`. You can change it with the `-o/--output-file` flag
+
+    - `-` can be used to denote `<stdout>`: e.g. `genbadge coverage -o - > badge.svg`.
 
  - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
 

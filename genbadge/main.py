@@ -15,6 +15,13 @@ except NameError:
     FileNotFoundError = IOError
 
 
+INFILE_XML_HELP = "An alternate test results XML file to read. '-' is supported and means <stdin>."
+OUTFILE_BADGE_HELP = ("An alternate SVG badge file to write to. '-' is supported and means <stdout>. Note that in this "
+                      "case no other message will be printed to <stdout>.")
+SHIELDS_HELP = ("Indicates if badges should be generated using the shields.io HTTP API (default) or the local SVG file "
+                "template included.")
+
+
 @click.group()
 def genbadge():
     """
@@ -29,11 +36,12 @@ def genbadge():
 
 @genbadge.command(name="tests",
                   short_help="Generate a badge for the test results (e.g. from a junit.xml).")
-@click.option('-i', '--input-file', type=click.File('rt'), help="")
-@click.option('-o', '--output-file', type=click.Path(), help="")
-@click.option('-t', '--threshold', type=float, help="")
-@click.option('-w/-l', '--webshields/--local', type=bool, help="", default=True)
-# TODO -s --stdout or support '-' for -o
+@click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_XML_HELP)
+@click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
+@click.option('-t', '--threshold', type=float,
+              help="An optional success percentage threshold to use. The command will fail with exit code 1 if the"
+                   "actual success percentage is strictly less than the provided value.")
+@click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
 # TODO -f --format
 def gen_tests_badge(
         input_file=None,
@@ -62,7 +70,7 @@ def gen_tests_badge(
     """
     # Process i/o files
     input_file, input_file_path = _process_infile(input_file, "reports/junit/junit.xml")
-    output_file_path = _process_outfile(output_file, "tests-badge.svg")
+    output_file, output_file_path, is_stdout = _process_outfile(output_file, "tests-badge.svg")
 
     # First retrieve the success percentage from the junit xml
     try:
@@ -93,16 +101,16 @@ def gen_tests_badge(
 
     # Generate the badge
     badge = get_tests_badge(test_stats)
-    badge.write_to(output_file_path, use_shields=webshields)
+    badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
-    click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path.absolute().as_posix()))
+    click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path))
 
 
 @genbadge.command(name="coverage",
                   short_help="Generate a badge for the coverage results (e.g. from a coverage.xml).")
-@click.option('-i', '--input-file', type=click.File('rt'), help="")
-@click.option('-o', '--output-file', type=click.Path(), help="")
-@click.option('-w/-l', '--webshields/--local', type=bool, help="", default=True)
+@click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_XML_HELP)
+@click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
+@click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
 def gen_coverage_badge(
         input_file=None,
         output_file=None,
@@ -127,7 +135,7 @@ def gen_coverage_badge(
     """
     # Process i/o files
     input_file, input_file_path = _process_infile(input_file, "reports/coverage/coverage.xml")
-    output_file_path = _process_outfile(output_file, "coverage-badge.svg")
+    output_file, output_file_path, is_stdout = _process_outfile(output_file, "coverage-badge.svg")
 
     # First retrieve the coverage info from the coverage xml
     try:
@@ -146,9 +154,9 @@ def gen_coverage_badge(
 
     # Generate the badge
     badge = get_coverage_badge(cov_stats)
-    badge.write_to(output_file_path, use_shields=webshields)
+    badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
-    click.echo("SUCCESS - Coverage badge created: %r" % str(output_file_path.absolute().as_posix()))
+    click.echo("SUCCESS - Coverage badge created: %r" % str(output_file_path))
 
 
 # @genbadge.command(name="flake8")
@@ -178,7 +186,7 @@ def _process_infile(input_file, default_in_file):
         input_file = default_in_file
 
     if isinstance(input_file, str):
-        input_file_path = Path(input_file).absolute().as_posix()
+        input_file_path = Path(input_file).resolve().absolute().as_posix()
     else:
         input_file_path = getattr(input_file, "name", "<stdin>")
 
@@ -188,14 +196,25 @@ def _process_infile(input_file, default_in_file):
 def _process_outfile(output_file, default_out_file):
     """Common out file processor"""
 
+    is_stdout = False
     if output_file is None:
-        output_file_path = Path(default_out_file)
-    else:
-        output_file_path = Path(output_file)
+        output_file_path = Path(default_out_file).resolve().absolute()
+    elif isinstance(output_file, str):
+        output_file_path = Path(output_file).resolve().absolute()
+        # special case of a directory
         if output_file_path.is_dir():
             output_file_path = output_file_path / default_out_file
+    else:
+        output_file_path = getattr(output_file, "name", "<stdout>")
+        if output_file_path == "<stdout>":
+            is_stdout = True
+        else:
+            output_file_path = Path(output_file_path).resolve().absolute()
 
-    return output_file_path
+    if not is_stdout:
+        output_file_path = output_file_path.as_posix()
+
+    return output_file, output_file_path, is_stdout
 
 
 if __name__ == '__main__':

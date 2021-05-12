@@ -68,10 +68,19 @@ SUCCESS - Tests badge created: %r
   badge will not be generated.
 
 Options:
-  -i, --input-file FILENAME
-  -o, --output-file PATH
-  -t, --threshold FLOAT
-  -w, --webshields / -l, --local
+  -i, --input-file FILENAME       An alternate test results XML file to read.
+                                  '-' is supported and means <stdin>.
+  -o, --output-file FILENAME      An alternate SVG badge file to write to. '-'
+                                  is supported and means <stdout>. Note that in
+                                  this case no other message will be printed to
+                                  <stdout>.
+  -t, --threshold FLOAT           An optional success percentage threshold to
+                                  use. The command will fail with exit code 1 if
+                                  theactual success percentage is strictly less
+                                  than the provided value.
+  -w, --webshields / -l, --local  Indicates if badges should be generated using
+                                  the shields.io HTTP API (default) or the local
+                                  SVG file template included.
   --help                          Show this message and exit.
 """
 )
@@ -107,9 +116,15 @@ SUCCESS - Coverage badge created: %r
   and multiplying this by 100.
 
 Options:
-  -i, --input-file FILENAME
-  -o, --output-file PATH
-  -w, --webshields / -l, --local
+  -i, --input-file FILENAME       An alternate test results XML file to read.
+                                  '-' is supported and means <stdin>.
+  -o, --output-file FILENAME      An alternate SVG badge file to write to. '-'
+                                  is supported and means <stdout>. Note that in
+                                  this case no other message will be printed to
+                                  <stdout>.
+  -w, --webshields / -l, --local  Indicates if badges should be generated using
+                                  the shields.io HTTP API (default) or the local
+                                  SVG file template included.
   --help                          Show this message and exit.
 """
 )
