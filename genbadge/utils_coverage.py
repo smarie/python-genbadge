@@ -4,6 +4,8 @@
 #
 #  License: 3-clause BSD, <https://github.com/smarie/python-genbadge/blob/master/LICENSE>
 
+from __future__ import division
+
 from .utils_badge import Badge
 from xml.etree import ElementTree
 
