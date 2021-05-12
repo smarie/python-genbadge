@@ -167,14 +167,17 @@ Error: Could not open file %r: File not found
     assert "\n" + result.output in (expected % cmd.default_infile, expected.replace("%r", "%s") % cmd.default_infile)
 
     # different non-existent input file: the error is raised by click from click.File as a BadParameterError (code 2)
-    result = _invoke_genbadge([cmd.name, "-i", "unknown.file"])
+    unknown_file = "unknown.file"
+    result = _invoke_genbadge([cmd.name, "-i", unknown_file])
     assert result.exit_code == 2
-    assert "\n" + result.output == """
+    expected = """
 Usage: genbadge {name} [OPTIONS]
 Try 'genbadge {name} --help' for help.
 
-Error: Invalid value for '-i' / '--input-file': Could not open file: unknown.file: No such file or directory
+Error: Invalid value for '-i' / '--input-file': Could not open file: %r: No such file or directory
 """.format(name=cmd.name)
+    # note: unfortunately click seems to have changed the display here, we should support single quotes around file name
+    assert "\n" + result.output in (expected % unknown_file, expected.replace("%r", "%s") % unknown_file)
 
 
 @pytest.mark.parametrize("variant", ["default", "custom", "custom_shortargs", "custom_absolute"])
