@@ -42,6 +42,10 @@ class CoverageStats(object):
 
     @property
     def total_rate(self):
+        """
+        See XmlReport class in https://github.com/nedbat/coveragepy/blob/master/coverage/xmlreport.py
+        for the formula.
+        """
         return (self.lines_covered + self.branches_covered) / (self.lines_valid + self.branches_valid)
 
     @property
@@ -126,9 +130,14 @@ class CovParser(object):
 
         # recompute the rates for more precision, but make sure that's correct
         branch_rate = float(root.attrib.get('branch-rate'))
-        assert int(cov.branch_rate * 1000) == int(branch_rate * 1000)
         line_rate = float(root.attrib.get('line-rate'))
-        assert int(cov.line_rate * 1000) == int(line_rate * 1000)
+
+        if int(cov.branch_rate * 1000) != int(branch_rate * 1000):
+            raise ValueError("Computed branch rate (%s) is different from the one in the file (%s)"
+                             % (cov.branch_rate, branch_rate))
+        if int(cov.line_rate * 1000) != int(line_rate * 1000):
+            raise ValueError("Computed line rate (%s) is different from the one in the file (%s)"
+                             % (cov.line_rate, line_rate))
 
         # for el in root:
         #     if el.tag == 'sources':
