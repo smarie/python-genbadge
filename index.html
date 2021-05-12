@@ -690,9 +690,9 @@
 <p><a href="https://smarie.github.io/python-genbadge/"><img alt="Documentation" src="https://img.shields.io/badge/doc-latest-blue.svg" /></a> <a href="https://pypi.python.org/pypi/genbadge/"><img alt="PyPI" src="https://img.shields.io/pypi/v/genbadge.svg" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads" src="https://pepy.tech/badge/genbadge" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads per week" src="https://pepy.tech/badge/genbadge/week" /></a> <a href="https://github.com/smarie/python-genbadge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/smarie/python-genbadge.svg" /></a></p>
 <p><code>genbadge</code> provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for </p>
 <ul>
-<li><code>tests</code>: <code>pytest</code> or other <code>junit.xml</code>-generating framework,</li>
-<li><code>coverage</code>: python coverage or other <code>coverage.xml</code>-generating framework, </li>
-<li><code>flake8</code>. </li>
+<li><a href="#1-tests-badge"><code>tests</code></a>: <code>pytest</code> or other <code>junit.xml</code>-generating framework,</li>
+<li><a href="#2-coverage-badge"><code>coverage</code></a>: python <code>coverage</code> or other <code>coverage.xml</code>-generating framework, </li>
+<li><a href="#3-flake8-badge"><code>flake8</code></a>. </li>
 </ul>
 <p>Badges are either generated using the <a href="https://shields.io/">shields.io</a> HTTP REST API, or with an equivalent local SVG template.</p>
 <h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
@@ -758,6 +758,9 @@ Commands:
 </li>
 <li>
 <p>the output file will be at <code>./tests-badge.svg</code>. You can change it with the <code>-o/--output-file</code> flag</p>
+<ul>
+<li><code>-</code> can be used to denote <code>&lt;stdout&gt;</code>: e.g. <code>genbadge tests -o - &gt; badge.svg</code>.</li>
+</ul>
 </li>
 <li>
 <p>the badge should be generated using <code>shields.io</code> (requires an internet connection). If you prefer you can use <code>-l/--local</code> to use the included SVG file template (less mature but seems to work)</p>
@@ -831,6 +834,9 @@ SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;<
 </li>
 <li>
 <p>the output file will be at <code>./coverage-badge.svg</code>. You can change it with the <code>-o/--output-file</code> flag</p>
+<ul>
+<li><code>-</code> can be used to denote <code>&lt;stdout&gt;</code>: e.g. <code>genbadge coverage -o - &gt; badge.svg</code>.</li>
+</ul>
 </li>
 <li>
 <p>the badge should be generated using <code>shields.io</code> (requires an internet connection). If you prefer you can use <code>-l/--local</code> to use the included SVG file template (less mature but seems to work)</p>
