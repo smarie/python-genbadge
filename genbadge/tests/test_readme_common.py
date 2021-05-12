@@ -2,6 +2,9 @@ import platform
 import sys
 from shutil import copy
 
+import click
+from distutils.version import LooseVersion
+
 import pytest
 
 try:
@@ -50,14 +53,14 @@ SUCCESS - Tests badge created: %r
   junit format. Such a file can be for example generated from python pytest
   using the --junitxml flag, or from java junit.
 
-  By default the input file is the relative `./reports/junit/junit.xml` and
-  the output file is `./tests-badge.svg`. You can change these settings with
-  the `-i/--input_file` and `-o/--output-file` options.
+  By default the input file is the relative `./reports/junit/junit.xml` and the
+  output file is `./tests-badge.svg`. You can change these settings with the
+  `-i/--input_file` and `-o/--output-file` options.
 
-  The resulting badge will by default look like this: [tests | 6/12] where 6
-  is the number of tests that have run successfully, and 12 is the total
-  number of tests minus the number of skipped tests. You can change the
-  appearance of the badge with the --format option (not implemented, todo).
+  The resulting badge will by default look like this: [tests | 6/12] where 6 is
+  the number of tests that have run successfully, and 12 is the total number of
+  tests minus the number of skipped tests. You can change the appearance of the
+  badge with the --format option (not implemented, todo).
 
   The success percentage is defined as 6/12 = 50.0%. You can use the
   `-t/--threshold` flag to setup a minimum success percentage required. If the
@@ -96,8 +99,8 @@ SUCCESS - Coverage badge created: %r
   with the `-i/--input_file` and `-o/--output-file` options.
 
   The resulting badge will by default look like this: [coverage | 98.1%] where
-  98.1 is the total coverage, obtained from the branch and line coverages
-  using the formula
+  98.1 is the total coverage, obtained from the branch and line coverages using
+  the formula
 
       (nb_lines_covered + nb_branches_covered) / (nb_lines / nb_branches)
 
@@ -123,7 +126,7 @@ def test_help():
 
     assert result.exit_code == 0
     print(result.output)
-    assert "\n" + result.output == """
+    expected = """
 Usage: genbadge [OPTIONS] COMMAND [ARGS]...
 
   Commandline utility to generate badges. To get help on each command use:
@@ -135,10 +138,14 @@ Options:
 
 Commands:
   coverage  Generate a badge for the coverage results (e.g. from a
-            coverage.xml).
-
+            coverage.xml).%s
   tests     Generate a badge for the test results (e.g. from a junit.xml).
 """
+    if LooseVersion(click.__version__) < "8.":
+        expected = expected % "\n"
+    else:
+        expected = expected % ""
+    assert "\n" + result.output == expected
 
 
 @pytest.mark.parametrize("cmd", ALL_COMMANDS, ids=str)
@@ -147,7 +154,12 @@ def test_help_cmd(cmd):
 
     result = _invoke_genbadge([cmd.name, "--help"])
     assert result.exit_code == 0
-    assert result.output == cmd.help_msg
+
+    if LooseVersion(click.__version__) >= "8.":
+        assert result.output == cmd.help_msg
+    else:
+        # the line wrapping seems to have changed, do not check for this old version.
+        pass
 
 
 @pytest.mark.parametrize("cmd", ALL_COMMANDS, ids=str)
@@ -157,16 +169,18 @@ def test_file_not_found(monkeypatch, tmpdir, cmd):
     currentfolder = Path(str(tmpdir))
     monkeypatch.chdir(str(currentfolder))
 
-    # default input file: the error is raised by us as a click.exceptions.FileError (exit code 1)
+    # a) default input file: the error is raised by us as a click.exceptions.FileError (exit code 1)
     result = _invoke_genbadge([cmd.name])
     assert result.exit_code == 1
     expected = """
 Error: Could not open file %r: File not found
 """
-    # note: unfortunately click seems to have changed the display here, we should support single quotes around file name
-    assert "\n" + result.output in (expected % cmd.default_infile, expected.replace("%r", "%s") % cmd.default_infile)
+    # support various versions of click
+    if LooseVersion(click.__version__) < "8.":
+        expected = expected.replace("%r", "%s")
+    assert "\n" + result.output == expected % cmd.default_infile
 
-    # different non-existent input file: the error is raised by click from click.File as a BadParameterError (code 2)
+    # b) different non-existent input file: the error is raised by click from click.File as a BadParameterError (code 2)
     unknown_file = "unknown.file"
     result = _invoke_genbadge([cmd.name, "-i", unknown_file])
     assert result.exit_code == 2
@@ -174,10 +188,14 @@ Error: Could not open file %r: File not found
 Usage: genbadge {name} [OPTIONS]
 Try 'genbadge {name} --help' for help.
 
-Error: Invalid value for '-i' / '--input-file': Could not open file: %r: No such file or directory
+Error: Invalid value for '-i' / '--input-file': %s: No such file or directory
 """.format(name=cmd.name)
-    # note: unfortunately click seems to have changed the display here, we should support single quotes around file name
-    assert "\n" + result.output in (expected % unknown_file, expected.replace("%r", "%s") % unknown_file)
+    # support various versions of click
+    if LooseVersion(click.__version__) < "8.":
+        expected = expected % "Could not open file: %s"
+    else:
+        expected = expected % "%r"
+    assert "\n" + result.output == expected % unknown_file
 
 
 @pytest.mark.parametrize("variant", ["default", "custom", "custom_shortargs", "custom_absolute"])
