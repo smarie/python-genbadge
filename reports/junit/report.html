@@ -243,7 +243,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 11-May-2021 at 15:40:25 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 12-May-2021 at 15:25:52 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -265,8 +265,8 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.7.10</td></tr></table>
     <h2>Summary</h2>
-    <p>25 tests ran in 0.98 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">25 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>33 tests ran in 0.92 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">33 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -298,7 +298,16 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_help</td>
+          <td class="col-name">genbadge/tests/test_core.py::test_parse_cov</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_help</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -313,105 +322,276 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  tests  Generate a badge for the test results (e.g. from a junit.xml).
+  coverage  Generate a badge for the coverage results (e.g. from a
+            coverage.xml).
+  tests     Generate a badge for the test results (e.g. from a junit.xml).
 
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_junit_file_not_found</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_help_cmd[tests]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+&gt; genbadge tests --help
+Usage: genbadge tests [OPTIONS]
+
+  This command generates a badge for the test results, from an XML file in the
+  junit format. Such a file can be for example generated from python pytest
+  using the --junitxml flag, or from java junit.
+
+  By default the input file is the relative `./reports/junit/junit.xml` and the
+  output file is `./tests-badge.svg`. You can change these settings with the
+  `-i/--input_file` and `-o/--output-file` options.
+
+  The resulting badge will by default look like this: [tests | 6/12] where 6 is
+  the number of tests that have run successfully, and 12 is the total number of
+  tests minus the number of skipped tests. You can change the appearance of the
+  badge with the --format option (not implemented, todo).
+
+  The success percentage is defined as 6/12 = 50.0%. You can use the
+  `-t/--threshold` flag to setup a minimum success percentage required. If the
+  success percentage is below the threshold, an error will be raised and the
+  badge will not be generated.
+
+Options:
+  -i, --input-file FILENAME
+  -o, --output-file PATH
+  -t, --threshold FLOAT
+  -w, --webshields / -l, --local
+  --help                          Show this message and exit.
+
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_help_cmd[coverage]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+&gt; genbadge coverage --help
+Usage: genbadge coverage [OPTIONS]
+
+  This command generates a badge for the coverage results, from an XML file in
+  the &#x27;coverage&#x27; format. Such a file can be for example generated using the
+  python `coverage` tool, or java `cobertura`.
+
+  By default the input file is the relative `./reports/coverage/coverage.xml`
+  and the output file is `./coverage-badge.svg`. You can change these settings
+  with the `-i/--input_file` and `-o/--output-file` options.
+
+  The resulting badge will by default look like this: [coverage | 98.1%] where
+  98.1 is the total coverage, obtained from the branch and line coverages using
+  the formula
+
+      (nb_lines_covered + nb_branches_covered) / (nb_lines / nb_branches)
+
+  and multiplying this by 100.
+
+Options:
+  -i, --input-file FILENAME
+  -o, --output-file PATH
+  -w, --webshields / -l, --local
+  --help                          Show this message and exit.
+
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_file_not_found[tests]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
 &gt; genbadge tests
-Error: Could not open file reports/junit/junit.xml: File not found
+Error: Could not open file &#x27;reports/junit/junit.xml&#x27;: File not found
 
 
 &gt; genbadge tests -i unknown.file
 Usage: genbadge tests [OPTIONS]
 Try &#x27;genbadge tests --help&#x27; for help.
 
-Error: Invalid value for &#x27;-i&#x27; / &#x27;--input-file&#x27;: Could not open file: unknown.file: No such file or directory
+Error: Invalid value for &#x27;-i&#x27; / &#x27;--input-file&#x27;: &#x27;unknown.file&#x27;: No such file or directory
 
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_junit[default]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_file_not_found[coverage]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_junit_default_0
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+&gt; genbadge coverage
+Error: Could not open file &#x27;reports/coverage/coverage.xml&#x27;: File not found
+
+
+&gt; genbadge coverage -i unknown.file
+Usage: genbadge coverage [OPTIONS]
+Try &#x27;genbadge coverage --help&#x27; for help.
+
+Error: Invalid value for &#x27;-i&#x27; / &#x27;--input-file&#x27;: &#x27;unknown.file&#x27;: No such file or directory
+
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[tests-default]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_tests_default0
 
 &gt; genbadge tests -l
-Test statistics parsed successfully from &#x27;/tmp/pytest-of-runner/pytest-0/test_junit_default_0/reports/junit/junit.xml&#x27;
+Test statistics parsed successfully from &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_tests_default0/reports/junit/junit.xml&#x27;
  - Nb tests: Total (6) = Success (2) + Skipped (1) + Failed (2) + Errors (1)
  - Success percentage: 40.00% (2 / 5) (Skipped tests are excluded)
 
-SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_junit_default_0/tests-badge.svg&#x27;
+SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_tests_default0/tests-badge.svg&#x27;
 
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_junit[custom]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[tests-custom]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_junit_custom_0
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_0
 
 &gt; genbadge tests -l --input-file foo/foo.xml --output-file bar/bar-badge.svg
 Test statistics parsed successfully from &#x27;foo/foo.xml&#x27;
  - Nb tests: Total (6) = Success (2) + Skipped (1) + Failed (2) + Errors (1)
  - Success percentage: 40.00% (2 / 5) (Skipped tests are excluded)
 
-SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_junit_custom_0/bar/bar-badge.svg&#x27;
+SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_0/bar/bar-badge.svg&#x27;
 
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_junit[custom_shortargs]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[tests-custom_shortargs]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_junit_custom_shortargs_0
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_1
 
 &gt; genbadge tests -l -i foo/foo.xml -o bar/bar-badge.svg
 Test statistics parsed successfully from &#x27;foo/foo.xml&#x27;
  - Nb tests: Total (6) = Success (2) + Skipped (1) + Failed (2) + Errors (1)
  - Success percentage: 40.00% (2 / 5) (Skipped tests are excluded)
 
-SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_junit_custom_shortargs_0/bar/bar-badge.svg&#x27;
+SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_1/bar/bar-badge.svg&#x27;
 
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_junit[custom_absolute]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[tests-custom_absolute]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_junit_custom_absolute_0
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_2
 
-&gt; genbadge tests -l --input-file /tmp/pytest-of-runner/pytest-0/test_junit_custom_absolute_0/foo/foo.xml --output-file bar/bar-badge.svg
-Test statistics parsed successfully from &#x27;/tmp/pytest-of-runner/pytest-0/test_junit_custom_absolute_0/foo/foo.xml&#x27;
+&gt; genbadge tests -l --input-file /tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_2/foo/foo.xml --output-file bar/bar-badge.svg
+Test statistics parsed successfully from &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_2/foo/foo.xml&#x27;
  - Nb tests: Total (6) = Success (2) + Skipped (1) + Failed (2) + Errors (1)
  - Success percentage: 40.00% (2 / 5) (Skipped tests are excluded)
 
-SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_junit_custom_absolute_0/bar/bar-badge.svg&#x27;
+SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_tests_custom_2/bar/bar-badge.svg&#x27;
 
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[False--1]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[coverage-default]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_coverage_defa0
+
+&gt; genbadge coverage -l
+Coverage results parsed successfully from &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_coverage_defa0/reports/coverage/coverage.xml&#x27;
+ - Branch coverage: 5.56% (1/18)
+ - Line coverage: 17.81% (13/73)
+ - Total coverage: 15.38% ((1+13)/(18+73))
+
+SUCCESS - Coverage badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_coverage_defa0/coverage-badge.svg&#x27;
+
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[coverage-custom]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust0
+
+&gt; genbadge coverage -l --input-file foo/foo.xml --output-file bar/bar-badge.svg
+Coverage results parsed successfully from &#x27;foo/foo.xml&#x27;
+ - Branch coverage: 5.56% (1/18)
+ - Line coverage: 17.81% (13/73)
+ - Total coverage: 15.38% ((1+13)/(18+73))
+
+SUCCESS - Coverage badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust0/bar/bar-badge.svg&#x27;
+
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[coverage-custom_shortargs]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust1
+
+&gt; genbadge coverage -l -i foo/foo.xml -o bar/bar-badge.svg
+Coverage results parsed successfully from &#x27;foo/foo.xml&#x27;
+ - Branch coverage: 5.56% (1/18)
+ - Line coverage: 17.81% (13/73)
+ - Total coverage: 15.38% ((1+13)/(18+73))
+
+SUCCESS - Coverage badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust1/bar/bar-badge.svg&#x27;
+
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_any_command[coverage-custom_absolute]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Executing command in tmp folder /tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust2
+
+&gt; genbadge coverage -l --input-file /tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust2/foo/foo.xml --output-file bar/bar-badge.svg
+Coverage results parsed successfully from &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust2/foo/foo.xml&#x27;
+ - Branch coverage: 5.56% (1/18)
+ - Line coverage: 17.81% (13/73)
+ - Total coverage: 15.38% ((1+13)/(18+73))
+
+SUCCESS - Coverage badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_any_command_coverage_cust2/bar/bar-badge.svg&#x27;
+
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[False--1]</td>
           <td class="col-duration">0.22</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -428,8 +608,8 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_thresho
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[False-0]</td>
-          <td class="col-duration">0.05</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[False-0]</td>
+          <td class="col-duration">0.03</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -445,7 +625,7 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_thresho
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[False-40]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[False-40]</td>
           <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -462,7 +642,7 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_thresho
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[False-40.1]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[False-40.1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -479,7 +659,7 @@ Error: Success percentage 40.0% is strictly lower than required threshold 40.1%
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[False-100]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[False-100]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -496,7 +676,7 @@ Error: Success percentage 40.0% is strictly lower than required threshold 100.0%
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[False-101]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[False-101]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -513,8 +693,8 @@ Error: Success percentage 40.0% is strictly lower than required threshold 101.0%
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[True--1]</td>
-          <td class="col-duration">0.06</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[True--1]</td>
+          <td class="col-duration">0.02</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -530,7 +710,7 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_thresho
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[True-0]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[True-0]</td>
           <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -547,8 +727,8 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_thresho
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[True-40]</td>
-          <td class="col-duration">0.06</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[True-40]</td>
+          <td class="col-duration">0.03</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -564,7 +744,7 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_thresho
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[True-40.1]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[True-40.1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -581,7 +761,7 @@ Error: Success percentage 40.0% is strictly lower than required threshold 40.1%
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[True-100]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[True-100]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -598,7 +778,7 @@ Error: Success percentage 40.0% is strictly lower than required threshold 100.0%
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_threshold[True-101]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_threshold[True-101]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -615,8 +795,8 @@ Error: Success percentage 40.0% is strictly lower than required threshold 101.0%
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_local_remote[None-None]</td>
-          <td class="col-duration">0.06</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_local_remote[None-None]</td>
+          <td class="col-duration">0.02</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -632,7 +812,7 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_local_r
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_local_remote[False-False]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_local_remote[False-False]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -649,7 +829,7 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_local_r
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_local_remote[False-True]</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_local_remote[False-True]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -666,8 +846,8 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_local_r
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_local_remote[True-False]</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_local_remote[True-False]</td>
+          <td class="col-duration">0.05</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -683,8 +863,8 @@ SUCCESS - Tests badge created: &#x27;/tmp/pytest-of-runner/pytest-0/test_local_r
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">genbadge/tests/test_readme.py::test_local_remote[True-True]</td>
-          <td class="col-duration">0.05</td>
+          <td class="col-name">genbadge/tests/test_readme_common.py::test_local_remote[True-True]</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">

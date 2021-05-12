@@ -328,6 +328,53 @@
     2. Coverage badge
   </a>
   
+    <nav class="md-nav" aria-label="2. Coverage badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite-a-cov-report" class="md-nav__link">
+    Prerequisite: a cov report
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisite: a cov report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-coverage" class="md-nav__link">
+    a. coverage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-other-frameworks_1" class="md-nav__link">
+    b. Other frameworks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-badge_1" class="md-nav__link">
+    Generating the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-badge_1" class="md-nav__link">
+    Using the badge
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -525,6 +572,53 @@
     2. Coverage badge
   </a>
   
+    <nav class="md-nav" aria-label="2. Coverage badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite-a-cov-report" class="md-nav__link">
+    Prerequisite: a cov report
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisite: a cov report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-coverage" class="md-nav__link">
+    a. coverage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-other-frameworks_1" class="md-nav__link">
+    b. Other frameworks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-badge_1" class="md-nav__link">
+    Generating the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-badge_1" class="md-nav__link">
+    Using the badge
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -592,13 +686,18 @@
                 
                 <h1 id="genbadge">genbadge<a class="headerlink" href="#genbadge" title="Permanent link">&para;</a></h1>
 <p><em>Generate badges for tools that do not provide one.</em></p>
-<p><a href="https://pypi.python.org/pypi/genbadge/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/genbadge.svg" /></a> <a href="https://github.com/smarie/python-genbadge/actions/workflows/base.yml"><img alt="Build Status" src="https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg" /></a> <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> <a href="https://codecov.io/gh/smarie/python-genbadge"><img alt="codecov" src="https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg" /></a></p>
+<p><a href="https://pypi.python.org/pypi/genbadge/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/genbadge.svg" /></a> <a href="https://github.com/smarie/python-genbadge/actions/workflows/base.yml"><img alt="Build Status" src="https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg" /></a> <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a> <a href="https://codecov.io/gh/smarie/python-genbadge"><img alt="codecov" src="https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg" /></a></p>
 <p><a href="https://smarie.github.io/python-genbadge/"><img alt="Documentation" src="https://img.shields.io/badge/doc-latest-blue.svg" /></a> <a href="https://pypi.python.org/pypi/genbadge/"><img alt="PyPI" src="https://img.shields.io/pypi/v/genbadge.svg" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads" src="https://pepy.tech/badge/genbadge" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads per week" src="https://pepy.tech/badge/genbadge/week" /></a> <a href="https://github.com/smarie/python-genbadge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/smarie/python-genbadge.svg" /></a></p>
-<p><code>genbadge</code> provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for <code>tests</code> (<code>pytest</code> or other <code>junit.xml</code>-generating framework), <code>coverage</code> and <code>flake8</code>. </p>
+<p><code>genbadge</code> provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for </p>
+<ul>
+<li><code>tests</code>: <code>pytest</code> or other <code>junit.xml</code>-generating framework,</li>
+<li><code>coverage</code>: python coverage or other <code>coverage.xml</code>-generating framework, </li>
+<li><code>flake8</code>. </li>
+</ul>
 <p>Badges are either generated using the <a href="https://shields.io/">shields.io</a> HTTP REST API, or with an equivalent local SVG template.</p>
 <h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
 <h3 id="full">Full<a class="headerlink" href="#full" title="Permanent link">&para;</a></h3>
-<p>In order for all comandline features to work, you should install <code>genbadge</code> with the extra dependencies:</p>
+<p>In order for all commandline features to work, you should install <code>genbadge</code> with the extra dependencies:</p>
 <div class="highlight"><pre><span></span><code>&gt; pip install genbadge<span class="o">[</span>all<span class="o">]</span>
 </code></pre></div>
 <p>This is equivalent to <code>pip install genbadge[tests,coverage,flake8]</code>. Alternatively you can install dependencies for only a subset of commands for example <code>pip install genbadge[tests,flake8]</code>.</p>
@@ -626,7 +725,7 @@ Commands:
 <h3 id="1-tests-badge">1. Tests badge<a class="headerlink" href="#1-tests-badge" title="Permanent link">&para;</a></h3>
 <h4 id="prerequisite-a-test-report">Prerequisite: a test report<a class="headerlink" href="#prerequisite-a-test-report" title="Permanent link">&para;</a></h4>
 <h5 id="a-pytest">a. <code>pytest</code><a class="headerlink" href="#a-pytest" title="Permanent link">&para;</a></h5>
-<p>If you use <code>pytest</code>, you can use some options to generate test reports:</p>
+<p>If you use <a href="https://docs.pytest.org"><code>pytest</code></a>, you can use some options to generate test reports:</p>
 <ul>
 <li>
 <p>with <code>--junitxml=path/to/junit.xml</code> a junit-format report is generated. This is the file that we'll need to generate the badge.</p>
@@ -696,7 +795,68 @@ SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;<
 <p>will fail and return an exit code of <code>1</code> if the success percentage is strictly lower than 90%.</p>
 <p>The success percentage is defined as the number of tests that have run successfully, divided by the total number of tests <em>minus the number of skipped tests</em>, times 100. So for 6 tests run, if 2 tests ran successfully and 1 was skipped then the success percentage is <code>2 / (6 - 1) * 100</code> which gives <code>40%</code>.</p>
 <h3 id="2-coverage-badge">2. Coverage badge<a class="headerlink" href="#2-coverage-badge" title="Permanent link">&para;</a></h3>
-<p>TODO</p>
+<h4 id="prerequisite-a-cov-report">Prerequisite: a cov report<a class="headerlink" href="#prerequisite-a-cov-report" title="Permanent link">&para;</a></h4>
+<h5 id="a-coverage">a. <code>coverage</code><a class="headerlink" href="#a-coverage" title="Permanent link">&para;</a></h5>
+<p>If you use <a href="https://coverage.readthedocs.io"><code>coverage</code></a>, you can use some options to generate reports:</p>
+<ul>
+<li>
+<p>with <code>coverage report</code> the coverage statistics are displayed in the console. This is not required but might be useful to debug if the xml generation fails.</p>
+</li>
+<li>
+<p>with <code>coverage xml</code> an XML-format report is generated. This is the file that we'll need to generate the badge.</p>
+</li>
+<li>
+<p>with <code>coverage html</code> a detailed HTML report (a folder) is generated. This is not required to generate the badge, but you might wish to use it so that users navigate to it when they will click on your badge. </p>
+</li>
+</ul>
+<p>Let's run this in your project:</p>
+<div class="highlight"><pre><span></span><code>&gt; coverage report
+&gt; coverage xml
+&gt; coverage html
+</code></pre></div>
+<p>You can check that the coverage file and html report folder are correctly generated before moving forward.</p>
+<h5 id="b-other-frameworks_1">b. Other frameworks<a class="headerlink" href="#b-other-frameworks_1" title="Permanent link">&para;</a></h5>
+<p>Any <code>coverage.xml</code> input file would be accepted so other language users (e.g. java) can get this working for them as well.</p>
+<h4 id="generating-the-badge_1">Generating the badge<a class="headerlink" href="#generating-the-badge_1" title="Permanent link">&para;</a></h4>
+<p>Now you can generate a badge similar to this one <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a> with the following command:</p>
+<div class="highlight"><pre><span></span><code>&gt; genbadge coverage
+</code></pre></div>
+<p>By default it assumes that</p>
+<ul>
+<li>
+<p>the input file can be found at <code>./reports/coverage/coverage.xml</code>. You can change this with the <code>-i/--input-file</code> flag. </p>
+<ul>
+<li><code>-</code> can be used to denote <code>&lt;stdin&gt;</code>: e.g. <code>genbadge coverage -i - &lt; junit.xml</code>.</li>
+</ul>
+</li>
+<li>
+<p>the output file will be at <code>./coverage-badge.svg</code>. You can change it with the <code>-o/--output-file</code> flag</p>
+</li>
+<li>
+<p>the badge should be generated using <code>shields.io</code> (requires an internet connection). If you prefer you can use <code>-l/--local</code> to use the included SVG file template (less mature but seems to work)</p>
+</li>
+</ul>
+<p>In addition to generating the badge, executing the command will also display some messages:</p>
+<div class="highlight"><pre><span></span><code>Coverage results parsed successfully from <span class="s1">&#39;(...)/reports/coverage/coverage.xml&#39;</span>
+ - Branch coverage: <span class="m">5</span>.56% <span class="o">(</span><span class="m">1</span>/18<span class="o">)</span>
+ - Line coverage: <span class="m">17</span>.81% <span class="o">(</span><span class="m">13</span>/73<span class="o">)</span>
+ - Total coverage: <span class="m">15</span>.38% <span class="o">((</span><span class="m">1</span>+13<span class="o">)</span>/<span class="o">(</span><span class="m">18</span>+73<span class="o">))</span>
+
+SUCCESS - Coverage badge created: <span class="s1">&#39;(...)/coverage-badge.svg&#39;</span>
+</code></pre></div>
+<p>The resulting badge will by default look like this: <code>[coverage | 98.1%]</code> where 98.1 is the total coverage, obtained from the branch and line coverages using the formula <code>(nb_lines_covered + nb_branches_covered) / (nb_lines / nb_branches)</code> and multiplying this by 100.</p>
+<p>Finally, the color of the badge depends on the success percentage.</p>
+<ul>
+<li>Less than 50%: red</li>
+<li>less than 75%: orange</li>
+<li>less than 90%: green</li>
+<li>higher: bright green</li>
+</ul>
+<h4 id="using-the-badge_1">Using the badge<a class="headerlink" href="#using-the-badge_1" title="Permanent link">&para;</a></h4>
+<p>To include the resulting badge in your documentation and make it point to the generated HTML report, you can for example use the following markdown:</p>
+<p><code>[![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html)</code></p>
+<p>It will render as follows: <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a></p>
+<p>Note that the query part of the image url <code>?dummy=8484744</code> is a trick so that the github pages web server does not try to add an extra cache layer to the badge. Maybe this is not useful anymore with new versions of github, if you know the answer let me know !</p>
 <h3 id="3-flake8-badge">3. Flake8 badge<a class="headerlink" href="#3-flake8-badge" title="Permanent link">&para;</a></h3>
 <p>TODO</p>
 <h3 id="4-low-level-api">4. Low-level API<a class="headerlink" href="#4-low-level-api" title="Permanent link">&para;</a></h3>
