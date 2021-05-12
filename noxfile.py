@@ -52,6 +52,7 @@ class Folders:
     test_badge = test_reports / "junit-badge.svg"
     coverage_reports = reports_root / "coverage"
     coverage_xml = coverage_reports / "coverage.xml"
+    coverage_badge = coverage_reports / "coverage-badge.svg"
 
 
 @power_session(envs=ENVS, logsdir=Folders.runlogs)
@@ -114,7 +115,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
         session.run2("coverage run --source {pkg_name} "
                      "-m pytest --cache-clear --junitxml={test_xml} --html={test_html} -v {pkg_name}/tests/"
                      "".format(pkg_name=pkg_name, test_xml=Folders.test_xml, test_html=Folders.test_html))
-        # session.run2("coverage report")  # this shows in terminal + fails under XX%, same as --cov-report term --cov-fail-under=70  # noqa
+        session.run2("coverage report")
         session.run2("coverage xml -o {covxml}".format(covxml=Folders.coverage_xml))
         session.run2("coverage html -d {dst}".format(dst=Folders.coverage_reports))
         # delete this intermediate file, it is not needed anymore
@@ -124,6 +125,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
         nox_logger.info("Generating badge for tests coverage")
         # Use our own package to generate the badge
         session.run2("genbadge tests -i %s -o %s -t 100" % (Folders.test_xml, Folders.test_badge))
+        session.run2("genbadge coverage -i %s -o %s" % (Folders.coverage_xml, Folders.coverage_badge))
 
 
 @power_session(python=[PY37])

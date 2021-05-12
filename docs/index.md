@@ -2,11 +2,15 @@
 
 *Generate badges for tools that do not provide one.*
 
-[![Python versions](https://img.shields.io/pypi/pyversions/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Build Status](https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg)](https://github.com/smarie/python-genbadge/actions/workflows/base.yml) [![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744)](./reports/junit/report.html) [![codecov](https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg)](https://codecov.io/gh/smarie/python-genbadge)
+[![Python versions](https://img.shields.io/pypi/pyversions/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Build Status](https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg)](https://github.com/smarie/python-genbadge/actions/workflows/base.yml) [![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744)](./reports/junit/report.html) [![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html) [![codecov](https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg)](https://codecov.io/gh/smarie/python-genbadge)
 
 [![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-genbadge/) [![PyPI](https://img.shields.io/pypi/v/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Downloads](https://pepy.tech/badge/genbadge)](https://pepy.tech/project/genbadge) [![Downloads per week](https://pepy.tech/badge/genbadge/week)](https://pepy.tech/project/genbadge) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-genbadge.svg)](https://github.com/smarie/python-genbadge/stargazers)
 
-`genbadge` provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for `tests` (`pytest` or other `junit.xml`-generating framework), `coverage` and `flake8`. 
+`genbadge` provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for 
+
+ - `tests`: `pytest` or other `junit.xml`-generating framework,
+ - `coverage`: python coverage or other `coverage.xml`-generating framework, 
+ - `flake8`. 
 
 Badges are either generated using the [shields.io](https://shields.io/) HTTP REST API, or with an equivalent local SVG template.
 
@@ -14,7 +18,7 @@ Badges are either generated using the [shields.io](https://shields.io/) HTTP RES
 
 ### Full
 
-In order for all comandline features to work, you should install `genbadge` with the extra dependencies:
+In order for all commandline features to work, you should install `genbadge` with the extra dependencies:
 
 ```bash
 > pip install genbadge[all]
@@ -60,7 +64,7 @@ Commands:
 
 ##### a. `pytest`
 
-If you use `pytest`, you can use some options to generate test reports:
+If you use [`pytest`](https://docs.pytest.org), you can use some options to generate test reports:
 
  - with `--junitxml=path/to/junit.xml` a junit-format report is generated. This is the file that we'll need to generate the badge.
 
@@ -148,7 +152,81 @@ The success percentage is defined as the number of tests that have run successfu
 
 ### 2. Coverage badge
 
-TODO
+#### Prerequisite: a cov report
+
+##### a. `coverage`
+
+If you use [`coverage`](https://coverage.readthedocs.io), you can use some options to generate reports:
+
+ - with `coverage report` the coverage statistics are displayed in the console. This is not required but might be useful to debug if the xml generation fails.
+
+ - with `coverage xml` an XML-format report is generated. This is the file that we'll need to generate the badge.
+
+ - with `coverage html` a detailed HTML report (a folder) is generated. This is not required to generate the badge, but you might wish to use it so that users navigate to it when they will click on your badge. 
+   
+Let's run this in your project:
+
+```bash
+> coverage report
+> coverage xml
+> coverage html
+```
+
+You can check that the coverage file and html report folder are correctly generated before moving forward.
+
+##### b. Other frameworks
+
+Any `coverage.xml` input file would be accepted so other language users (e.g. java) can get this working for them as well.
+
+#### Generating the badge
+
+Now you can generate a badge similar to this one [![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html) with the following command:
+
+```bash
+> genbadge coverage
+```
+
+By default it assumes that
+
+ - the input file can be found at `./reports/coverage/coverage.xml`. You can change this with the `-i/--input-file` flag. 
+   
+    - `-` can be used to denote `<stdin>`: e.g. `genbadge coverage -i - < junit.xml`.
+
+ - the output file will be at `./coverage-badge.svg`. You can change it with the `-o/--output-file` flag
+
+ - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
+
+In addition to generating the badge, executing the command will also display some messages:
+
+```bash
+Coverage results parsed successfully from '(...)/reports/coverage/coverage.xml'
+ - Branch coverage: 5.56% (1/18)
+ - Line coverage: 17.81% (13/73)
+ - Total coverage: 15.38% ((1+13)/(18+73))
+
+SUCCESS - Coverage badge created: '(...)/coverage-badge.svg'
+```
+
+The resulting badge will by default look like this: `[coverage | 98.1%]` where 98.1 is the total coverage, obtained from the branch and line coverages using the formula `(nb_lines_covered + nb_branches_covered) / (nb_lines / nb_branches)` and multiplying this by 100.
+
+Finally, the color of the badge depends on the success percentage.
+
+ - Less than 50%: red
+ - less than 75%: orange
+ - less than 90%: green
+ - higher: bright green
+
+
+#### Using the badge
+
+To include the resulting badge in your documentation and make it point to the generated HTML report, you can for example use the following markdown:
+
+`[![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html)`
+
+It will render as follows: [![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html)
+
+Note that the query part of the image url `?dummy=8484744` is a trick so that the github pages web server does not try to add an extra cache layer to the badge. Maybe this is not useful anymore with new versions of github, if you know the answer let me know !
+
 
 ### 3. Flake8 badge
 
