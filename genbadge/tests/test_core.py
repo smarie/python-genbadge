@@ -6,6 +6,7 @@ import pytest
 
 from genbadge import Badge
 from genbadge.utils_badge import get_local_badge_template
+from genbadge.utils_coverage import parse_cov
 
 
 def test_access_pkg_resources():
@@ -64,3 +65,9 @@ def standardize_xml(xmltxt):
     import xml.dom.minidom
     dom = xml.dom.minidom.parseString(xmltxt)  # or xml.dom.minidom.parseString(xml_string)
     return dom.toprettyxml()
+
+
+def test_parse_cov():
+    """Check that we can parse a coverage.xml file successfully"""
+    res = parse_cov("reports/coverage/coverage.xml")
+    assert res.line_rate == 0.1781

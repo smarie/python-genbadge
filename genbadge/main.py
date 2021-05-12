@@ -7,6 +7,7 @@ import click
 
 
 from .utils_junit import get_test_stats, get_tests_badge
+from .utils_coverage import get_coverage_badge, get_coverage_stats
 
 try:
     FileNotFoundError
@@ -42,8 +43,8 @@ def gen_tests_badge(
 ):
     """
     This command generates a badge for the test results, from an XML file in the
-    junit format. Such a file can be for example generated from pytest using the
-    --junitxml flag.
+    junit format. Such a file can be for example generated from python pytest
+    using the --junitxml flag, or from java junit.
 
     By default the input file is the relative `./reports/junit/junit.xml` and
     the output file is `./tests-badge.svg`. You can change these settings with
@@ -95,6 +96,51 @@ def gen_tests_badge(
     badge.write_to(output_file_path, use_shields=webshields)
 
     click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path.absolute().as_posix()))
+
+
+@genbadge.command(name="coverage",
+                  short_help="Generate a badge for the coverage results (e.g. from a coverage.xml).")
+@click.option('-i', '--input-file', type=click.File('rt'), help="")
+@click.option('-o', '--output-file', type=click.Path(), help="")
+@click.option('-w/-l', '--webshields/--local', type=bool, help="", default=True)
+def gen_coverage_badge(
+        input_file=None,
+        output_file=None,
+        webshields=None
+):
+    """
+    This command generates a badge for the coverage results, from an XML file in
+    the 'coverage' format. Such a file can be for example generated using the
+    python `coverage` tool, or java `cobertura`.
+
+    By default the input file is the relative `./reports/coverage/coverage.xml`
+    and the output file is `./coverage-badge.svg`. You can change these settings
+    with the `-i/--input_file` and `-o/--output-file` options.
+
+    The resulting badge will by default look like this: [coverage | 98%].
+    """
+    # Process i/o files
+    input_file, input_file_path = _process_infile(input_file, "reports/coverage/coverage.xml")
+    output_file_path = _process_outfile(output_file, "coverage-badge.svg")
+
+    # First retrieve the coverage info from the coverage xml
+    try:
+        cov_stats = get_coverage_stats(coverage_xml_file=input_file)
+    except FileNotFoundError:
+        raise click.exceptions.FileError(input_file, hint="File not found")
+
+    # TODO if verbose and not stdout
+    click.echo("""Coverage results parsed successfully from %r
+ - Branch coverage: %.2f%% (%s/%s)
+ - Line coverage: %.2f%% (%s/%s)
+""" % (input_file_path, cov_stats.branch_coverage, cov_stats.branches_covered, cov_stats.branches_valid,
+       cov_stats.line_coverage, cov_stats.lines_covered, cov_stats.lines_valid))
+
+    # Generate the badge
+    badge = get_coverage_badge(cov_stats)
+    badge.write_to(output_file_path, use_shields=webshields)
+
+    click.echo("SUCCESS - Coverage badge created: %r" % str(output_file_path.absolute().as_posix()))
 
 
 # @genbadge.command(name="flake8")
