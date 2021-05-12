@@ -190,7 +190,7 @@ def _process_infile(input_file, default_in_file):
         input_file = default_in_file
 
     if isinstance(input_file, str):
-        input_file_path = Path(input_file).resolve().absolute().as_posix()
+        input_file_path = Path(input_file).absolute().as_posix()
     else:
         input_file_path = getattr(input_file, "name", "<stdin>")
 
@@ -202,9 +202,9 @@ def _process_outfile(output_file, default_out_file):
 
     is_stdout = False
     if output_file is None:
-        output_file_path = Path(default_out_file).resolve().absolute()
+        output_file_path = Path(default_out_file).absolute()
     elif isinstance(output_file, str):
-        output_file_path = Path(output_file).resolve().absolute()
+        output_file_path = Path(output_file).absolute()
         # special case of a directory
         if output_file_path.is_dir():
             output_file_path = output_file_path / default_out_file
@@ -213,7 +213,7 @@ def _process_outfile(output_file, default_out_file):
         if output_file_path == "<stdout>":
             is_stdout = True
         else:
-            output_file_path = Path(output_file_path).resolve().absolute()
+            output_file_path = Path(output_file_path).absolute()
 
     if not is_stdout:
         output_file_path = output_file_path.as_posix()
