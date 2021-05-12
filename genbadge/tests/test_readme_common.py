@@ -95,7 +95,13 @@ SUCCESS - Coverage badge created: %r
   and the output file is `./coverage-badge.svg`. You can change these settings
   with the `-i/--input_file` and `-o/--output-file` options.
 
-  The resulting badge will by default look like this: [coverage | 98%].
+  The resulting badge will by default look like this: [coverage | 98.1%] where
+  98.1 is the total coverage, obtained from the branch and line coverages
+  using the formula
+
+      (nb_lines_covered + nb_branches_covered) / (nb_lines / nb_branches)
+
+  and multiplying this by 100.
 
 Options:
   -i, --input-file FILENAME
