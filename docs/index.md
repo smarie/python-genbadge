@@ -6,10 +6,10 @@
 
 [![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-genbadge/) [![PyPI](https://img.shields.io/pypi/v/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Downloads](https://pepy.tech/badge/genbadge)](https://pepy.tech/project/genbadge) [![Downloads per week](https://pepy.tech/badge/genbadge/week)](https://pepy.tech/project/genbadge) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-genbadge.svg)](https://github.com/smarie/python-genbadge/stargazers)
 
-`genbadge` provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for 
+`genbadge` provides a set of commandline utilities to generate badges for tools that do not provide one. It currently can create: 
 
- - [`tests`](#1-tests-badge): `pytest` or other `junit.xml`-generating framework,
- - [`coverage`](#2-coverage-badge): python `coverage` or other `coverage.xml`-generating framework, 
+ - [`tests`](#1-tests-badge) badges such as ![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744) from `pytest` or other `junit.xml`-generating framework,
+ - [`coverage`](#2-coverage-badge) badges such as ![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744) from python `coverage` or other `coverage.xml`-generating framework, 
  - [`flake8`](#3-flake8-badge). 
 
 Badges are either generated using the [shields.io](https://shields.io/) HTTP REST API, or with an equivalent local SVG template.
@@ -105,7 +105,7 @@ By default it assumes that
 
  - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
 
-In addition to generating the badge, executing the command will also display some messages:
+In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose `-v` flag:
 
 ```bash
 Test statistics parsed successfully from '(...)/reports/junit/junit.xml'
@@ -200,7 +200,7 @@ By default it assumes that
 
  - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
 
-In addition to generating the badge, executing the command will also display some messages:
+In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose `-v` flag:
 
 ```bash
 Coverage results parsed successfully from '(...)/reports/coverage/coverage.xml'
