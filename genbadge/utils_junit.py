@@ -2,6 +2,7 @@
 #            + All contributors to <https://github.com/smarie/python-genbadge>
 #
 #  License: 3-clause BSD, <https://github.com/smarie/python-genbadge/blob/master/LICENSE>
+from __future__ import division
 
 from io import TextIOWrapper
 from math import floor
@@ -49,7 +50,7 @@ class TestStats(object):
     @property
     def success_percentage(self):
         if self.runned > 0:
-            return floor(self.success * 100 / self.total_without_skipped)
+            return self.success * 100 / self.total_without_skipped
         else:
             return 100
 
