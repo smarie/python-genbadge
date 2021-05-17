@@ -688,10 +688,10 @@
 <p><em>Generate badges for tools that do not provide one.</em></p>
 <p><a href="https://pypi.python.org/pypi/genbadge/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/genbadge.svg" /></a> <a href="https://github.com/smarie/python-genbadge/actions/workflows/base.yml"><img alt="Build Status" src="https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg" /></a> <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a> <a href="https://codecov.io/gh/smarie/python-genbadge"><img alt="codecov" src="https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg" /></a></p>
 <p><a href="https://smarie.github.io/python-genbadge/"><img alt="Documentation" src="https://img.shields.io/badge/doc-latest-blue.svg" /></a> <a href="https://pypi.python.org/pypi/genbadge/"><img alt="PyPI" src="https://img.shields.io/pypi/v/genbadge.svg" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads" src="https://pepy.tech/badge/genbadge" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads per week" src="https://pepy.tech/badge/genbadge/week" /></a> <a href="https://github.com/smarie/python-genbadge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/smarie/python-genbadge.svg" /></a></p>
-<p><code>genbadge</code> provides a set of commandline utilities to generate badges for tools that do not provide one. It currently includes support for </p>
+<p><code>genbadge</code> provides a set of commandline utilities to generate badges for tools that do not provide one. It currently can create: </p>
 <ul>
-<li><a href="#1-tests-badge"><code>tests</code></a>: <code>pytest</code> or other <code>junit.xml</code>-generating framework,</li>
-<li><a href="#2-coverage-badge"><code>coverage</code></a>: python <code>coverage</code> or other <code>coverage.xml</code>-generating framework, </li>
+<li><a href="#1-tests-badge"><code>tests</code></a> badges such as <img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /> from <code>pytest</code> or other <code>junit.xml</code>-generating framework,</li>
+<li><a href="#2-coverage-badge"><code>coverage</code></a> badges such as <img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /> from python <code>coverage</code> or other <code>coverage.xml</code>-generating framework, </li>
 <li><a href="#3-flake8-badge"><code>flake8</code></a>. </li>
 </ul>
 <p>Badges are either generated using the <a href="https://shields.io/">shields.io</a> HTTP REST API, or with an equivalent local SVG template.</p>
@@ -766,13 +766,14 @@ Commands:
 <p>the badge should be generated using <code>shields.io</code> (requires an internet connection). If you prefer you can use <code>-l/--local</code> to use the included SVG file template (less mature but seems to work)</p>
 </li>
 </ul>
-<p>In addition to generating the badge, executing the command will also display some messages:</p>
+<p>In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose <code>-v</code> flag:</p>
 <div class="highlight"><pre><span></span><code>Test statistics parsed successfully from <span class="s1">&#39;(...)/reports/junit/junit.xml&#39;</span>
  - Nb tests: Total <span class="o">(</span><span class="m">6</span><span class="o">)</span> <span class="o">=</span> Success <span class="o">(</span><span class="m">2</span><span class="o">)</span> + Skipped <span class="o">(</span><span class="m">1</span><span class="o">)</span> + Failed <span class="o">(</span><span class="m">2</span><span class="o">)</span> + Errors <span class="o">(</span><span class="m">1</span><span class="o">)</span>
  - Success percentage: <span class="m">40</span>.00% <span class="o">(</span><span class="m">2</span> / <span class="m">5</span><span class="o">)</span> <span class="o">(</span>Skipped tests are excluded<span class="o">)</span>
 
 SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;</span>
 </code></pre></div>
+<p>Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag <code>-s</code>.</p>
 <p>The resulting badge will by default look like this: <code>[tests | 2/5]</code> where 2 is the number of tests that have run successfully, and 5 is the total number of tests <em>minus the number of skipped tests</em>. The success percentage, defined as this ratio multiplied by 100, is displayed and can be further used to fail on threshold, see <a href="#failing-on-threshold">below</a>.</p>
 <p>Finally, the color of the badge depends on the success percentage.</p>
 <ul>
@@ -842,7 +843,7 @@ SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;<
 <p>the badge should be generated using <code>shields.io</code> (requires an internet connection). If you prefer you can use <code>-l/--local</code> to use the included SVG file template (less mature but seems to work)</p>
 </li>
 </ul>
-<p>In addition to generating the badge, executing the command will also display some messages:</p>
+<p>In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose <code>-v</code> flag:</p>
 <div class="highlight"><pre><span></span><code>Coverage results parsed successfully from <span class="s1">&#39;(...)/reports/coverage/coverage.xml&#39;</span>
  - Branch coverage: <span class="m">5</span>.56% <span class="o">(</span><span class="m">1</span>/18<span class="o">)</span>
  - Line coverage: <span class="m">17</span>.81% <span class="o">(</span><span class="m">13</span>/73<span class="o">)</span>
@@ -850,6 +851,7 @@ SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;<
 
 SUCCESS - Coverage badge created: <span class="s1">&#39;(...)/coverage-badge.svg&#39;</span>
 </code></pre></div>
+<p>Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag <code>-s</code>.</p>
 <p>The resulting badge will by default look like this: <code>[coverage | 98.1%]</code> where 98.1 is the total coverage, obtained from the branch and line coverages using the formula <code>(nb_lines_covered + nb_branches_covered) / (nb_lines / nb_branches)</code> and multiplying this by 100.</p>
 <p>Finally, the color of the badge depends on the success percentage.</p>
 <ul>
