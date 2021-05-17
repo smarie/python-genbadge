@@ -115,6 +115,8 @@ Test statistics parsed successfully from '(...)/reports/junit/junit.xml'
 SUCCESS - Tests badge created: '(...)/tests-badge.svg'
 ```
 
+Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag `-s`.
+
 The resulting badge will by default look like this: `[tests | 2/5]` where 2 is the number of tests that have run successfully, and 5 is the total number of tests *minus the number of skipped tests*. The success percentage, defined as this ratio multiplied by 100, is displayed and can be further used to fail on threshold, see [below](#failing-on-threshold).
 
 Finally, the color of the badge depends on the success percentage.
@@ -210,6 +212,8 @@ Coverage results parsed successfully from '(...)/reports/coverage/coverage.xml'
 
 SUCCESS - Coverage badge created: '(...)/coverage-badge.svg'
 ```
+
+Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag `-s`.
 
 The resulting badge will by default look like this: `[coverage | 98.1%]` where 98.1 is the total coverage, obtained from the branch and line coverages using the formula `(nb_lines_covered + nb_branches_covered) / (nb_lines / nb_branches)` and multiplying this by 100.
 

@@ -21,8 +21,11 @@ OUTFILE_BADGE_HELP = ("An alternate SVG badge file to write to. '-' is supported
                       "effect.")
 SHIELDS_HELP = ("Indicates if badges should be generated using the shields.io HTTP API (default) or the local SVG file "
                 "template included.")
-VERBOSE_HELP = ("Use this flag to print details to stdout during the badge generation process. Note that this flag has"
-                " no effect when '-' is used as output, since the badge is written to <stdout>.")
+VERBOSE_HELP = ("Use this flag to print details to stdout during the badge generation process. Note that this flag has "
+                "no effect when '-' is used as output, since the badge is written to <stdout>. It also has no effect "
+                "when the silent flag `-s` is used.")
+SILENT_HELP = ("When this flag is active nothing will be written to stdout. Note that this flag has no effect when '-' "
+               "is used as the output file.")
 
 
 @click.group()
@@ -46,12 +49,14 @@ def genbadge():
                    "actual success percentage is strictly less than the provided value.")
 @click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
 @click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
+@click.option('-s', '--silent', type=bool, default=False, is_flag=True, help=SILENT_HELP)
 def gen_tests_badge(
         input_file=None,
         output_file=None,
         threshold=None,
         webshields=None,
-        verbose=None
+        verbose=None,
+        silent=None
 ):
     """
     This command generates a badge for the test results, from an XML file in the
@@ -85,7 +90,7 @@ def gen_tests_badge(
     except FileNotFoundError:
         raise click.exceptions.FileError(input_file, hint="File not found")
 
-    if verbose and not is_stdout:
+    if not silent and verbose and not is_stdout:
         click.echo("""Test statistics parsed successfully from %r
  - Nb tests: Total (%s) = Success (%s) + Skipped (%s) + Failed (%s) + Errors (%s)
  - Success percentage: %.2f%% (%s / %s) (Skipped tests are excluded)
@@ -110,7 +115,7 @@ def gen_tests_badge(
     badge = get_tests_badge(test_stats)
     badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
-    if not is_stdout:
+    if not silent and not is_stdout:
         click.echo("SUCCESS - Tests badge created: %r" % str(output_file_path))
 
 
@@ -120,11 +125,13 @@ def gen_tests_badge(
 @click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
 @click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
 @click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
+@click.option('-s', '--silent', type=bool, default=False, is_flag=True, help=SILENT_HELP)
 def gen_coverage_badge(
         input_file=None,
         output_file=None,
         webshields=None,
-        verbose=None
+        verbose=None,
+        silent=None
 ):
     """
     This command generates a badge for the coverage results, from an XML file in
@@ -156,7 +163,7 @@ def gen_coverage_badge(
     except FileNotFoundError:
         raise click.exceptions.FileError(input_file, hint="File not found")
 
-    if verbose and not is_stdout:
+    if not silent and verbose and not is_stdout:
         click.echo("""Coverage results parsed successfully from %(ifp)r
  - Branch coverage: %(bcp).2f%% (%(bc)s/%(bv)s)
  - Line coverage: %(lcp).2f%% (%(lc)s/%(lv)s)
@@ -169,7 +176,7 @@ def gen_coverage_badge(
     badge = get_coverage_badge(cov_stats)
     badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
-    if not is_stdout:
+    if not silent and not is_stdout:
         click.echo("SUCCESS - Coverage badge created: %r" % str(output_file_path))
 
 

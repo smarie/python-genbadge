@@ -92,7 +92,11 @@ Options:
                                   during the badge generation process. Note that
                                   this flag has no effect when '-' is used as
                                   output, since the badge is written to
-                                  <stdout>.
+                                  <stdout>. It also has no effect when the
+                                  silent flag `-s` is used.
+  -s, --silent                    When this flag is active nothing will be
+                                  written to stdout. Note that this flag has no
+                                  effect when '-' is used as the output file.
   --help                          Show this message and exit.
 """
 )
@@ -146,7 +150,11 @@ Options:
                                   during the badge generation process. Note that
                                   this flag has no effect when '-' is used as
                                   output, since the badge is written to
-                                  <stdout>.
+                                  <stdout>. It also has no effect when the
+                                  silent flag `-s` is used.
+  -s, --silent                    When this flag is active nothing will be
+                                  written to stdout. Note that this flag has no
+                                  effect when '-' is used as the output file.
   --help                          Show this message and exit.
 """
 )
@@ -236,10 +244,11 @@ Error: Invalid value for '-i' / '--input-file': %s: No such file or directory
 
 
 @pytest.mark.parametrize("outstream", [False, True], ids="outstream={}".format)
+@pytest.mark.parametrize("silent", [False, True], ids="silent={}".format)
 @pytest.mark.parametrize("verbose", [False, True], ids="verbose={}".format)
 @pytest.mark.parametrize("variant", ["default", "custom", "custom_shortargs", "custom_absolute"])
 @pytest.mark.parametrize("cmd", ALL_COMMANDS, ids=str)
-def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream, verbose):
+def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream, silent, verbose):
     """Test that `genbadge <cmd>` works consistently concerning the ios and output messages"""
 
     # from pytest path to pathlib path
@@ -252,6 +261,8 @@ def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream, verbose):
     args = [cmd.name, "-l"]
     if verbose:
         args.append("--verbose")
+    if silent:
+        args.append("--silent")
     if variant == "default":
         if outstream:
             pytest.skip("this test does not make sense")
@@ -283,7 +294,9 @@ def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream, verbose):
 
     # verify the output message
     if not outstream:
-        if verbose:
+        if silent:
+            assert result.output == ""
+        elif verbose:
             assert "\n" + result.output == cmd.example_output_msg_long % (infile_path_for_msg, outfile_path_for_msg)
         else:
             assert result.output == cmd.example_output_msg % outfile_path_for_msg
