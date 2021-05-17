@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for genbadge/main.py: 82%</title>
+    <title>Coverage for genbadge/main.py: 89%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -18,15 +18,15 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>genbadge/main.py</b> :
-            <span class="pc_cov">82%</span>
+            <span class="pc_cov">89%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             77 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">69 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">8 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">70 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">7 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">2 excluded</button>
-            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">9 partial</button>
+            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">3 partial</button>
         </h2>
     </div>
 </div>
@@ -134,7 +134,7 @@
     <p id="t79" class="run"><span class="n"><a href="#t79">79</a></span><span class="t">        <span class="key">raise</span> <span class="nam">click</span><span class="op">.</span><span class="nam">exceptions</span><span class="op">.</span><span class="nam">FileError</span><span class="op">(</span><span class="nam">input_file</span><span class="op">,</span> <span class="nam">hint</span><span class="op">=</span><span class="str">"File not found"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t80" class="pln"><span class="n"><a href="#t80">80</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t81" class="pln"><span class="n"><a href="#t81">81</a></span><span class="t">    <span class="com"># TODO if verbose</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t82" class="par run show_par"><span class="n"><a href="#t82">82</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">82&#x202F;&#x219B;&#x202F;90</span><span class="annotate long">line 82 didn't jump to line 90, because the condition on line 82 was never false</span></span></p>
+    <p id="t82" class="run"><span class="n"><a href="#t82">82</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t83" class="run"><span class="n"><a href="#t83">83</a></span><span class="t">        <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span><span class="str">"""Test statistics parsed successfully from %r</span>&nbsp;</span><span class="r"></span></p>
     <p id="t84" class="pln"><span class="n"><a href="#t84">84</a></span><span class="t"><span class="str"> - Nb tests: Total (%s) = Success (%s) + Skipped (%s) + Failed (%s) + Errors (%s)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t85" class="pln"><span class="n"><a href="#t85">85</a></span><span class="t"><span class="str"> - Success percentage: %.2f%% (%s / %s) (Skipped tests are excluded)</span>&nbsp;</span><span class="r"></span></p>
@@ -159,7 +159,7 @@
     <p id="t104" class="run"><span class="n"><a href="#t104">104</a></span><span class="t">    <span class="nam">badge</span> <span class="op">=</span> <span class="nam">get_tests_badge</span><span class="op">(</span><span class="nam">test_stats</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t105" class="run"><span class="n"><a href="#t105">105</a></span><span class="t">    <span class="nam">badge</span><span class="op">.</span><span class="nam">write_to</span><span class="op">(</span><span class="nam">output_file</span> <span class="key">if</span> <span class="nam">is_stdout</span> <span class="key">else</span> <span class="nam">output_file_path</span><span class="op">,</span> <span class="nam">use_shields</span><span class="op">=</span><span class="nam">webshields</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t106" class="pln"><span class="n"><a href="#t106">106</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t107" class="par run show_par"><span class="n"><a href="#t107">107</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">107&#x202F;&#x219B;&#x202F;exit</span><span class="annotate long">line 107 didn't return from function 'gen_tests_badge', because the condition on line 107 was never false</span></span></p>
+    <p id="t107" class="run"><span class="n"><a href="#t107">107</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t108" class="run"><span class="n"><a href="#t108">108</a></span><span class="t">        <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span><span class="str">"SUCCESS - Tests badge created: %r"</span> <span class="op">%</span> <span class="nam">str</span><span class="op">(</span><span class="nam">output_file_path</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t109" class="pln"><span class="n"><a href="#t109">109</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t110" class="pln"><span class="n"><a href="#t110">110</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -201,7 +201,7 @@
     <p id="t146" class="run"><span class="n"><a href="#t146">146</a></span><span class="t">        <span class="key">raise</span> <span class="nam">click</span><span class="op">.</span><span class="nam">exceptions</span><span class="op">.</span><span class="nam">FileError</span><span class="op">(</span><span class="nam">input_file</span><span class="op">,</span> <span class="nam">hint</span><span class="op">=</span><span class="str">"File not found"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t147" class="pln"><span class="n"><a href="#t147">147</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t148" class="pln"><span class="n"><a href="#t148">148</a></span><span class="t">    <span class="com"># TODO if verbose</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t149" class="par run show_par"><span class="n"><a href="#t149">149</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">149&#x202F;&#x219B;&#x202F;159</span><span class="annotate long">line 149 didn't jump to line 159, because the condition on line 149 was never false</span></span></p>
+    <p id="t149" class="run"><span class="n"><a href="#t149">149</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t150" class="run"><span class="n"><a href="#t150">150</a></span><span class="t">        <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span><span class="str">"""Coverage results parsed successfully from %(ifp)r</span>&nbsp;</span><span class="r"></span></p>
     <p id="t151" class="pln"><span class="n"><a href="#t151">151</a></span><span class="t"><span class="str"> - Branch coverage: %(bcp).2f%% (%(bc)s/%(bv)s)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t152" class="pln"><span class="n"><a href="#t152">152</a></span><span class="t"><span class="str"> - Line coverage: %(lcp).2f%% (%(lc)s/%(lv)s)</span>&nbsp;</span><span class="r"></span></p>
@@ -214,7 +214,7 @@
     <p id="t159" class="run"><span class="n"><a href="#t159">159</a></span><span class="t">    <span class="nam">badge</span> <span class="op">=</span> <span class="nam">get_coverage_badge</span><span class="op">(</span><span class="nam">cov_stats</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t160" class="run"><span class="n"><a href="#t160">160</a></span><span class="t">    <span class="nam">badge</span><span class="op">.</span><span class="nam">write_to</span><span class="op">(</span><span class="nam">output_file</span> <span class="key">if</span> <span class="nam">is_stdout</span> <span class="key">else</span> <span class="nam">output_file_path</span><span class="op">,</span> <span class="nam">use_shields</span><span class="op">=</span><span class="nam">webshields</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t161" class="pln"><span class="n"><a href="#t161">161</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t162" class="par run show_par"><span class="n"><a href="#t162">162</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">162&#x202F;&#x219B;&#x202F;exit</span><span class="annotate long">line 162 didn't return from function 'gen_coverage_badge', because the condition on line 162 was never false</span></span></p>
+    <p id="t162" class="run"><span class="n"><a href="#t162">162</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t163" class="run"><span class="n"><a href="#t163">163</a></span><span class="t">        <span class="nam">click</span><span class="op">.</span><span class="nam">echo</span><span class="op">(</span><span class="str">"SUCCESS - Coverage badge created: %r"</span> <span class="op">%</span> <span class="nam">str</span><span class="op">(</span><span class="nam">output_file_path</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t164" class="pln"><span class="n"><a href="#t164">164</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t165" class="pln"><span class="n"><a href="#t165">165</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -265,12 +265,12 @@
     <p id="t210" class="mis show_mis"><span class="n"><a href="#t210">210</a></span><span class="t">            <span class="nam">output_file_path</span> <span class="op">=</span> <span class="nam">output_file_path</span> <span class="op">/</span> <span class="nam">default_out_file</span>&nbsp;</span><span class="r"></span></p>
     <p id="t211" class="pln"><span class="n"><a href="#t211">211</a></span><span class="t">    <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t212" class="run"><span class="n"><a href="#t212">212</a></span><span class="t">        <span class="nam">output_file_path</span> <span class="op">=</span> <span class="nam">getattr</span><span class="op">(</span><span class="nam">output_file</span><span class="op">,</span> <span class="str">"name"</span><span class="op">,</span> <span class="str">"&lt;stdout>"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t213" class="par run show_par"><span class="n"><a href="#t213">213</a></span><span class="t">        <span class="key">if</span> <span class="nam">output_file_path</span> <span class="op">==</span> <span class="str">"&lt;stdout>"</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">213&#x202F;&#x219B;&#x202F;214</span><span class="annotate long">line 213 didn't jump to line 214, because the condition on line 213 was never true</span></span></p>
-    <p id="t214" class="mis show_mis"><span class="n"><a href="#t214">214</a></span><span class="t">            <span class="nam">is_stdout</span> <span class="op">=</span> <span class="key">True</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t213" class="run"><span class="n"><a href="#t213">213</a></span><span class="t">        <span class="key">if</span> <span class="nam">output_file_path</span> <span class="op">==</span> <span class="str">"&lt;stdout>"</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t214" class="run"><span class="n"><a href="#t214">214</a></span><span class="t">            <span class="nam">is_stdout</span> <span class="op">=</span> <span class="key">True</span>&nbsp;</span><span class="r"></span></p>
     <p id="t215" class="pln"><span class="n"><a href="#t215">215</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t216" class="run"><span class="n"><a href="#t216">216</a></span><span class="t">            <span class="nam">output_file_path</span> <span class="op">=</span> <span class="nam">Path</span><span class="op">(</span><span class="nam">output_file_path</span><span class="op">)</span><span class="op">.</span><span class="nam">absolute</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t217" class="pln"><span class="n"><a href="#t217">217</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t218" class="par run show_par"><span class="n"><a href="#t218">218</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">218&#x202F;&#x219B;&#x202F;221</span><span class="annotate long">line 218 didn't jump to line 221, because the condition on line 218 was never false</span></span></p>
+    <p id="t218" class="run"><span class="n"><a href="#t218">218</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">is_stdout</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t219" class="run"><span class="n"><a href="#t219">219</a></span><span class="t">        <span class="nam">output_file_path</span> <span class="op">=</span> <span class="nam">output_file_path</span><span class="op">.</span><span class="nam">as_posix</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t220" class="pln"><span class="n"><a href="#t220">220</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t221" class="run"><span class="n"><a href="#t221">221</a></span><span class="t">    <span class="key">return</span> <span class="nam">output_file</span><span class="op">,</span> <span class="nam">output_file_path</span><span class="op">,</span> <span class="nam">is_stdout</span>&nbsp;</span><span class="r"></span></p>
@@ -283,7 +283,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
-            created at 2021-05-12 19:58 +0000
+            created at 2021-05-17 09:04 +0000
         </p>
     </div>
 </div>
