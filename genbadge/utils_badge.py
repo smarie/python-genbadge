@@ -89,7 +89,7 @@ class Badge:
             with open(str(path_or_stream), mode="wb") as f:
                 f.write(self.as_svg(use_shields=use_shields).encode("utf-8"))
         else:
-            path_or_stream.write(self.as_svg(use_shields=use_shields).encode("utf-8"))
+            path_or_stream.write(self.as_svg(use_shields=use_shields))
 
 
 def get_svg_badge(

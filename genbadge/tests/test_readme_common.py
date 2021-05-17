@@ -213,9 +213,10 @@ Error: Invalid value for '-i' / '--input-file': %s: No such file or directory
     assert "\n" + result.output == expected % unknown_file
 
 
+@pytest.mark.parametrize("outstream", [False, True], ids="outstream={}".format)
 @pytest.mark.parametrize("variant", ["default", "custom", "custom_shortargs", "custom_absolute"])
 @pytest.mark.parametrize("cmd", ALL_COMMANDS, ids=str)
-def test_any_command(monkeypatch, cmd, tmpdir, variant):
+def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream):
     """Test that `genbadge <cmd>` works consistently concerning the ios and output messages"""
 
     # from pytest path to pathlib path
@@ -227,6 +228,8 @@ def test_any_command(monkeypatch, cmd, tmpdir, variant):
     # create the various arguments. Use local template for faster exec
     args = [cmd.name, "-l"]
     if variant == "default":
+        if outstream:
+            pytest.skip("this test does not make sense")
         infile = currentfolder / cmd.default_infile
         outfile = currentfolder / cmd.default_outfile
         infile_path_for_msg = str(infile.absolute().as_posix())
@@ -239,7 +242,7 @@ def test_any_command(monkeypatch, cmd, tmpdir, variant):
             infile_path_for_msg = infile.absolute().as_posix()
         outfile = currentfolder / "bar" / "bar-badge.svg"
         args += ["-i" if shortargs else "--input-file", infile_path_for_msg]
-        args += ["-o" if shortargs else "--output-file", "bar/bar-badge.svg"]
+        args += ["-o" if shortargs else "--output-file", "-" if outstream else "bar/bar-badge.svg"]
     else:
         raise ValueError(variant)
     outfile_path_for_msg = str(outfile.absolute().as_posix())
@@ -254,9 +257,12 @@ def test_any_command(monkeypatch, cmd, tmpdir, variant):
     assert result.exit_code == 0
 
     # verify the output message
-    assert "\n" + result.output == cmd.example_output_msg % (infile_path_for_msg, outfile_path_for_msg)
-
-    assert outfile.exists()
+    if not outstream:
+        assert "\n" + result.output == cmd.example_output_msg % (infile_path_for_msg, outfile_path_for_msg)
+        assert outfile.exists()
+    else:
+        assert result.output.startswith('<svg xmlns="http://www.w3.org/2000/svg" '
+                                        'xmlns:xlink="http://www.w3.org/1999/xlink" width=')
 
 
 @pytest.mark.parametrize("threshold", [-1, 0, 40, 40.1, 100, 101])
