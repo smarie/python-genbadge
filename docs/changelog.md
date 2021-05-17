@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.7.1 - Bugfix
+
+ - Fixed bug with writing to stdout. Fixed [#8](https://github.com/smarie/python-genbadge/issues/8).
+
 ### 0.7.0 - Badges can be written to stdout
 
  - Completed CLI help for subcommands. Fixes [#5](https://github.com/smarie/python-genbadge/issues/5)
