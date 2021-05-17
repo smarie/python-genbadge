@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>genbadge/utils_badge.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <h1>
+            <a href="genbadge.utils_badge.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               genbadge/utils_badge.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="kn">import</span> <span class="nn">os</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> &nbsp;</tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFont</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> &nbsp;</tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i>     <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span></tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i>     <span class="kn">from</span> <span class="nn">pathlib2</span> <span class="kn">import</span> <span class="n">Path</span>  <span class="c1"># python 2</span></tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> &nbsp;</tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i> <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev- "><tt><i>11</i>     <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i>     <span class="k">pass</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> &nbsp;</tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_string</span><span class="p">,</span> <span class="n">resource_filename</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i> &nbsp;</tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i> &nbsp;</tt>
+            </div>
+            <div id="l18"
+               class="code sev- "><tt><i>18</i> <span class="n">COLORS</span> <span class="o">=</span> <span class="p">{</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i>     <span class="s1">&#39;brightgreen&#39;</span><span class="p">:</span> <span class="s1">&#39;#4c1&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i>     <span class="s1">&#39;green&#39;</span><span class="p">:</span> <span class="s1">&#39;#97CA00&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i>     <span class="s1">&#39;yellowgreen&#39;</span><span class="p">:</span> <span class="s1">&#39;#a4a61d&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i>     <span class="s1">&#39;yellow&#39;</span><span class="p">:</span> <span class="s1">&#39;#dfb317&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i>     <span class="s1">&#39;orange&#39;</span><span class="p">:</span> <span class="s1">&#39;#fe7d37&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i>     <span class="s1">&#39;red&#39;</span><span class="p">:</span> <span class="s1">&#39;#e05d44&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev- "><tt><i>25</i>     <span class="s1">&#39;lightgrey&#39;</span><span class="p">:</span> <span class="s1">&#39;#9f9f9f&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i> <span class="p">}</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> &nbsp;</tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i> &nbsp;</tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i> <span class="k">class</span> <span class="nc">Badge</span><span class="p">:</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev- "><tt><i>30</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i> <span class="sd">    A small utility class for badges</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i>                  <span class="n">left_txt</span><span class="p">,</span>   <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i>                  <span class="n">right_txt</span><span class="p">,</span>  <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i>                  <span class="n">color</span><span class="p">,</span>      <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i>                  <span class="p">):</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i>         <span class="bp">self</span><span class="o">.</span><span class="n">left_txt</span> <span class="o">=</span> <span class="n">left_txt</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i>         <span class="bp">self</span><span class="o">.</span><span class="n">right_txt</span> <span class="o">=</span> <span class="n">right_txt</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev- "><tt><i>40</i>         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i> &nbsp;</tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i>     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i>         <span class="k">return</span> <span class="s2">&quot;[ </span><span class="si">%s</span><span class="s2"> | </span><span class="si">%s</span><span class="s2"> ]  color: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_txt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_txt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span></tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i> &nbsp;</tt>
+            </div>
+            <div id="l45"
+               class="code sev- "><tt><i>45</i>     <span class="k">def</span> <span class="nf">as_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i>                <span class="n">use_shields</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># type: bool</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i>                <span class="p">):</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i>         <span class="sd">&quot;&quot;&quot;Return a string containing the SVG representation of this badge</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i> &nbsp;</tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i> <span class="sd">        :param use_shields:</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i> <span class="sd">        :return:</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i> <span class="sd">        &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">use_shields</span><span class="p">:</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i>             <span class="c1"># generate from our local file template</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i>             <span class="k">return</span> <span class="n">get_svg_badge</span><span class="p">(</span><span class="n">label_txt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">left_txt</span><span class="p">,</span> <span class="n">msg_txt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">right_txt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i>             <span class="c1"># download from requests</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i>             <span class="kn">import</span> <span class="nn">requests</span></tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i>             <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://img.shields.io/badge/</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">.svg&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_txt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_txt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span></tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i>             <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i>             <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i> &nbsp;</tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i>     <span class="k">def</span> <span class="nf">write_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F821
+                     </span>
+                     Undefined name 'TextIO'</li>
+               
+               </ul><tt><i>64</i>                  <span class="n">path_or_stream</span><span class="p">,</span>              <span class="c1"># type: Union[TextIO, str, Path]</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i>                  <span class="n">use_shields</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># type: bool</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>                  <span class="p">):</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i>         <span class="sd">&quot;&quot;&quot;Write the SVG representation of this badge to the given file</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i> &nbsp;</tt>
+            </div>
+            <div id="l69"
+               class="code sev- "><tt><i>69</i> <span class="sd">        :param path_or_stream:</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i> <span class="sd">        :param use_shields:</span></tt>
+            </div>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i> <span class="sd">        :return:</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i> <span class="sd">        &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>         <span class="c1"># convert to a Path</span></tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path_or_stream</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i>             <span class="n">path_or_stream</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path_or_stream</span><span class="p">)</span></tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i> &nbsp;</tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i>         <span class="c1"># create parent dirs if needed</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path_or_stream</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i>             <span class="n">path_or_stream</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i> &nbsp;</tt>
+            </div>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i>             <span class="c1"># finally write to</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i>             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path_or_stream</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span></tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_svg</span><span class="p">(</span><span class="n">use_shields</span><span class="o">=</span><span class="n">use_shields</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>             <span class="n">path_or_stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_svg</span><span class="p">(</span><span class="n">use_shields</span><span class="o">=</span><span class="n">use_shields</span><span class="p">))</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i> &nbsp;</tt>
+            </div>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i> &nbsp;</tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i> <span class="k">def</span> <span class="nf">get_svg_badge</span><span class="p">(</span></tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i>         <span class="n">label_txt</span><span class="p">,</span>    <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l90"
+               class="code sev- "><tt><i>90</i>         <span class="n">msg_txt</span><span class="p">,</span>   <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i>         <span class="n">color</span><span class="p">,</span>       <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev- "><tt><i>92</i>         <span class="n">label_color</span><span class="o">=</span><span class="kc">None</span></tt>
+            </div>
+            <div id="l93"
+               class="code sev- "><tt><i>93</i> <span class="p">):</span></tt>
+            </div>
+            <div id="l94"
+               class="code sev- "><tt><i>94</i>     <span class="c1"># type: (...) -&gt; str</span></tt>
+            </div>
+            <div id="l95"
+               class="code sev- "><tt><i>95</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l96"
+               class="code sev- "><tt><i>96</i> <span class="sd">    Reads the SVG template from the package,</span></tt>
+            </div>
+            <div id="l97"
+               class="code sev- "><tt><i>97</i> <span class="sd">    fills the various information from args and returns the svg string</span></tt>
+            </div>
+            <div id="l98"
+               class="code sev- "><tt><i>98</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l99"
+               class="code sev- "><tt><i>99</i>     <span class="n">all_text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">label_txt</span><span class="p">,</span> <span class="n">msg_txt</span><span class="p">)</span> <span class="k">if</span> <span class="n">label_txt</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">msg_txt</span><span class="p">)</span></tt>
+            </div>
+            <div id="l100"
+               class="code sev- "><tt><i>100</i> &nbsp;</tt>
+            </div>
+            <div id="l101"
+               class="code sev- "><tt><i>101</i>     <span class="c1"># Same principle as in shields.io</span></tt>
+            </div>
+            <div id="l102"
+               class="code sev- "><tt><i>102</i>     <span class="n">template</span> <span class="o">=</span> <span class="n">get_local_badge_template</span><span class="p">()</span></tt>
+            </div>
+            <div id="l103"
+               class="code sev- "><tt><i>103</i> &nbsp;</tt>
+            </div>
+            <div id="l104"
+               class="code sev- "><tt><i>104</i>     <span class="n">horiz_padding</span> <span class="o">=</span> <span class="mi">5</span></tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i>     <span class="n">vertical_margin</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l106"
+               class="code sev- "><tt><i>106</i> &nbsp;</tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i>     <span class="n">has_logo</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># TODO when a logo is inserted</span></tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i>     <span class="n">total_logo_width</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i> &nbsp;</tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i>     <span class="n">has_label</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_txt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">label_color</span></tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>     <span class="n">label_color</span> <span class="o">=</span> <span class="n">label_color</span> <span class="ow">or</span> <span class="s1">&#39;#555&#39;</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i>     <span class="n">label_margin</span> <span class="o">=</span> <span class="n">total_logo_width</span> <span class="o">+</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i> &nbsp;</tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i>     <span class="k">def</span> <span class="nf">process_text</span><span class="p">(</span><span class="n">left_margin</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span></tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i>         <span class="sd">&quot;&quot;&quot;From renderText()</span></tt>
+            </div>
+            <div id="l116"
+               class="code sev- "><tt><i>116</i> <span class="sd">        https://github.com/badges/shields/blob/4415d07e8b5bf794e6675cea052cc644d0c81bb5/badge-maker/lib/badge-renderers.js#L113</span></tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i> <span class="sd">        &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l118"
+               class="code sev- "><tt><i>118</i>         <span class="n">text_length</span> <span class="o">=</span> <span class="n">preferred_width_of</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">font_name</span><span class="o">=</span><span class="s2">&quot;Verdana&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l119"
+               class="code sev- "><tt><i>119</i>         <span class="c1"># todo content = escape_xml(content)</span></tt>
+            </div>
+            <div id="l120"
+               class="code sev- "><tt><i>120</i>         <span class="n">shadow_margin</span> <span class="o">=</span> <span class="mi">150</span> <span class="o">+</span> <span class="n">vertical_margin</span></tt>
+            </div>
+            <div id="l121"
+               class="code sev- "><tt><i>121</i>         <span class="n">text_margin</span> <span class="o">=</span> <span class="mi">140</span> <span class="o">+</span> <span class="n">vertical_margin</span></tt>
+            </div>
+            <div id="l122"
+               class="code sev- "><tt><i>122</i>         <span class="n">out_text_length</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">text_length</span></tt>
+            </div>
+            <div id="l123"
+               class="code sev- "><tt><i>123</i>         <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="p">(</span><span class="n">left_margin</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">text_length</span> <span class="o">+</span> <span class="n">horiz_padding</span><span class="p">)</span></tt>
+            </div>
+            <div id="l124"
+               class="code sev- "><tt><i>124</i>         <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">shadow_margin</span><span class="p">,</span> <span class="n">text_margin</span><span class="p">,</span> <span class="n">text_length</span><span class="p">,</span> <span class="n">out_text_length</span></tt>
+            </div>
+            <div id="l125"
+               class="code sev- "><tt><i>125</i> &nbsp;</tt>
+            </div>
+            <div id="l126"
+               class="code sev- "><tt><i>126</i>     <span class="n">label_x</span><span class="p">,</span> <span class="n">label_shadow_margin</span><span class="p">,</span> <span class="n">label_text_margin</span><span class="p">,</span> <span class="n">label_width</span><span class="p">,</span> <span class="n">label_text_length</span> <span class="o">=</span> \</tt>
+            </div>
+            <div id="l127"
+               class="code sev- "><tt><i>127</i>         <span class="n">process_text</span><span class="p">(</span><span class="n">label_margin</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">label_txt</span><span class="p">)</span></tt>
+            </div>
+            <div id="l128"
+               class="code sev- "><tt><i>128</i> &nbsp;</tt>
+            </div>
+            <div id="l129"
+               class="code sev- "><tt><i>129</i>     <span class="n">left_width</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">horiz_padding</span> <span class="o">+</span> <span class="n">total_logo_width</span><span class="p">)</span> <span class="k">if</span> <span class="n">has_label</span> <span class="k">else</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l130"
+               class="code sev- "><tt><i>130</i> &nbsp;</tt>
+            </div>
+            <div id="l131"
+               class="code sev- "><tt><i>131</i>     <span class="n">msg_margin</span> <span class="o">=</span> <span class="n">left_width</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg_txt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span></tt>
+            </div>
+            <div id="l132"
+               class="code sev- "><tt><i>132</i>     <span class="k">if</span> <span class="ow">not</span> <span class="n">has_label</span><span class="p">:</span></tt>
+            </div>
+            <div id="l133"
+               class="code sev- "><tt><i>133</i>         <span class="k">if</span> <span class="n">has_logo</span><span class="p">:</span></tt>
+            </div>
+            <div id="l134"
+               class="code sev- "><tt><i>134</i>             <span class="n">msg_margin</span> <span class="o">=</span> <span class="n">msg_margin</span> <span class="o">+</span> <span class="n">total_logo_width</span> <span class="o">+</span> <span class="n">horiz_padding</span></tt>
+            </div>
+            <div id="l135"
+               class="code sev- "><tt><i>135</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l136"
+               class="code sev- "><tt><i>136</i>             <span class="n">msg_margin</span> <span class="o">=</span> <span class="n">msg_margin</span> <span class="o">+</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l137"
+               class="code sev- "><tt><i>137</i> &nbsp;</tt>
+            </div>
+            <div id="l138"
+               class="code sev- "><tt><i>138</i>     <span class="n">msg_x</span><span class="p">,</span> <span class="n">msg_shadow_margin</span><span class="p">,</span> <span class="n">msg_text_margin</span><span class="p">,</span> <span class="n">msg_width</span><span class="p">,</span> <span class="n">msg_text_length</span> <span class="o">=</span> \</tt>
+            </div>
+            <div id="l139"
+               class="code sev- "><tt><i>139</i>         <span class="n">process_text</span><span class="p">(</span><span class="n">msg_margin</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">msg_txt</span><span class="p">)</span></tt>
+            </div>
+            <div id="l140"
+               class="code sev- "><tt><i>140</i> &nbsp;</tt>
+            </div>
+            <div id="l141"
+               class="code sev- "><tt><i>141</i>     <span class="n">right_width</span> <span class="o">=</span> <span class="p">(</span><span class="n">msg_width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">horiz_padding</span><span class="p">)</span></tt>
+            </div>
+            <div id="l142"
+               class="code sev- "><tt><i>142</i>     <span class="k">if</span> <span class="p">(</span><span class="n">has_logo</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_label</span><span class="p">):</span></tt>
+            </div>
+            <div id="l143"
+               class="code sev- "><tt><i>143</i>         <span class="n">right_width</span> <span class="o">+=</span> <span class="n">total_logo_width</span> <span class="o">+</span> <span class="n">horiz_padding</span> <span class="o">-</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l144"
+               class="code sev- "><tt><i>144</i> &nbsp;</tt>
+            </div>
+            <div id="l145"
+               class="code sev- "><tt><i>145</i>     <span class="n">total_width</span> <span class="o">=</span> <span class="n">left_width</span> <span class="o">+</span> <span class="n">right_width</span></tt>
+            </div>
+            <div id="l146"
+               class="code sev- "><tt><i>146</i> &nbsp;</tt>
+            </div>
+            <div id="l147"
+               class="code sev- "><tt><i>147</i>     <span class="n">to_replace</span> <span class="o">=</span> <span class="p">{</span></tt>
+            </div>
+            <div id="l148"
+               class="code sev- "><tt><i>148</i>         <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">all_text</span><span class="p">,</span></tt>
+            </div>
+            <div id="l149"
+               class="code sev- "><tt><i>149</i>         <span class="s2">&quot;label_color&quot;</span><span class="p">:</span> <span class="n">get_color</span><span class="p">(</span><span class="n">label_color</span><span class="p">),</span></tt>
+            </div>
+            <div id="l150"
+               class="code sev- "><tt><i>150</i>         <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">),</span></tt>
+            </div>
+            <div id="l151"
+               class="code sev- "><tt><i>151</i>         <span class="s2">&quot;total_width&quot;</span><span class="p">:</span> <span class="n">total_width</span><span class="p">,</span></tt>
+            </div>
+            <div id="l152"
+               class="code sev- "><tt><i>152</i>         <span class="s2">&quot;left_width&quot;</span><span class="p">:</span> <span class="n">left_width</span><span class="p">,</span></tt>
+            </div>
+            <div id="l153"
+               class="code sev- "><tt><i>153</i>         <span class="s2">&quot;right_width&quot;</span><span class="p">:</span> <span class="n">right_width</span><span class="p">,</span></tt>
+            </div>
+            <div id="l154"
+               class="code sev- "><tt><i>154</i>         <span class="c1"># label text</span></tt>
+            </div>
+            <div id="l155"
+               class="code sev- "><tt><i>155</i>         <span class="s2">&quot;left_x&quot;</span><span class="p">:</span> <span class="n">label_x</span><span class="p">,</span></tt>
+            </div>
+            <div id="l156"
+               class="code sev- "><tt><i>156</i>         <span class="s2">&quot;left_shadow_margin&quot;</span><span class="p">:</span> <span class="n">label_shadow_margin</span><span class="p">,</span></tt>
+            </div>
+            <div id="l157"
+               class="code sev- "><tt><i>157</i>         <span class="s2">&quot;left_text_margin&quot;</span><span class="p">:</span> <span class="n">label_text_margin</span><span class="p">,</span></tt>
+            </div>
+            <div id="l158"
+               class="code sev- "><tt><i>158</i>         <span class="s2">&quot;left_out_text_length&quot;</span><span class="p">:</span> <span class="n">label_text_length</span><span class="p">,</span></tt>
+            </div>
+            <div id="l159"
+               class="code sev- "><tt><i>159</i>         <span class="s2">&quot;left_text&quot;</span><span class="p">:</span> <span class="n">label_txt</span><span class="p">,</span></tt>
+            </div>
+            <div id="l160"
+               class="code sev- "><tt><i>160</i>         <span class="c1"># msg text</span></tt>
+            </div>
+            <div id="l161"
+               class="code sev- "><tt><i>161</i>         <span class="s2">&quot;right_x&quot;</span><span class="p">:</span> <span class="n">msg_x</span><span class="p">,</span></tt>
+            </div>
+            <div id="l162"
+               class="code sev- "><tt><i>162</i>         <span class="s2">&quot;right_shadow_margin&quot;</span><span class="p">:</span> <span class="n">msg_shadow_margin</span><span class="p">,</span></tt>
+            </div>
+            <div id="l163"
+               class="code sev- "><tt><i>163</i>         <span class="s2">&quot;right_text_margin&quot;</span><span class="p">:</span> <span class="n">msg_text_margin</span><span class="p">,</span></tt>
+            </div>
+            <div id="l164"
+               class="code sev- "><tt><i>164</i>         <span class="s2">&quot;right_out_text_length&quot;</span><span class="p">:</span> <span class="n">msg_text_length</span><span class="p">,</span></tt>
+            </div>
+            <div id="l165"
+               class="code sev- "><tt><i>165</i>         <span class="s2">&quot;right_text&quot;</span><span class="p">:</span> <span class="n">msg_txt</span></tt>
+            </div>
+            <div id="l166"
+               class="code sev- "><tt><i>166</i>     <span class="p">}</span></tt>
+            </div>
+            <div id="l167"
+               class="code sev- "><tt><i>167</i>     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">to_replace</span><span class="o">.</span><span class="n">items</span><span class="p">():</span></tt>
+            </div>
+            <div id="l168"
+               class="code sev- "><tt><i>168</i>         <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{{ </span><span class="si">%s</span><span class="s2"> }}&quot;</span> <span class="o">%</span> <span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></tt>
+            </div>
+            <div id="l169"
+               class="code sev- "><tt><i>169</i> &nbsp;</tt>
+            </div>
+            <div id="l170"
+               class="code sev- "><tt><i>170</i>     <span class="k">return</span> <span class="n">template</span></tt>
+            </div>
+            <div id="l171"
+               class="code sev- "><tt><i>171</i> &nbsp;</tt>
+            </div>
+            <div id="l172"
+               class="code sev- "><tt><i>172</i> &nbsp;</tt>
+            </div>
+            <div id="l173"
+               class="code sev- "><tt><i>173</i> <span class="k">def</span> <span class="nf">get_local_badge_template</span><span class="p">():</span></tt>
+            </div>
+            <div id="l174"
+               class="code sev- "><tt><i>174</i>     <span class="sd">&quot;&quot;&quot;Reads the SVG file template fgrom the package resources&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l175"
+               class="code sev- "><tt><i>175</i>     <span class="n">template_path</span> <span class="o">=</span> <span class="s2">&quot;badge-template.svg&quot;</span></tt>
+            </div>
+            <div id="l176"
+               class="code sev- "><tt><i>176</i>     <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l177"
+               class="code sev- "><tt><i>177</i>         <span class="n">template</span> <span class="o">=</span> <span class="n">resource_string</span><span class="p">(</span><span class="s2">&quot;genbadge&quot;</span><span class="p">,</span> <span class="n">template_path</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l178"
+               class="code sev- "><tt><i>178</i>     <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span></tt>
+            </div>
+            <div id="l179"
+               class="code sev- "><tt><i>179</i>         <span class="c1"># error when running on python 2 inside the CliInvoker from click with a change of os.cwd.</span></tt>
+            </div>
+            <div id="l180"
+               class="code sev- "><tt><i>180</i>         <span class="kn">import</span> <span class="nn">genbadge</span></tt>
+            </div>
+            <div id="l181"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F821
+                     </span>
+                     Undefined name 'reload'</li>
+               
+               </ul><tt><i>181</i>         <span class="n">reload</span><span class="p">(</span><span class="n">genbadge</span><span class="p">)</span></tt>
+            </div>
+            <div id="l182"
+               class="code sev- "><tt><i>182</i>         <span class="n">template</span> <span class="o">=</span> <span class="n">resource_string</span><span class="p">(</span><span class="s2">&quot;genbadge&quot;</span><span class="p">,</span> <span class="n">template_path</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l183"
+               class="code sev- "><tt><i>183</i> &nbsp;</tt>
+            </div>
+            <div id="l184"
+               class="code sev- "><tt><i>184</i>     <span class="k">return</span> <span class="n">template</span></tt>
+            </div>
+            <div id="l185"
+               class="code sev- "><tt><i>185</i> &nbsp;</tt>
+            </div>
+            <div id="l186"
+               class="code sev- "><tt><i>186</i> &nbsp;</tt>
+            </div>
+            <div id="l187"
+               class="code sev- "><tt><i>187</i> <span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span><span class="n">color_str</span><span class="p">):</span></tt>
+            </div>
+            <div id="l188"
+               class="code sev- "><tt><i>188</i>     <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l189"
+               class="code sev- "><tt><i>189</i>         <span class="n">color_hexa</span> <span class="o">=</span> <span class="n">COLORS</span><span class="p">[</span><span class="n">color_str</span><span class="p">]</span></tt>
+            </div>
+            <div id="l190"
+               class="code sev- "><tt><i>190</i>     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span></tt>
+            </div>
+            <div id="l191"
+               class="code sev- "><tt><i>191</i>         <span class="c1"># assume custom hexa string already</span></tt>
+            </div>
+            <div id="l192"
+               class="code sev- "><tt><i>192</i>         <span class="n">color_hexa</span> <span class="o">=</span> <span class="n">color_str</span></tt>
+            </div>
+            <div id="l193"
+               class="code sev- "><tt><i>193</i> &nbsp;</tt>
+            </div>
+            <div id="l194"
+               class="code sev- "><tt><i>194</i>     <span class="k">return</span> <span class="n">color_hexa</span></tt>
+            </div>
+            <div id="l195"
+               class="code sev- "><tt><i>195</i> &nbsp;</tt>
+            </div>
+            <div id="l196"
+               class="code sev- "><tt><i>196</i> &nbsp;</tt>
+            </div>
+            <div id="l197"
+               class="code sev- "><tt><i>197</i> <span class="k">def</span> <span class="nf">round_up_to_odd</span><span class="p">(</span><span class="n">val</span><span class="p">):</span></tt>
+            </div>
+            <div id="l198"
+               class="code sev- "><tt><i>198</i>     <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="n">val</span></tt>
+            </div>
+            <div id="l199"
+               class="code sev- "><tt><i>199</i> &nbsp;</tt>
+            </div>
+            <div id="l200"
+               class="code sev- "><tt><i>200</i> &nbsp;</tt>
+            </div>
+            <div id="l201"
+               class="code sev- "><tt><i>201</i> <span class="k">def</span> <span class="nf">preferred_width_of</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">font_name</span><span class="p">,</span> <span class="n">font_size</span><span class="p">):</span></tt>
+            </div>
+            <div id="l202"
+               class="code sev- "><tt><i>202</i>     <span class="c1"># Increase chances of pixel grid alignment.</span></tt>
+            </div>
+            <div id="l203"
+               class="code sev- "><tt><i>203</i>     <span class="n">font_file</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.ttf&quot;</span> <span class="o">%</span> <span class="n">font_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></tt>
+            </div>
+            <div id="l204"
+               class="code sev- "><tt><i>204</i>     <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l205"
+               class="code sev- "><tt><i>205</i>         <span class="c1"># Try from name only - this works if the font is known by the OS</span></tt>
+            </div>
+            <div id="l206"
+               class="code sev- "><tt><i>206</i>         <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="n">font_file</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span></tt>
+            </div>
+            <div id="l207"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        B014
+                     </span>
+                     Redundant exception types in `except (IOError, OSError):`.  Write `except OSError:`, which catches exactly the same exceptions.</li>
+               
+               </ul><tt><i>207</i>     <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">):</span></tt>
+            </div>
+            <div id="l208"
+               class="code sev- "><tt><i>208</i>         <span class="c1"># Font not found: use the embedded font file from the package</span></tt>
+            </div>
+            <div id="l209"
+               class="code sev- "><tt><i>209</i>         <span class="n">font_path</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;genbadge&quot;</span><span class="p">,</span> <span class="n">font_file</span><span class="p">)</span></tt>
+            </div>
+            <div id="l210"
+               class="code sev- "><tt><i>210</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">font_path</span><span class="p">):</span></tt>
+            </div>
+            <div id="l211"
+               class="code sev- "><tt><i>211</i>             <span class="c1"># error when running on python 2 inside the CliInvoker from click with a change of os.cwd.</span></tt>
+            </div>
+            <div id="l212"
+               class="code sev- "><tt><i>212</i>             <span class="kn">import</span> <span class="nn">genbadge</span></tt>
+            </div>
+            <div id="l213"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F821
+                     </span>
+                     Undefined name 'reload'</li>
+               
+               </ul><tt><i>213</i>             <span class="n">reload</span><span class="p">(</span><span class="n">genbadge</span><span class="p">)</span></tt>
+            </div>
+            <div id="l214"
+               class="code sev- "><tt><i>214</i>             <span class="n">font_path</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;genbadge&quot;</span><span class="p">,</span> <span class="n">font_file</span><span class="p">)</span></tt>
+            </div>
+            <div id="l215"
+               class="code sev- "><tt><i>215</i> &nbsp;</tt>
+            </div>
+            <div id="l216"
+               class="code sev- "><tt><i>216</i>         <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="n">font_path</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span></tt>
+            </div>
+            <div id="l217"
+               class="code sev- "><tt><i>217</i> &nbsp;</tt>
+            </div>
+            <div id="l218"
+               class="code sev- "><tt><i>218</i>     <span class="n">width</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">txt</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></tt>
+            </div>
+            <div id="l219"
+               class="code sev- "><tt><i>219</i>     <span class="k">return</span> <span class="n">round_up_to_odd</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

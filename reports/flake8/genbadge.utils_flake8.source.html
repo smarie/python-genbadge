@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>genbadge/utils_flake8.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <h1>
+            <a href="genbadge.utils_flake8.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               genbadge/utils_flake8.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="c1">#  Authors:</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> <span class="c1">#            Sylvain MARIE &lt;sylvain.marie@se.com&gt;</span></tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="c1">#            + All contributors to &lt;https://github.com/smarie/python-genbadge&gt;</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="c1">#  License: 3-clause BSD, &lt;https://github.com/smarie/python-genbadge/blob/master/LICENSE&gt;</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> &nbsp;</tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> &nbsp;</tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span></tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i> <span class="kn">import</span> <span class="nn">re</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev- "><tt><i>11</i> &nbsp;</tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> <span class="kn">from</span> <span class="nn">.utils_badge</span> <span class="kn">import</span> <span class="n">Badge</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i> &nbsp;</tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> &nbsp;</tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i>     <span class="c1"># flake8-html is an optional dependency, do not fail if it cant be loaded</span></tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i>     <span class="kn">import</span> <span class="nn">flake8_html</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F841
+                     </span>
+                     Local variable 'e' is assigned to but never used</li>
+               
+               </ul><tt><i>18</i> <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i>     <span class="k">class</span> <span class="nc">FakeFlake8HtmlImport</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i>         <span class="k">def</span> <span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i>             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Could not import `flake8_html` module, please install it&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i>     <span class="n">flake8_html</span> <span class="o">=</span> <span class="n">FakeFlake8HtmlImport</span><span class="p">()</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i> &nbsp;</tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i> &nbsp;</tt>
+            </div>
+            <div id="l25"
+               class="code sev- "><tt><i>25</i> <span class="k">class</span> <span class="nc">Flake8Stats</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> <span class="sd">    Contains the results from parsing the flake8 report.</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i> <span class="sd">    The severity levels are defined by flake8-html</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev- "><tt><i>30</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i>                  <span class="n">nb_critical</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_warning</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_info</span><span class="o">=</span><span class="mi">0</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i>                  <span class="p">):</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i>         <span class="c1"># severities 1, 2, 3</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i>         <span class="bp">self</span><span class="o">.</span><span class="n">nb_critical</span> <span class="o">=</span> <span class="n">nb_critical</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i>         <span class="bp">self</span><span class="o">.</span><span class="n">nb_warning</span> <span class="o">=</span> <span class="n">nb_warning</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i>         <span class="bp">self</span><span class="o">.</span><span class="n">nb_info</span> <span class="o">=</span> <span class="n">nb_info</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i> &nbsp;</tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i>     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i>             <span class="n">nb</span><span class="p">,</span>   <span class="c1"># type: int</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev- "><tt><i>40</i>             <span class="n">code</span>  <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i>             <span class="p">):</span></tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i>         <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i> <span class="sd">        Add `nb` errors with the same code to the statistics.</span></tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i> <span class="sd">        &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev- "><tt><i>45</i>         <span class="n">severity</span> <span class="o">=</span> <span class="n">flake8_html</span><span class="o">.</span><span class="n">plugin</span><span class="o">.</span><span class="n">find_severity</span><span class="p">(</span><span class="n">code</span><span class="p">)</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i>         <span class="k">if</span> <span class="n">severity</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i>             <span class="bp">self</span><span class="o">.</span><span class="n">nb_critical</span> <span class="o">+=</span> <span class="n">nb</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i>         <span class="k">elif</span> <span class="n">severity</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i>             <span class="bp">self</span><span class="o">.</span><span class="n">nb_warning</span> <span class="o">+=</span> <span class="n">nb</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i>         <span class="k">elif</span> <span class="n">severity</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i>             <span class="bp">self</span><span class="o">.</span><span class="n">nb_info</span> <span class="o">+=</span> <span class="n">nb</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown severity: </span><span class="si">%r</span><span class="s2"> for code </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">severity</span><span class="p">,</span> <span class="n">code</span><span class="p">))</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i> &nbsp;</tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i>     <span class="nd">@property</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i>     <span class="k">def</span> <span class="nf">nb_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_critical</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_warning</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_info</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i> &nbsp;</tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i> &nbsp;</tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i> <span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i>         <span class="n">flake8_stats</span>  <span class="c1"># type: Flake8Stats</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i> <span class="p">):</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i>     <span class="sd">&quot;&quot;&quot; Returns the badge color to use depending on the flake8 results &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i> &nbsp;</tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i>     <span class="k">if</span> <span class="n">flake8_stats</span><span class="o">.</span><span class="n">nb_critical</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i>     <span class="k">elif</span> <span class="n">flake8_stats</span><span class="o">.</span><span class="n">nb_warning</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i>         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev- "><tt><i>69</i>     <span class="k">elif</span> <span class="n">flake8_stats</span><span class="o">.</span><span class="n">nb_info</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i>         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span></tt>
+            </div>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i>     <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i>         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;brightgreen&#39;</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i> &nbsp;</tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i>     <span class="k">return</span> <span class="n">color</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i> &nbsp;</tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i> &nbsp;</tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i> <span class="k">def</span> <span class="nf">get_flake8_badge</span><span class="p">(</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i>     <span class="n">flake8_stats</span>  <span class="c1"># type: Flake8Stats</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i> <span class="p">):</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i>     <span class="c1"># type: (...) -&gt; Badge</span></tt>
+            </div>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i>     <span class="sd">&quot;&quot;&quot;Return the badge from coverage results &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i> &nbsp;</tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>     <span class="n">color</span> <span class="o">=</span> <span class="n">get_color</span><span class="p">(</span><span class="n">flake8_stats</span><span class="p">)</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i> &nbsp;</tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>     <span class="n">right_txt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> C, </span><span class="si">%s</span><span class="s2"> W, </span><span class="si">%s</span><span class="s2"> I&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">flake8_stats</span><span class="o">.</span><span class="n">nb_critical</span><span class="p">,</span> <span class="n">flake8_stats</span><span class="o">.</span><span class="n">nb_warning</span><span class="p">,</span> <span class="n">flake8_stats</span><span class="o">.</span><span class="n">nb_info</span><span class="p">)</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i> &nbsp;</tt>
+            </div>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i>     <span class="k">return</span> <span class="n">Badge</span><span class="p">(</span><span class="n">left_txt</span><span class="o">=</span><span class="s2">&quot;flake8&quot;</span><span class="p">,</span> <span class="n">right_txt</span><span class="o">=</span><span class="n">right_txt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span></tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i> &nbsp;</tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i> &nbsp;</tt>
+            </div>
+            <div id="l90"
+               class="code sev- "><tt><i>90</i> <span class="k">def</span> <span class="nf">get_flake8_stats</span><span class="p">(</span><span class="n">flake8_stats_file</span><span class="p">):</span></tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i>     <span class="c1"># type: (...) -&gt; Flake8Stats</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev- "><tt><i>92</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l93"
+               class="code sev- "><tt><i>93</i> <span class="sd">    Reads an index.html file obtained from flake8-html.</span></tt>
+            </div>
+            <div id="l94"
+               class="code sev- "><tt><i>94</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l95"
+               class="code sev- "><tt><i>95</i>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">flake8_stats_file</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span></tt>
+            </div>
+            <div id="l96"
+               class="code sev- "><tt><i>96</i>         <span class="c1"># assume a file path</span></tt>
+            </div>
+            <div id="l97"
+               class="code sev- "><tt><i>97</i>         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">flake8_stats_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span></tt>
+            </div>
+            <div id="l98"
+               class="code sev- "><tt><i>98</i>             <span class="n">flake8_stats_txt</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></tt>
+            </div>
+            <div id="l99"
+               class="code sev- "><tt><i>99</i>     <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l100"
+               class="code sev- "><tt><i>100</i>         <span class="c1"># assume a stream already</span></tt>
+            </div>
+            <div id="l101"
+               class="code sev- "><tt><i>101</i>         <span class="n">flake8_stats_txt</span> <span class="o">=</span> <span class="n">flake8_stats_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></tt>
+            </div>
+            <div id="l102"
+               class="code sev- "><tt><i>102</i> &nbsp;</tt>
+            </div>
+            <div id="l103"
+               class="code sev- "><tt><i>103</i>     <span class="k">return</span> <span class="n">parse_flake8_stats</span><span class="p">(</span><span class="n">flake8_stats_txt</span><span class="p">)</span></tt>
+            </div>
+            <div id="l104"
+               class="code sev- "><tt><i>104</i> &nbsp;</tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i> &nbsp;</tt>
+            </div>
+            <div id="l106"
+               class="code sev- "><tt><i>106</i> <span class="n">RE_TO_MATCH</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([0-9]+)\s+([A-Z0-9]+)\s.*&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i> &nbsp;</tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i> &nbsp;</tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i> <span class="k">def</span> <span class="nf">parse_flake8_stats</span><span class="p">(</span><span class="n">stats_txt</span>  <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i>                        <span class="p">):</span></tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>     <span class="c1"># type: (...) -&gt; Flake8Stats</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i> &nbsp;</tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i>     <span class="n">stats</span> <span class="o">=</span> <span class="n">Flake8Stats</span><span class="p">()</span></tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stats_txt</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span></tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i>         <span class="n">match</span> <span class="o">=</span> <span class="n">RE_TO_MATCH</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></tt>
+            </div>
+            <div id="l116"
+               class="code sev- "><tt><i>116</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span></tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i>             <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Line in Flake8 statistics report does not match template and will be ignored: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">line</span><span class="p">)</span></tt>
+            </div>
+            <div id="l118"
+               class="code sev- "><tt><i>118</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l119"
+               class="code sev- "><tt><i>119</i>             <span class="n">nb</span><span class="p">,</span> <span class="n">code</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span></tt>
+            </div>
+            <div id="l120"
+               class="code sev- "><tt><i>120</i>             <span class="n">stats</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nb</span><span class="p">),</span> <span class="n">code</span><span class="p">)</span></tt>
+            </div>
+            <div id="l121"
+               class="code sev- "><tt><i>121</i> &nbsp;</tt>
+            </div>
+            <div id="l122"
+               class="code sev- "><tt><i>122</i>     <span class="k">return</span> <span class="n">stats</span></tt>
+            </div>
+            <div id="l123"
+               class="code sev- "><tt><i>123</i> &nbsp;</tt>
+            </div>
+            <div id="l124"
+               class="code sev- "><tt><i>124</i> &nbsp;</tt>
+            </div>
+            <div id="l125"
+               class="code sev- "><tt><i>125</i> <span class="c1"># def parse_flake8_html(html  # type: str</span></tt>
+            </div>
+            <div id="l126"
+               class="code sev- "><tt><i>126</i> <span class="c1">#                       ):</span></tt>
+            </div>
+            <div id="l127"
+               class="code sev- "><tt><i>127</i> <span class="c1">#     #</span></tt>
+            </div>
+            <div id="l128"
+               class="code sev- "><tt><i>128</i> <span class="c1">#     &quot;&quot;&quot;Reads the flake8 html report&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l129"
+               class="code sev- "><tt><i>129</i> <span class="c1">#     soup = bs4.BeautifulSoup(html, &quot;html.parser&quot;)</span></tt>
+            </div>
+            <div id="l130"
+               class="code sev- "><tt><i>130</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l131"
+               class="code sev- "><tt><i>131</i> <span class="c1">#     # check title</span></tt>
+            </div>
+            <div id="l132"
+               class="code sev- "><tt><i>132</i> <span class="c1">#     title = soup.head.title.get_text()</span></tt>
+            </div>
+            <div id="l133"
+               class="code sev- "><tt><i>133</i> <span class="c1">#     assert title == &#39;flake8 violations&#39;, &quot;Invalid flake8 html report found, unexpected title: %s&quot; % title</span></tt>
+            </div>
+            <div id="l134"
+               class="code sev- "><tt><i>134</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l135"
+               class="code sev- "><tt><i>135</i> <span class="c1">#     # get page div</span></tt>
+            </div>
+            <div id="l136"
+               class="code sev- "><tt><i>136</i> <span class="c1">#     pagediv = soup.body.find(&quot;div&quot;, {&quot;id&quot;: &quot;page&quot;})</span></tt>
+            </div>
+            <div id="l137"
+               class="code sev- "><tt><i>137</i> <span class="c1">#     assert pagediv.h1.get_text() == &#39;flake8 violations&#39;</span></tt>
+            </div>
+            <div id="l138"
+               class="code sev- "><tt><i>138</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l139"
+               class="code sev- "><tt><i>139</i> <span class="c1">#     results_dct = dict()</span></tt>
+            </div>
+            <div id="l140"
+               class="code sev- "><tt><i>140</i> <span class="c1">#     ul_violations = pagediv.ul</span></tt>
+            </div>
+            <div id="l141"
+               class="code sev- "><tt><i>141</i> <span class="c1">#     for li in ul_violations.find_all(&#39;li&#39;):</span></tt>
+            </div>
+            <div id="l142"
+               class="code sev- "><tt><i>142</i> <span class="c1">#         # synthesis</span></tt>
+            </div>
+            <div id="l143"
+               class="code sev- "><tt><i>143</i> <span class="c1">#         typ_str, severity_str = li.a.span[&#39;class&#39;]</span></tt>
+            </div>
+            <div id="l144"
+               class="code sev- "><tt><i>144</i> <span class="c1">#         assert typ_str == &#39;count&#39;</span></tt>
+            </div>
+            <div id="l145"
+               class="code sev- "><tt><i>145</i> <span class="c1">#         assert severity_str.startswith(&#39;sev-&#39;)</span></tt>
+            </div>
+            <div id="l146"
+               class="code sev- "><tt><i>146</i> <span class="c1">#         count = int(li.a.span.get_text().strip())</span></tt>
+            </div>
+            <div id="l147"
+               class="code sev- "><tt><i>147</i> <span class="c1">#         worst_severity_nb = int(severity_str[4:])</span></tt>
+            </div>
+            <div id="l148"
+               class="code sev- "><tt><i>148</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l149"
+               class="code sev- "><tt><i>149</i> <span class="c1">#         count2, file_name = list(li.stripped_strings)</span></tt>
+            </div>
+            <div id="l150"
+               class="code sev- "><tt><i>150</i> <span class="c1">#         assert int(count2) == count</span></tt>
+            </div>
+            <div id="l151"
+               class="code sev- "><tt><i>151</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l152"
+               class="code sev- "><tt><i>152</i> <span class="c1">#         # we need to access the details because the count is not correct</span></tt>
+            </div>
+            <div id="l153"
+               class="code sev- "><tt><i>153</i> <span class="c1">#         li_href = li.a[&#39;href&#39;]</span></tt>
+            </div>
+            <div id="l154"
+               class="code sev- "><tt><i>154</i> <span class="c1">#         child_results_dct = parse_child_html(path, li_href)</span></tt>
+            </div>
+            <div id="l155"
+               class="code sev- "><tt><i>155</i> <span class="c1">#         for c_severity_nb, c_count in child_results_dct.items():</span></tt>
+            </div>
+            <div id="l156"
+               class="code sev- "><tt><i>156</i> <span class="c1">#             try:</span></tt>
+            </div>
+            <div id="l157"
+               class="code sev- "><tt><i>157</i> <span class="c1">#                 results_dct[c_severity_nb] += c_count</span></tt>
+            </div>
+            <div id="l158"
+               class="code sev- "><tt><i>158</i> <span class="c1">#             except KeyError:</span></tt>
+            </div>
+            <div id="l159"
+               class="code sev- "><tt><i>159</i> <span class="c1">#                 results_dct[c_severity_nb] = c_count</span></tt>
+            </div>
+            <div id="l160"
+               class="code sev- "><tt><i>160</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l161"
+               class="code sev- "><tt><i>161</i> <span class="c1">#         assert worst_severity_nb == min(child_results_dct.keys())</span></tt>
+            </div>
+            <div id="l162"
+               class="code sev- "><tt><i>162</i> <span class="c1">#         assert count == sum(child_results_dct.values())</span></tt>
+            </div>
+            <div id="l163"
+               class="code sev- "><tt><i>163</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l164"
+               class="code sev- "><tt><i>164</i> <span class="c1">#     return results_dct</span></tt>
+            </div>
+            <div id="l165"
+               class="code sev- "><tt><i>165</i> &nbsp;</tt>
+            </div>
+            <div id="l166"
+               class="code sev- "><tt><i>166</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l167"
+               class="code sev- "><tt><i>167</i> <span class="c1"># def parse_child_html(path,   # type: str</span></tt>
+            </div>
+            <div id="l168"
+               class="code sev- "><tt><i>168</i> <span class="c1">#                      suffix  # type: str</span></tt>
+            </div>
+            <div id="l169"
+               class="code sev- "><tt><i>169</i> <span class="c1">#                      ):</span></tt>
+            </div>
+            <div id="l170"
+               class="code sev- "><tt><i>170</i> <span class="c1">#     with open(path + suffix) as f:</span></tt>
+            </div>
+            <div id="l171"
+               class="code sev- "><tt><i>171</i> <span class="c1">#         html_child = f.read()</span></tt>
+            </div>
+            <div id="l172"
+               class="code sev- "><tt><i>172</i> <span class="c1">#     soup_child = bs4.BeautifulSoup(html_child, &quot;html.parser&quot;)</span></tt>
+            </div>
+            <div id="l173"
+               class="code sev- "><tt><i>173</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l174"
+               class="code sev- "><tt><i>174</i> <span class="c1">#     # check title</span></tt>
+            </div>
+            <div id="l175"
+               class="code sev- "><tt><i>175</i> <span class="c1">#     title = soup_child.head.title.get_text()</span></tt>
+            </div>
+            <div id="l176"
+               class="code sev- "><tt><i>176</i> <span class="c1">#     assert title.startswith(&#39;flake8 violations&#39;), &quot;Invalid flake8 html report found, unexpected title: %s&quot; % title</span></tt>
+            </div>
+            <div id="l177"
+               class="code sev- "><tt><i>177</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l178"
+               class="code sev- "><tt><i>178</i> <span class="c1">#     # get page div</span></tt>
+            </div>
+            <div id="l179"
+               class="code sev- "><tt><i>179</i> <span class="c1">#     pagediv = soup_child.body.find(&quot;div&quot;, {&quot;id&quot;: &quot;page&quot;})</span></tt>
+            </div>
+            <div id="l180"
+               class="code sev- "><tt><i>180</i> <span class="c1">#     # assert pagediv.h1.get_text() == &#39;flake8 violations&#39;</span></tt>
+            </div>
+            <div id="l181"
+               class="code sev- "><tt><i>181</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l182"
+               class="code sev- "><tt><i>182</i> <span class="c1">#     results_dct = dict()</span></tt>
+            </div>
+            <div id="l183"
+               class="code sev- "><tt><i>183</i> <span class="c1">#     ul_violations = pagediv.ul</span></tt>
+            </div>
+            <div id="l184"
+               class="code sev- "><tt><i>184</i> <span class="c1">#     for li in ul_violations.find_all(&#39;li&#39;, recursive=False):</span></tt>
+            </div>
+            <div id="l185"
+               class="code sev- "><tt><i>185</i> <span class="c1">#         code = li.a[&#39;data-code&#39;]  # F401, etc.</span></tt>
+            </div>
+            <div id="l186"
+               class="code sev- "><tt><i>186</i> <span class="c1">#         typ_str, severity_str = li.a.span[&#39;class&#39;]</span></tt>
+            </div>
+            <div id="l187"
+               class="code sev- "><tt><i>187</i> <span class="c1">#         assert typ_str == &#39;count&#39;</span></tt>
+            </div>
+            <div id="l188"
+               class="code sev- "><tt><i>188</i> <span class="c1">#         assert severity_str.startswith(&#39;sev-&#39;)</span></tt>
+            </div>
+            <div id="l189"
+               class="code sev- "><tt><i>189</i> <span class="c1">#         count = int(li.a.span.get_text().strip())</span></tt>
+            </div>
+            <div id="l190"
+               class="code sev- "><tt><i>190</i> <span class="c1">#         severity_nb = int(severity_str[4:])</span></tt>
+            </div>
+            <div id="l191"
+               class="code sev- "><tt><i>191</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l192"
+               class="code sev- "><tt><i>192</i> <span class="c1">#         try:</span></tt>
+            </div>
+            <div id="l193"
+               class="code sev- "><tt><i>193</i> <span class="c1">#             results_dct[severity_nb] += count</span></tt>
+            </div>
+            <div id="l194"
+               class="code sev- "><tt><i>194</i> <span class="c1">#         except KeyError:</span></tt>
+            </div>
+            <div id="l195"
+               class="code sev- "><tt><i>195</i> <span class="c1">#             results_dct[severity_nb] = count</span></tt>
+            </div>
+            <div id="l196"
+               class="code sev- "><tt><i>196</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l197"
+               class="code sev- "><tt><i>197</i> <span class="c1">#     return results_dct</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

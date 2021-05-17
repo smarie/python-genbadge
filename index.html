@@ -382,6 +382,33 @@
     3. Flake8 badge
   </a>
   
+    <nav class="md-nav" aria-label="3. Flake8 badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite-a-flake8-report" class="md-nav__link">
+    Prerequisite: a flake8 report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-badge_2" class="md-nav__link">
+    Generating the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-badge_2" class="md-nav__link">
+    Using the badge
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -626,6 +653,33 @@
     3. Flake8 badge
   </a>
   
+    <nav class="md-nav" aria-label="3. Flake8 badge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite-a-flake8-report" class="md-nav__link">
+    Prerequisite: a flake8 report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-badge_2" class="md-nav__link">
+    Generating the badge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-badge_2" class="md-nav__link">
+    Using the badge
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -686,15 +740,15 @@
                 
                 <h1 id="genbadge">genbadge<a class="headerlink" href="#genbadge" title="Permanent link">&para;</a></h1>
 <p><em>Generate badges for tools that do not provide one.</em></p>
-<p><a href="https://pypi.python.org/pypi/genbadge/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/genbadge.svg" /></a> <a href="https://github.com/smarie/python-genbadge/actions/workflows/base.yml"><img alt="Build Status" src="https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg" /></a> <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a> <a href="https://codecov.io/gh/smarie/python-genbadge"><img alt="codecov" src="https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg" /></a></p>
-<p><a href="https://smarie.github.io/python-genbadge/"><img alt="Documentation" src="https://img.shields.io/badge/doc-latest-blue.svg" /></a> <a href="https://pypi.python.org/pypi/genbadge/"><img alt="PyPI" src="https://img.shields.io/pypi/v/genbadge.svg" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads" src="https://pepy.tech/badge/genbadge" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads per week" src="https://pepy.tech/badge/genbadge/week" /></a> <a href="https://github.com/smarie/python-genbadge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/smarie/python-genbadge.svg" /></a></p>
+<p><a href="https://pypi.python.org/pypi/genbadge/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/genbadge.svg" /></a> <a href="https://github.com/smarie/python-genbadge/actions/workflows/base.yml"><img alt="Build Status" src="https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg" /></a> <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a> <a href="reports/flake8/"><img alt="Flake8 Status" src="reports/flake8/flake8-badge.svg?dummy=8484744" /></a></p>
+<p><a href="https://smarie.github.io/python-genbadge/"><img alt="Documentation" src="https://img.shields.io/badge/doc-latest-blue.svg" /></a> <a href="https://pypi.python.org/pypi/genbadge/"><img alt="PyPI" src="https://img.shields.io/pypi/v/genbadge.svg" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads" src="https://pepy.tech/badge/genbadge" /></a> <a href="https://pepy.tech/project/genbadge"><img alt="Downloads per week" src="https://pepy.tech/badge/genbadge/week" /></a> <a href="https://github.com/smarie/python-genbadge/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/smarie/python-genbadge.svg" /></a> <a href="https://codecov.io/gh/smarie/python-genbadge"><img alt="codecov" src="https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg" /></a></p>
 <p><code>genbadge</code> provides a set of commandline utilities to generate badges for tools that do not provide one. It currently can create: </p>
 <ul>
-<li><a href="#1-tests-badge"><code>tests</code></a> badges such as <img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /> from <code>pytest</code> or other <code>junit.xml</code>-generating framework,</li>
-<li><a href="#2-coverage-badge"><code>coverage</code></a> badges such as <img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /> from python <code>coverage</code> or other <code>coverage.xml</code>-generating framework, </li>
-<li><a href="#3-flake8-badge"><code>flake8</code></a>. </li>
+<li><a href="#1-tests-badge"><code>tests</code></a> badges such as <img alt="Tests Badge" src="reports/junit/junit-badge.svg?dummy=8484744" /> from <code>pytest</code> or other <code>junit.xml</code>-generating framework,</li>
+<li><a href="#2-coverage-badge"><code>coverage</code></a> badges such as <img alt="Coverage Badge" src="reports/coverage/coverage-badge.svg?dummy=8484744" /> from python <code>coverage</code> or other <code>coverage.xml</code>-generating framework, </li>
+<li><a href="#3-flake8-badge"><code>flake8</code></a> badges such as <img alt="Flake8 Status" src="reports/flake8/flake8-badge.svg?dummy=8484744" /> from <code>flake8 --statistics</code>. </li>
 </ul>
-<p>Badges are either generated using the <a href="https://shields.io/">shields.io</a> HTTP REST API, or with an equivalent local SVG template.</p>
+<p>Badges are either generated using the <a href="https://shields.io/">shields.io</a> HTTP REST API, or with an equivalent local SVG template included in <code>genbadge</code>.</p>
 <h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
 <h3 id="full">Full<a class="headerlink" href="#full" title="Permanent link">&para;</a></h3>
 <p>In order for all commandline features to work, you should install <code>genbadge</code> with the extra dependencies:</p>
@@ -720,7 +774,11 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  tests  Generate a badge <span class="k">for</span> the <span class="nb">test</span> results <span class="o">(</span>e.g. from a junit.xml<span class="o">)</span>.
+  coverage  Generate a badge <span class="k">for</span> the coverage results <span class="o">(</span>e.g. from a
+            coverage.xml<span class="o">)</span>.%s
+  flake8    Generate a badge <span class="k">for</span> the flake8 results <span class="o">(</span>e.g. from a flake8stats.txt
+            file<span class="o">)</span>.%s
+  tests     Generate a badge <span class="k">for</span> the <span class="nb">test</span> results <span class="o">(</span>e.g. from a junit.xml<span class="o">)</span>.
 </code></pre></div>
 <h3 id="1-tests-badge">1. Tests badge<a class="headerlink" href="#1-tests-badge" title="Permanent link">&para;</a></h3>
 <h4 id="prerequisite-a-test-report">Prerequisite: a test report<a class="headerlink" href="#prerequisite-a-test-report" title="Permanent link">&para;</a></h4>
@@ -745,7 +803,7 @@ Commands:
 <h5 id="b-other-frameworks">b. Other frameworks<a class="headerlink" href="#b-other-frameworks" title="Permanent link">&para;</a></h5>
 <p>Any <code>junit.xml</code> input file would be accepted so other language users (e.g. java) can get this working for them as well.</p>
 <h4 id="generating-the-badge">Generating the badge<a class="headerlink" href="#generating-the-badge" title="Permanent link">&para;</a></h4>
-<p>Now you can generate a badge similar to this one <a href="reports/junit/report.html"><img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /></a> with the following command:</p>
+<p>Now you can generate a badge similar to this one <img alt="Tests Status" src="reports/junit/junit-badge.svg?dummy=8484744" /> with the following command:</p>
 <div class="highlight"><pre><span></span><code>&gt; genbadge tests
 </code></pre></div>
 <p>By default it assumes that</p>
@@ -822,7 +880,7 @@ SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;<
 <h5 id="b-other-frameworks_1">b. Other frameworks<a class="headerlink" href="#b-other-frameworks_1" title="Permanent link">&para;</a></h5>
 <p>Any <code>coverage.xml</code> input file would be accepted so other language users (e.g. java) can get this working for them as well.</p>
 <h4 id="generating-the-badge_1">Generating the badge<a class="headerlink" href="#generating-the-badge_1" title="Permanent link">&para;</a></h4>
-<p>Now you can generate a badge similar to this one <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a> with the following command:</p>
+<p>Now you can generate a badge similar to this one <img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /> with the following command:</p>
 <div class="highlight"><pre><span></span><code>&gt; genbadge coverage
 </code></pre></div>
 <p>By default it assumes that</p>
@@ -830,7 +888,7 @@ SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;<
 <li>
 <p>the input file can be found at <code>./reports/coverage/coverage.xml</code>. You can change this with the <code>-i/--input-file</code> flag. </p>
 <ul>
-<li><code>-</code> can be used to denote <code>&lt;stdin&gt;</code>: e.g. <code>genbadge coverage -i - &lt; junit.xml</code>.</li>
+<li><code>-</code> can be used to denote <code>&lt;stdin&gt;</code>: e.g. <code>genbadge coverage -i - &lt; coverage.xml</code>.</li>
 </ul>
 </li>
 <li>
@@ -866,7 +924,67 @@ SUCCESS - Coverage badge created: <span class="s1">&#39;(...)/coverage-badge.svg
 <p>It will render as follows: <a href="reports/coverage/"><img alt="Coverage Status" src="reports/coverage/coverage-badge.svg?dummy=8484744" /></a></p>
 <p>Note that the query part of the image url <code>?dummy=8484744</code> is a trick so that the github pages web server does not try to add an extra cache layer to the badge. Maybe this is not useful anymore with new versions of github, if you know the answer let me know !</p>
 <h3 id="3-flake8-badge">3. Flake8 badge<a class="headerlink" href="#3-flake8-badge" title="Permanent link">&para;</a></h3>
-<p>TODO</p>
+<h4 id="prerequisite-a-flake8-report">Prerequisite: a flake8 report<a class="headerlink" href="#prerequisite-a-flake8-report" title="Permanent link">&para;</a></h4>
+<p>If you use <a href="https://flake8.pycqa.org/"><code>flake8</code></a>, you can use some options to generate reports:</p>
+<ul>
+<li>
+<p>with <code>--statistics</code>, the number of issues grouped by code (e.g. <code>E201</code>) is consolidated and printed to std out. You can redirect this to a file named <code>flake8stats.txt</code> using <code>--tee --output-file flake8stats.txt</code>. This is the file that we'll need to generate the badge. Note that <code>--tee</code> is to continue to see the report on the console, this is optional.</p>
+</li>
+<li>
+<p>with <code>--format=html --htmldir</code> a detailed HTML report (a folder) is generated. This is not required to generate the badge, but you might wish to use it so that users navigate to it when they will click on your badge. </p>
+</li>
+</ul>
+<p>Let's run this in your project. We use <code>--exit-zero</code> so that the commands always returns with exit code 0 even if problems are found.</p>
+<div class="highlight"><pre><span></span><code>&gt; flake8 &lt;src_folder&gt; --exit-zero --format<span class="o">=</span>html --htmldir ./reports/flake8 --statistics --tee --output-file flake8stats.txt
+<span class="m">1</span>     B014 Redundant exception types <span class="k">in</span> <span class="sb">`</span>except <span class="o">(</span>IOError, OSError<span class="o">)</span>:<span class="sb">`</span>.  Write <span class="sb">`</span>except OSError:<span class="sb">`</span>, which catches exactly the same exceptions.
+<span class="m">7</span>     C801 Copyright notice not present.
+<span class="m">1</span>     E122 continuation line missing indentation or outdented
+<span class="m">1</span>     E303 too many blank lines <span class="o">(</span><span class="m">3</span><span class="o">)</span>
+...
+</code></pre></div>
+<p>You can check that the statistics file and html report folder are correctly generated before moving forward.</p>
+<h4 id="generating-the-badge_2">Generating the badge<a class="headerlink" href="#generating-the-badge_2" title="Permanent link">&para;</a></h4>
+<p>Now you can generate a badge similar to this one <img alt="Flake8 Status" src="reports/flake8/flake8-badge.svg" /> with the following command:</p>
+<div class="highlight"><pre><span></span><code>&gt; genbadge flake8
+</code></pre></div>
+<p>By default it assumes that</p>
+<ul>
+<li>
+<p>the input file can be found at <code>./reports/flake8/flake8stats.txt</code>. You can change this with the <code>-i/--input-file</code> flag. </p>
+<ul>
+<li><code>-</code> can be used to denote <code>&lt;stdin&gt;</code>: e.g. <code>genbadge flake8 -i - &lt; flake8stats.txt</code>.</li>
+</ul>
+</li>
+<li>
+<p>the output file will be at <code>./flake8-badge.svg</code>. You can change it with the <code>-o/--output-file</code> flag</p>
+<ul>
+<li><code>-</code> can be used to denote <code>&lt;stdout&gt;</code>: e.g. <code>genbadge flake8 -o - &gt; badge.svg</code>.</li>
+</ul>
+</li>
+<li>
+<p>the badge should be generated using <code>shields.io</code> (requires an internet connection). If you prefer you can use <code>-l/--local</code> to use the included SVG file template (less mature but seems to work)</p>
+</li>
+</ul>
+<p>In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose <code>-v</code> flag:</p>
+<div class="highlight"><pre><span></span><code>Flake8 statistics parsed successfully from <span class="s1">&#39;(...)/reports/flake8/flake8stats.txt&#39;</span>
+ - Total <span class="o">(</span><span class="m">20</span><span class="o">)</span> <span class="o">=</span> Critical <span class="o">(</span><span class="m">6</span><span class="o">)</span> + Warning <span class="o">(</span><span class="m">9</span><span class="o">)</span> + Info <span class="o">(</span><span class="m">5</span><span class="o">)</span>
+
+SUCCESS - Flake8 badge created: <span class="s1">&#39;(...)/flake8-badge.svg&#39;</span>
+</code></pre></div>
+<p>Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag <code>-s</code>.</p>
+<p>The resulting badge will by default look like this: <code>[flake8 | 6 C, 0 W, 5 I]</code> where 6, 0, 5 denote the number of critical issues, warnings, and information messages respectively. These severity levels are determined by the <code>flake8-html</code> plugin so as to match the colors in the HTML report.</p>
+<p>Finally, the color of the badge depends on the number of issues at each severity level.</p>
+<ul>
+<li>at least a critical issue (severity 1): red</li>
+<li>at least a warning (severity 2): orange</li>
+<li>at least an info (severity 3): green</li>
+<li>no issue at all: bright green</li>
+</ul>
+<h4 id="using-the-badge_2">Using the badge<a class="headerlink" href="#using-the-badge_2" title="Permanent link">&para;</a></h4>
+<p>To include the resulting badge in your documentation and make it point to the generated HTML report, you can for example use the following markdown:</p>
+<p><code>[![Flake8 Status](./reports/flake8/flake8-badge.svg?dummy=8484744)](./reports/flake8/index.html)</code></p>
+<p>It will render as follows: <a href="reports/flake8/"><img alt="Flake8 Status" src="reports/flake8/flake8-badge.svg?dummy=8484744" /></a></p>
+<p>Note that the query part of the image url <code>?dummy=8484744</code> is a trick so that the github pages web server does not try to add an extra cache layer to the badge. Maybe this is not useful anymore with new versions of github, if you know the answer let me know !</p>
 <h3 id="4-low-level-api">4. Low-level API<a class="headerlink" href="#4-low-level-api" title="Permanent link">&para;</a></h3>
 <p>You can create a badge with the <code>Badge</code> class.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">genbadge</span> <span class="kn">import</span> <span class="n">Badge</span>
@@ -885,7 +1003,7 @@ SUCCESS - Coverage badge created: <span class="s1">&#39;(...)/coverage-badge.svg
 <p>Other badge generation projects exist:</p>
 <ul>
 <li><a href="https://github.com/dbrgn/coverage-badge"><code>coverage-badge</code></a>, see in particular this <a href="https://github.com/dbrgn/coverage-badge/issues/7">discussion</a></li>
-<li><a href="https://github.com/alex-rudakov/flake8-svg-badge"><code>flake8-svg-badge</code></a> that seems abandoned</li>
+<li><a href="https://github.com/alex-rudakov/flake8-svg-badge"><code>flake8-svg-badge</code></a> that seems abandoned ?</li>
 </ul>
 <h3 id="others">Others<a class="headerlink" href="#others" title="Permanent link">&para;</a></h3>
 <p><em>Do you like this library ? You might also like <a href="https://github.com/smarie/OVERVIEW#python">my other python libraries</a></em> </p>
