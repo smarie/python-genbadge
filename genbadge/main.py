@@ -17,9 +17,12 @@ except NameError:
 
 INFILE_XML_HELP = "An alternate test results XML file to read. '-' is supported and means <stdin>."
 OUTFILE_BADGE_HELP = ("An alternate SVG badge file to write to. '-' is supported and means <stdout>. Note that in this "
-                      "case no other message will be printed to <stdout>.")
+                      "case no other message will be printed to <stdout>. In particular the verbose flag will have no "
+                      "effect.")
 SHIELDS_HELP = ("Indicates if badges should be generated using the shields.io HTTP API (default) or the local SVG file "
                 "template included.")
+VERBOSE_HELP = ("Use this flag to print details to stdout during the badge generation process. Note that this flag has"
+                " no effect when '-' is used as output, since the badge is written to <stdout>.")
 
 
 @click.group()
@@ -42,12 +45,13 @@ def genbadge():
               help="An optional success percentage threshold to use. The command will fail with exit code 1 if the"
                    "actual success percentage is strictly less than the provided value.")
 @click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
-# TODO -f --format
+@click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
 def gen_tests_badge(
         input_file=None,
         output_file=None,
         threshold=None,
-        webshields=None
+        webshields=None,
+        verbose=None
 ):
     """
     This command generates a badge for the test results, from an XML file in the
@@ -57,6 +61,9 @@ def gen_tests_badge(
     By default the input file is the relative `./reports/junit/junit.xml` and
     the output file is `./tests-badge.svg`. You can change these settings with
     the `-i/--input_file` and `-o/--output-file` options.
+
+    You can use the verbose flag `-v/--verbose` to display information on the
+    input file contents, for verification.
 
     The resulting badge will by default look like this: [tests | 6/12]
     where 6 is the number of tests that have run successfully, and 12 is the
@@ -78,8 +85,7 @@ def gen_tests_badge(
     except FileNotFoundError:
         raise click.exceptions.FileError(input_file, hint="File not found")
 
-    # TODO if verbose
-    if not is_stdout:
+    if verbose and not is_stdout:
         click.echo("""Test statistics parsed successfully from %r
  - Nb tests: Total (%s) = Success (%s) + Skipped (%s) + Failed (%s) + Errors (%s)
  - Success percentage: %.2f%% (%s / %s) (Skipped tests are excluded)
@@ -113,10 +119,12 @@ def gen_tests_badge(
 @click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_XML_HELP)
 @click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
 @click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
+@click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
 def gen_coverage_badge(
         input_file=None,
         output_file=None,
-        webshields=None
+        webshields=None,
+        verbose=None
 ):
     """
     This command generates a badge for the coverage results, from an XML file in
@@ -126,6 +134,9 @@ def gen_coverage_badge(
     By default the input file is the relative `./reports/coverage/coverage.xml`
     and the output file is `./coverage-badge.svg`. You can change these settings
     with the `-i/--input_file` and `-o/--output-file` options.
+
+    You can use the verbose flag `-v/--verbose` to display information on the
+    input file contents, for verification.
 
     The resulting badge will by default look like this: [coverage | 98.1%] where
     98.1 is the total coverage, obtained from the branch and line coverages
@@ -145,8 +156,7 @@ def gen_coverage_badge(
     except FileNotFoundError:
         raise click.exceptions.FileError(input_file, hint="File not found")
 
-    # TODO if verbose
-    if not is_stdout:
+    if verbose and not is_stdout:
         click.echo("""Coverage results parsed successfully from %(ifp)r
  - Branch coverage: %(bcp).2f%% (%(bc)s/%(bv)s)
  - Line coverage: %(lcp).2f%% (%(lc)s/%(lv)s)

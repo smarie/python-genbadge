@@ -23,12 +23,14 @@ class CmdReference:
     """
     Container class used to store our test reference for all commands
     """
-    def __init__(self, name, default_infile, default_outfile, example_input_file, example_output_msg, help_msg):
+    def __init__(self, name, default_infile, default_outfile, example_input_file, example_output_msg,
+                 example_output_msg_long, help_msg):
         self.name = name
         self.default_infile = default_infile
         self.default_outfile = default_outfile
         self.example_input_file = example_input_file
         self.example_output_msg = example_output_msg
+        self.example_output_msg_long = example_output_msg_long
         self.help_msg = help_msg
 
     def __str__(self):
@@ -40,7 +42,8 @@ TEST_CMD = CmdReference(
         default_infile="reports/junit/junit.xml",
         default_outfile = "tests-badge.svg",
         example_input_file=(TESTS_FOLDER / "reports" / "junit" / "junit.xml").as_posix(),
-        example_output_msg="""
+        example_output_msg="SUCCESS - Tests badge created: %r\n",
+        example_output_msg_long="""
 Test statistics parsed successfully from %r
  - Nb tests: Total (6) = Success (2) + Skipped (1) + Failed (2) + Errors (1)
  - Success percentage: 40.00%% (2 / 5) (Skipped tests are excluded)
@@ -56,6 +59,9 @@ SUCCESS - Tests badge created: %r
   By default the input file is the relative `./reports/junit/junit.xml` and the
   output file is `./tests-badge.svg`. You can change these settings with the
   `-i/--input_file` and `-o/--output-file` options.
+
+  You can use the verbose flag `-v/--verbose` to display information on the
+  input file contents, for verification.
 
   The resulting badge will by default look like this: [tests | 6/12] where 6 is
   the number of tests that have run successfully, and 12 is the total number of
@@ -73,7 +79,8 @@ Options:
   -o, --output-file FILENAME      An alternate SVG badge file to write to. '-'
                                   is supported and means <stdout>. Note that in
                                   this case no other message will be printed to
-                                  <stdout>.
+                                  <stdout>. In particular the verbose flag will
+                                  have no effect.
   -t, --threshold FLOAT           An optional success percentage threshold to
                                   use. The command will fail with exit code 1 if
                                   theactual success percentage is strictly less
@@ -81,6 +88,11 @@ Options:
   -w, --webshields / -l, --local  Indicates if badges should be generated using
                                   the shields.io HTTP API (default) or the local
                                   SVG file template included.
+  -v, --verbose                   Use this flag to print details to stdout
+                                  during the badge generation process. Note that
+                                  this flag has no effect when '-' is used as
+                                  output, since the badge is written to
+                                  <stdout>.
   --help                          Show this message and exit.
 """
 )
@@ -89,7 +101,8 @@ COV_CMD = CmdReference(
         default_infile="reports/coverage/coverage.xml",
         default_outfile = "coverage-badge.svg",
         example_input_file=(TESTS_FOLDER / "reports" / "coverage" / "coverage.xml").as_posix(),
-        example_output_msg="""
+        example_output_msg="SUCCESS - Coverage badge created: %r\n",
+        example_output_msg_long="""
 Coverage results parsed successfully from %r
  - Branch coverage: 5.56%% (1/18)
  - Line coverage: 17.81%% (13/73)
@@ -107,6 +120,9 @@ SUCCESS - Coverage badge created: %r
   and the output file is `./coverage-badge.svg`. You can change these settings
   with the `-i/--input_file` and `-o/--output-file` options.
 
+  You can use the verbose flag `-v/--verbose` to display information on the
+  input file contents, for verification.
+
   The resulting badge will by default look like this: [coverage | 98.1%] where
   98.1 is the total coverage, obtained from the branch and line coverages using
   the formula
@@ -121,10 +137,16 @@ Options:
   -o, --output-file FILENAME      An alternate SVG badge file to write to. '-'
                                   is supported and means <stdout>. Note that in
                                   this case no other message will be printed to
-                                  <stdout>.
+                                  <stdout>. In particular the verbose flag will
+                                  have no effect.
   -w, --webshields / -l, --local  Indicates if badges should be generated using
                                   the shields.io HTTP API (default) or the local
                                   SVG file template included.
+  -v, --verbose                   Use this flag to print details to stdout
+                                  during the badge generation process. Note that
+                                  this flag has no effect when '-' is used as
+                                  output, since the badge is written to
+                                  <stdout>.
   --help                          Show this message and exit.
 """
 )
@@ -214,9 +236,10 @@ Error: Invalid value for '-i' / '--input-file': %s: No such file or directory
 
 
 @pytest.mark.parametrize("outstream", [False, True], ids="outstream={}".format)
+@pytest.mark.parametrize("verbose", [False, True], ids="verbose={}".format)
 @pytest.mark.parametrize("variant", ["default", "custom", "custom_shortargs", "custom_absolute"])
 @pytest.mark.parametrize("cmd", ALL_COMMANDS, ids=str)
-def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream):
+def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream, verbose):
     """Test that `genbadge <cmd>` works consistently concerning the ios and output messages"""
 
     # from pytest path to pathlib path
@@ -227,6 +250,8 @@ def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream):
 
     # create the various arguments. Use local template for faster exec
     args = [cmd.name, "-l"]
+    if verbose:
+        args.append("--verbose")
     if variant == "default":
         if outstream:
             pytest.skip("this test does not make sense")
@@ -258,7 +283,10 @@ def test_any_command(monkeypatch, cmd, tmpdir, variant, outstream):
 
     # verify the output message
     if not outstream:
-        assert "\n" + result.output == cmd.example_output_msg % (infile_path_for_msg, outfile_path_for_msg)
+        if verbose:
+            assert "\n" + result.output == cmd.example_output_msg_long % (infile_path_for_msg, outfile_path_for_msg)
+        else:
+            assert result.output == cmd.example_output_msg % outfile_path_for_msg
         assert outfile.exists()
     else:
         assert result.output.startswith('<svg xmlns="http://www.w3.org/2000/svg" '
@@ -274,7 +302,7 @@ def test_threshold(threshold, shortarg, tmpdir):
     badge_path = destfolder / "tests-badge.svg"
 
     # define cli args (explicit input so that we do not fall into the python 2 issue with CliRunner IOError
-    args = ["tests", "-i", str(TEST_CMD.example_input_file), "-o", "%s" % badge_path]
+    args = ["tests", "-v", "-i", str(TEST_CMD.example_input_file), "-o", "%s" % badge_path]
     args += ["-t" if shortarg else "--threshold", str(threshold)]
 
     # execute "genbadge tests" with the appropriate arguments
@@ -298,7 +326,7 @@ Error: Success percentage 40.0% is strictly lower than required threshold {}%
         assert result.exit_code == 0
 
         # verify the output message
-        assert "\n" + result.output == TEST_CMD.example_output_msg % (str(TEST_CMD.example_input_file), str(badge_path.as_posix()))
+        assert "\n" + result.output == TEST_CMD.example_output_msg_long % (str(TEST_CMD.example_input_file), str(badge_path.as_posix()))
 
         assert badge_path.exists()
 
@@ -316,7 +344,7 @@ def test_local_remote(use_shields, shortarg, tmpdir):
     badge_path = destfolder / "tests-badge.svg"
 
     # define cli args (explicit input so that we do not fall into the python 2 issue with CliRunner IOError
-    args = ["tests", "-i", str(TEST_CMD.example_input_file), "-o", "%s" % badge_path]
+    args = ["tests", "-v", "-i", str(TEST_CMD.example_input_file), "-o", "%s" % badge_path]
     if use_shields is False:
         args.append("-l" if shortarg else "--local")
     if use_shields is True:
@@ -327,7 +355,7 @@ def test_local_remote(use_shields, shortarg, tmpdir):
     assert result.exit_code == 0
 
     # verify the output message
-    assert "\n" + result.output == TEST_CMD.example_output_msg % (str(TEST_CMD.example_input_file), str(badge_path.as_posix()))
+    assert "\n" + result.output == TEST_CMD.example_output_msg_long % (str(TEST_CMD.example_input_file), str(badge_path.as_posix()))
 
     assert badge_path.exists()
 
