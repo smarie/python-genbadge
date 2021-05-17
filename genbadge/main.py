@@ -8,6 +8,7 @@ import click
 
 from .utils_junit import get_test_stats, get_tests_badge
 from .utils_coverage import get_coverage_badge, get_coverage_stats
+from .utils_flake8 import get_flake8_stats, get_flake8_badge
 
 try:
     FileNotFoundError
@@ -15,7 +16,7 @@ except NameError:
     FileNotFoundError = IOError
 
 
-INFILE_XML_HELP = "An alternate test results XML file to read. '-' is supported and means <stdin>."
+INFILE_HELP_TMP = "An alternate %s file to read. '-' is supported and means <stdin>."
 OUTFILE_BADGE_HELP = ("An alternate SVG badge file to write to. '-' is supported and means <stdout>. Note that in this "
                       "case no other message will be printed to <stdout>. In particular the verbose flag will have no "
                       "effect.")
@@ -42,7 +43,7 @@ def genbadge():
 
 @genbadge.command(name="tests",
                   short_help="Generate a badge for the test results (e.g. from a junit.xml).")
-@click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_XML_HELP)
+@click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_HELP_TMP % "test results XML")
 @click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
 @click.option('-t', '--threshold', type=float,
               help="An optional success percentage threshold to use. The command will fail with exit code 1 if the"
@@ -121,7 +122,7 @@ def gen_tests_badge(
 
 @genbadge.command(name="coverage",
                   short_help="Generate a badge for the coverage results (e.g. from a coverage.xml).")
-@click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_XML_HELP)
+@click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_HELP_TMP % "coverage results XML")
 @click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
 @click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
 @click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
@@ -180,24 +181,60 @@ def gen_coverage_badge(
         click.echo("SUCCESS - Coverage badge created: %r" % str(output_file_path))
 
 
-# @genbadge.command(name="flake8")
-# # @click.option('-p', '--platform_id', default='public', help="Specific ODS platform id. Default 'public'")
-# # @click.option('-b', '--base_url', default=None, help="Specific ODS base url. Default: "
-# #                                                      "https://<platform_id>.opendatasoft.com/")
-# # @click.option('-u', '--username', default=KR_DEFAULT_USERNAME, help='Custom username to use in the keyring entry. '
-# #                                                                     'Default: %s' % KR_DEFAULT_USERNAME)
-# def gen_flake8_badge(platform_id,                   # type: str
-#                      base_url,                      # type: str
-#                      username=KR_DEFAULT_USERNAME,  # type: str
-#                      ):
-#     """
-#     Looks up an ODS apikey entry in the keyring. Custom ODS platform id or base url can be provided through options.
-#     """
-#
-#     if apikey is not None:
-#         click.echo("Api key found for platform url '%s': %s" % (url_used, apikey))
-#     else:
-#         click.echo("No api key registered for platform url '%s'" % (url_used, ))
+@genbadge.command(name="flake8",
+                  short_help="Generate a badge for the flake8 results (e.g. from a flake8stats.txt file).")
+@click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_HELP_TMP % "flake8 results TXT")
+@click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
+@click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
+@click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
+@click.option('-s', '--silent', type=bool, default=False, is_flag=True, help=SILENT_HELP)
+def gen_flake8_badge(
+        input_file=None,
+        output_file=None,
+        webshields=None,
+        verbose=None,
+        silent=None
+):
+    """
+    This command generates a badge for the flake8 results, from a flake8stats.txt
+    file. Such a file can be generated from python `flake8` using the
+    --statistics flag.
+
+    By default the input file is the relative `./reports/flake8/flake8stats.txt`
+    and the output file is `./flake8-badge.svg`. You can change these settings
+    with the `-i/--input_file` and `-o/--output-file` options.
+
+    You can use the verbose flag `-v/--verbose` to display information on the
+    input file contents, for verification.
+
+    The resulting badge will by default look like this: [flake8 | 6 C, 0 W, 5 I]
+    where 6, 0, 5 denote the number of critical issues, warnings, and
+    information messages respectively. These severity levels are determined by
+    the flake8-html plugin so as to match the colors in the HTML report. You can
+    change the appearance of the badge with the --format option (not
+    implemented, todo).
+    """
+    # Process i/o files
+    input_file, input_file_path = _process_infile(input_file, "reports/flake8/flake8stats.txt")
+    output_file, output_file_path, is_stdout = _process_outfile(output_file, "flake8-badge.svg")
+
+    # First retrieve the success percentage from the junit xml
+    try:
+        flake8_stats = get_flake8_stats(flake8_stats_file=input_file)
+    except FileNotFoundError:
+        raise click.exceptions.FileError(input_file, hint="File not found")
+
+    if not silent and verbose and not is_stdout:
+        click.echo("""Flake8 statistics parsed successfully from %r
+ - Total (%s) = Critical (%s) + Warning (%s) + Info (%s)
+""" % (input_file_path, flake8_stats.nb_total, flake8_stats.nb_critical, flake8_stats.nb_warning, flake8_stats.nb_info))
+
+    # Generate the badge
+    badge = get_flake8_badge(flake8_stats)
+    badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
+
+    if not silent and not is_stdout:
+        click.echo("SUCCESS - Flake8 badge created: %r" % str(output_file_path))
 
 
 def _process_infile(input_file, default_in_file):

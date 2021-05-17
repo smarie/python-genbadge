@@ -8,13 +8,6 @@ except ImportError:  # pragma: no cover
     from pathlib2 import Path  # python 2
 
 try:
-    # python 3
-    from urllib.parse import quote_plus
-except ImportError:
-    # python 2
-    from urllib import quote_plus
-
-try:
     from typing import Union
 except ImportError:  # pragma: no cover
     pass
@@ -63,7 +56,7 @@ class Badge:
         else:
             # download from requests
             import requests
-            url = 'https://img.shields.io/badge/%s-%s-%s.svg' % (self.left_txt, quote_plus(self.right_txt), self.color)
+            url = 'https://img.shields.io/badge/%s-%s-%s.svg' % (self.left_txt, self.right_txt, self.color)
             response = requests.get(url, stream=True)
             return response.text
 

@@ -2,17 +2,17 @@
 
 *Generate badges for tools that do not provide one.*
 
-[![Python versions](https://img.shields.io/pypi/pyversions/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Build Status](https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg)](https://github.com/smarie/python-genbadge/actions/workflows/base.yml) [![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744)](./reports/junit/report.html) [![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html) [![codecov](https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg)](https://codecov.io/gh/smarie/python-genbadge)
+[![Python versions](https://img.shields.io/pypi/pyversions/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Build Status](https://github.com/smarie/python-genbadge/actions/workflows/base.yml/badge.svg)](https://github.com/smarie/python-genbadge/actions/workflows/base.yml) [![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744)](./reports/junit/report.html) [![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html) [![Flake8 Status](./reports/flake8/flake8-badge.svg?dummy=8484744)](./reports/flake8/index.html)
 
-[![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-genbadge/) [![PyPI](https://img.shields.io/pypi/v/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Downloads](https://pepy.tech/badge/genbadge)](https://pepy.tech/project/genbadge) [![Downloads per week](https://pepy.tech/badge/genbadge/week)](https://pepy.tech/project/genbadge) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-genbadge.svg)](https://github.com/smarie/python-genbadge/stargazers)
+[![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-genbadge/) [![PyPI](https://img.shields.io/pypi/v/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Downloads](https://pepy.tech/badge/genbadge)](https://pepy.tech/project/genbadge) [![Downloads per week](https://pepy.tech/badge/genbadge/week)](https://pepy.tech/project/genbadge) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-genbadge.svg)](https://github.com/smarie/python-genbadge/stargazers) [![codecov](https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg)](https://codecov.io/gh/smarie/python-genbadge)
 
 `genbadge` provides a set of commandline utilities to generate badges for tools that do not provide one. It currently can create: 
 
- - [`tests`](#1-tests-badge) badges such as ![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744) from `pytest` or other `junit.xml`-generating framework,
- - [`coverage`](#2-coverage-badge) badges such as ![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744) from python `coverage` or other `coverage.xml`-generating framework, 
- - [`flake8`](#3-flake8-badge). 
+ - [`tests`](#1-tests-badge) badges such as ![Tests Badge](./reports/junit/junit-badge.svg?dummy=8484744) from `pytest` or other `junit.xml`-generating framework,
+ - [`coverage`](#2-coverage-badge) badges such as ![Coverage Badge](./reports/coverage/coverage-badge.svg?dummy=8484744) from python `coverage` or other `coverage.xml`-generating framework, 
+ - [`flake8`](#3-flake8-badge) badges such as ![Flake8 Status](./reports/flake8/flake8-badge.svg?dummy=8484744) from `flake8 --statistics`. 
 
-Badges are either generated using the [shields.io](https://shields.io/) HTTP REST API, or with an equivalent local SVG template.
+Badges are either generated using the [shields.io](https://shields.io/) HTTP REST API, or with an equivalent local SVG template included in `genbadge`.
 
 ## Installing
 
@@ -53,7 +53,11 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  tests  Generate a badge for the test results (e.g. from a junit.xml).
+  coverage  Generate a badge for the coverage results (e.g. from a
+            coverage.xml).%s
+  flake8    Generate a badge for the flake8 results (e.g. from a flake8stats.txt
+            file).%s
+  tests     Generate a badge for the test results (e.g. from a junit.xml).
 
 ```
 
@@ -87,7 +91,7 @@ Any `junit.xml` input file would be accepted so other language users (e.g. java)
 
 #### Generating the badge
 
-Now you can generate a badge similar to this one [![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744)](./reports/junit/report.html) with the following command:
+Now you can generate a badge similar to this one ![Tests Status](./reports/junit/junit-badge.svg?dummy=8484744) with the following command:
 
 ```bash
 > genbadge tests
@@ -184,7 +188,7 @@ Any `coverage.xml` input file would be accepted so other language users (e.g. ja
 
 #### Generating the badge
 
-Now you can generate a badge similar to this one [![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/index.html) with the following command:
+Now you can generate a badge similar to this one ![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744) with the following command:
 
 ```bash
 > genbadge coverage
@@ -194,7 +198,7 @@ By default it assumes that
 
  - the input file can be found at `./reports/coverage/coverage.xml`. You can change this with the `-i/--input-file` flag. 
    
-    - `-` can be used to denote `<stdin>`: e.g. `genbadge coverage -i - < junit.xml`.
+    - `-` can be used to denote `<stdin>`: e.g. `genbadge coverage -i - < coverage.xml`.
 
  - the output file will be at `./coverage-badge.svg`. You can change it with the `-o/--output-file` flag
 
@@ -238,7 +242,77 @@ Note that the query part of the image url `?dummy=8484744` is a trick so that th
 
 ### 3. Flake8 badge
 
-TODO
+#### Prerequisite: a flake8 report
+
+If you use [`flake8`](https://flake8.pycqa.org/), you can use some options to generate reports:
+
+ - with `--statistics`, the number of issues grouped by code (e.g. `E201`) is consolidated and printed to std out. You can redirect this to a file named `flake8stats.txt` using `--tee --output-file flake8stats.txt`. This is the file that we'll need to generate the badge. Note that `--tee` is to continue to see the report on the console, this is optional.
+
+ - with `--format=html --htmldir ` a detailed HTML report (a folder) is generated. This is not required to generate the badge, but you might wish to use it so that users navigate to it when they will click on your badge. 
+   
+Let's run this in your project. We use `--exit-zero` so that the commands always returns with exit code 0 even if problems are found.
+
+```bash
+> flake8 <src_folder> --exit-zero --format=html --htmldir ./reports/flake8 --statistics --tee --output-file flake8stats.txt
+1     B014 Redundant exception types in `except (IOError, OSError):`.  Write `except OSError:`, which catches exactly the same exceptions.
+7     C801 Copyright notice not present.
+1     E122 continuation line missing indentation or outdented
+1     E303 too many blank lines (3)
+...
+```
+
+You can check that the statistics file and html report folder are correctly generated before moving forward.
+
+#### Generating the badge
+
+Now you can generate a badge similar to this one ![Flake8 Status](./reports/flake8/flake8-badge.svg) with the following command:
+
+```bash
+> genbadge flake8
+```
+
+By default it assumes that
+
+ - the input file can be found at `./reports/flake8/flake8stats.txt`. You can change this with the `-i/--input-file` flag. 
+   
+    - `-` can be used to denote `<stdin>`: e.g. `genbadge flake8 -i - < flake8stats.txt`.
+
+ - the output file will be at `./flake8-badge.svg`. You can change it with the `-o/--output-file` flag
+
+    - `-` can be used to denote `<stdout>`: e.g. `genbadge flake8 -o - > badge.svg`.
+
+ - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
+
+In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose `-v` flag:
+
+```bash
+Flake8 statistics parsed successfully from '(...)/reports/flake8/flake8stats.txt'
+ - Total (20) = Critical (6) + Warning (9) + Info (5)
+
+SUCCESS - Flake8 badge created: '(...)/flake8-badge.svg'
+```
+
+Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag `-s`.
+
+The resulting badge will by default look like this: `[flake8 | 6 C, 0 W, 5 I]` where 6, 0, 5 denote the number of critical issues, warnings, and information messages respectively. These severity levels are determined by the `flake8-html` plugin so as to match the colors in the HTML report.
+
+Finally, the color of the badge depends on the number of issues at each severity level.
+
+ - at least a critical issue (severity 1): red
+ - at least a warning (severity 2): orange
+ - at least an info (severity 3): green
+ - no issue at all: bright green
+
+
+#### Using the badge
+
+To include the resulting badge in your documentation and make it point to the generated HTML report, you can for example use the following markdown:
+
+`[![Flake8 Status](./reports/flake8/flake8-badge.svg?dummy=8484744)](./reports/flake8/index.html)`
+
+It will render as follows: [![Flake8 Status](./reports/flake8/flake8-badge.svg?dummy=8484744)](./reports/flake8/index.html)
+
+Note that the query part of the image url `?dummy=8484744` is a trick so that the github pages web server does not try to add an extra cache layer to the badge. Maybe this is not useful anymore with new versions of github, if you know the answer let me know !
 
 ### 4. Low-level API
 
@@ -271,7 +345,7 @@ Note the optional `use_shields` boolean flag that is used to switch between quer
 Other badge generation projects exist:
 
  * [`coverage-badge`](https://github.com/dbrgn/coverage-badge), see in particular this [discussion](https://github.com/dbrgn/coverage-badge/issues/7)
- * [`flake8-svg-badge`](https://github.com/alex-rudakov/flake8-svg-badge) that seems abandoned
+ * [`flake8-svg-badge`](https://github.com/alex-rudakov/flake8-svg-badge) that seems abandoned ?
 
 
 ### Others

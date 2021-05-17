@@ -136,7 +136,61 @@ SUCCESS - Coverage badge created: %r
   and multiplying this by 100.
 
 Options:
-  -i, --input-file FILENAME       An alternate test results XML file to read.
+  -i, --input-file FILENAME       An alternate coverage results XML file to
+                                  read. '-' is supported and means <stdin>.
+  -o, --output-file FILENAME      An alternate SVG badge file to write to. '-'
+                                  is supported and means <stdout>. Note that in
+                                  this case no other message will be printed to
+                                  <stdout>. In particular the verbose flag will
+                                  have no effect.
+  -w, --webshields / -l, --local  Indicates if badges should be generated using
+                                  the shields.io HTTP API (default) or the local
+                                  SVG file template included.
+  -v, --verbose                   Use this flag to print details to stdout
+                                  during the badge generation process. Note that
+                                  this flag has no effect when '-' is used as
+                                  output, since the badge is written to
+                                  <stdout>. It also has no effect when the
+                                  silent flag `-s` is used.
+  -s, --silent                    When this flag is active nothing will be
+                                  written to stdout. Note that this flag has no
+                                  effect when '-' is used as the output file.
+  --help                          Show this message and exit.
+"""
+)
+FLAKE8_CMD = CmdReference(
+        name="flake8",
+        default_infile="reports/flake8/flake8stats.txt",
+        default_outfile = "flake8-badge.svg",
+        example_input_file=(TESTS_FOLDER / "reports" / "flake8" / "flake8stats.txt").as_posix(),
+        example_output_msg="SUCCESS - Flake8 badge created: %r\n",
+        example_output_msg_long="""
+Flake8 statistics parsed successfully from %r
+ - Total (20) = Critical (6) + Warning (9) + Info (5)
+
+SUCCESS - Flake8 badge created: %r
+""",
+        help_msg="""Usage: genbadge flake8 [OPTIONS]
+
+  This command generates a badge for the flake8 results, from a flake8stats.txt
+  file. Such a file can be generated from python `flake8` using the --statistics
+  flag.
+
+  By default the input file is the relative `./reports/flake8/flake8stats.txt`
+  and the output file is `./flake8-badge.svg`. You can change these settings
+  with the `-i/--input_file` and `-o/--output-file` options.
+
+  You can use the verbose flag `-v/--verbose` to display information on the
+  input file contents, for verification.
+
+  The resulting badge will by default look like this: [flake8 | 6 C, 0 W, 5 I]
+  where 6, 0, 5 denote the number of critical issues, warnings, and information
+  messages respectively. These severity levels are determined by the flake8-html
+  plugin so as to match the colors in the HTML report. You can change the
+  appearance of the badge with the --format option (not implemented, todo).
+
+Options:
+  -i, --input-file FILENAME       An alternate flake8 results TXT file to read.
                                   '-' is supported and means <stdin>.
   -o, --output-file FILENAME      An alternate SVG badge file to write to. '-'
                                   is supported and means <stdout>. Note that in
@@ -159,7 +213,7 @@ Options:
 """
 )
 
-ALL_COMMANDS = [TEST_CMD, COV_CMD]
+ALL_COMMANDS = [TEST_CMD, COV_CMD, FLAKE8_CMD]
 ALL_COMMAND_NAMES = [c.name for c in ALL_COMMANDS]
 
 
@@ -184,12 +238,14 @@ Options:
 Commands:
   coverage  Generate a badge for the coverage results (e.g. from a
             coverage.xml).%s
+  flake8    Generate a badge for the flake8 results (e.g. from a flake8stats.txt
+            file).%s
   tests     Generate a badge for the test results (e.g. from a junit.xml).
 """
     if LooseVersion(click.__version__) < "8.":
-        expected = expected % "\n"
+        expected = expected % ("\n", "\n")
     else:
-        expected = expected % ""
+        expected = expected % ("", "")
     assert "\n" + result.output == expected
 
 

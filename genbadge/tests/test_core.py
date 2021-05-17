@@ -15,6 +15,8 @@ except ImportError:  # pragma: no cover
 from genbadge import Badge
 from genbadge.utils_badge import get_local_badge_template
 from genbadge.utils_coverage import parse_cov
+from genbadge.utils_junit import get_test_stats
+from genbadge.utils_flake8 import get_flake8_stats
 
 
 TESTS_FOLDER = Path(__file__).parent.absolute()
@@ -78,6 +80,25 @@ def standardize_xml(xmltxt):
     return dom.toprettyxml()
 
 
+def test_parse_tests():
+    """Check that we can parse a coverage.xml file successfully"""
+    res = get_test_stats(str(TESTS_FOLDER / "reports/junit/junit.xml"))
+
+    # not runned at all
+    assert res.errors == 1
+    # runned
+    assert res.runned == 5
+    assert res.failed == 2
+    assert res.success == 2
+    assert res.skipped == 1
+
+    assert res.total_with_skipped == res.runned + res.errors
+    assert res.total_without_skipped == res.runned - res.skipped + res.errors
+
+    assert res.success_percentage == res.success * 100 / res.total_without_skipped
+
+
+
 def test_parse_cov():
     """Check that we can parse a coverage.xml file successfully"""
     res = parse_cov(str(TESTS_FOLDER / "reports/coverage/coverage.xml"))
@@ -95,3 +116,14 @@ def test_parse_cov():
 
     assert res.total_rate == ((res.lines_covered + res.branches_covered) / (res.branches_valid + res.lines_valid))
     assert res.total_coverage == 100 * res.total_rate
+
+
+def test_parse_flake8():
+    """Check that we can parse a coverage.xml file successfully"""
+    res = get_flake8_stats(str(TESTS_FOLDER / "reports/flake8/flake8stats.txt"))
+
+    assert res.nb_critical == 6
+    assert res.nb_warning == 9
+    assert res.nb_info == 5
+
+    assert res.nb_total == res.nb_critical + res.nb_warning + res.nb_info

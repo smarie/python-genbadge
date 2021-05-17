@@ -1,0 +1,11 @@
+1     B014 Redundant exception types in `except (IOError, OSError):`.  Write `except OSError:`, which catches exactly the same exceptions.
+7     C801 Copyright notice not present.
+1     E122 continuation line missing indentation or outdented
+1     E303 too many blank lines (3)
+1     F401 'math.floor' imported but unused
+3     F821 undefined name 'TextIO'
+2     F841 local variable 'e' is assigned to but never used
+1     S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+1     S314 Using xml.etree.ElementTree.parse to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib() is called
+1     S405 Using ElementTree to parse untrusted XML data is known to be vulnerable to XML attacks. Replace ElementTree with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.
+1     T001 print found.

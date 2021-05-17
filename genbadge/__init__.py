@@ -12,5 +12,5 @@ except ImportError:
 __all__ = [
     '__version__',
     # submodules
-    'main', 'utils_junit', 'utils_coverage', 'utils_badge', 'Badge'
+    'main', 'utils_junit', 'utils_coverage', 'utils_flake8', 'utils_badge', 'Badge'
 ]
