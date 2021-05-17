@@ -134,10 +134,10 @@ class CovParser(object):
         branch_rate = float(root.attrib.get('branch-rate'))
         line_rate = float(root.attrib.get('line-rate'))
 
-        if int(cov.branch_rate * 1000) != int(branch_rate * 1000):
+        if round(cov.branch_rate * 1000) != round(branch_rate * 1000):
             raise ValueError("Computed branch rate (%s) is different from the one in the file (%s)"
                              % (cov.branch_rate, branch_rate))
-        if int(cov.line_rate * 1000) != int(line_rate * 1000):
+        if round(cov.line_rate * 1000) != round(line_rate * 1000):
             raise ValueError("Computed line rate (%s) is different from the one in the file (%s)"
                              % (cov.line_rate, line_rate))
 
