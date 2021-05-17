@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.8.0 - New features
+
+ - Added `flake8` command. Fixes [#3](https://github.com/smarie/python-genbadge/issues/3).
+ - Added a "silent" flag `-s`. Fixes [#10](https://github.com/smarie/python-genbadge/issues/10)
+ - Added a verbosity flag `-v`. Fixes [#1](https://github.com/smarie/python-genbadge/issues/1)
+ - Python 3.9 is now officially supported. Fixes [#9](https://github.com/smarie/python-genbadge/issues/9)
+
 ### 0.7.1 - Bugfix
 
  - Fixed bug with writing to stdout. Fixed [#8](https://github.com/smarie/python-genbadge/issues/8).
