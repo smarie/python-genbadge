@@ -54,9 +54,9 @@ Options:
 
 Commands:
   coverage  Generate a badge for the coverage results (e.g. from a
-            coverage.xml).%s
+            coverage.xml).
   flake8    Generate a badge for the flake8 results (e.g. from a flake8stats.txt
-            file).%s
+            file).
   tests     Generate a badge for the test results (e.g. from a junit.xml).
 
 ```
