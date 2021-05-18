@@ -141,10 +141,10 @@ class CovParser(object):
         branch_rate = float(root.attrib.get('branch-rate'))
         line_rate = float(root.attrib.get('line-rate'))
 
-        if round(cov.branch_rate * 1000) != round(branch_rate * 1000):
+        if not is_close(cov.branch_rate, branch_rate):
             raise ValueError("Computed branch rate (%s) is different from the one in the file (%s)"
                              % (cov.branch_rate, branch_rate))
-        if round(cov.line_rate * 1000) != round(line_rate * 1000):
+        if not is_close(cov.line_rate, line_rate):
             raise ValueError("Computed line rate (%s) is different from the one in the file (%s)"
                              % (cov.line_rate, line_rate))
 
@@ -155,3 +155,8 @@ class CovParser(object):
         #         self.parse_packages(el, ts)
 
         return cov
+
+
+def is_close(a, b):
+    """Return True if there is at most a difference of 1 at the 2d decimal"""
+    return abs(a - b) <= 0.01
