@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 - security patch + simplified tests badge
+
+ - The tests badge now simplifies when the success rate is 100%, which is the case in the vast majority of projects. Fixes [#12](https://github.com/smarie/python-genbadge/issues/12)
+   
+ - Now using `defusedxml` to fix a [known vulnerability](https://docs.python.org/3/library/xml.etree.elementtree.html). Fixes [#11](https://github.com/smarie/python-genbadge/issues/11)
+
 ### 0.8.0 - New features
 
  - Added `flake8` command. Fixes [#3](https://github.com/smarie/python-genbadge/issues/3).
