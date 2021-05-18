@@ -7,7 +7,15 @@
 from __future__ import division
 
 from .utils_badge import Badge
-from xml.etree import ElementTree
+
+try:
+    # security patch: see https://docs.python.org/3/library/xml.etree.elementtree.html
+    import defusedxml
+except ImportError as e:
+    class FakeDefusedXmlImport(object):
+        def __getattribute__(self, item):
+            raise ImportError("Could not import `defusedxml` module, please install it. Caught: %r" % e)
+    defusedxml = FakeDefusedXmlImport()
 
 
 class CoverageStats(object):
@@ -114,7 +122,7 @@ class CovParser(object):
     """Parser class - inspired by the code in `xunitparser`"""
 
     def parse(self, source):
-        xml = ElementTree.parse(source)
+        xml = defusedxml.ElementTree.parse(source)
         root = xml.getroot()
         return self.parse_root(root)
 
