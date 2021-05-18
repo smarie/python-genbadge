@@ -65,8 +65,9 @@ SUCCESS - Tests badge created: %r
 
   The resulting badge will by default look like this: [tests | 6/12] where 6 is
   the number of tests that have run successfully, and 12 is the total number of
-  tests minus the number of skipped tests. You can change the appearance of the
-  badge with the --format option (not implemented, todo).
+  tests minus the number of skipped tests. When all tests pass with success, the
+  badge simply shows the number of tests [tests | 12]. You can change the
+  appearance of the badge with the --format option (not implemented, todo).
 
   The success percentage is defined as 6/12 = 50.0%. You can use the
   `-t/--threshold` flag to setup a minimum success percentage required. If the

@@ -111,7 +111,11 @@ def get_tests_badge(
 
     color = get_color(test_stats)
 
-    # right_txt = "%s%%" % test_stats.success_percentage
-    right_txt = "%s/%s" % (test_stats.success, test_stats.total_without_skipped)
+    if test_stats.success_percentage < 100:
+        # full badge
+        right_txt = "%s/%s" % (test_stats.success, test_stats.total_without_skipped)
+    else:
+        # simplified badge showing the number of tests
+        right_txt = "%s" % (test_stats.total_without_skipped,)
 
     return Badge(left_txt="tests", right_txt=right_txt, color=color)

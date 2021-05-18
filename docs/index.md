@@ -121,7 +121,7 @@ SUCCESS - Tests badge created: '(...)/tests-badge.svg'
 
 Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag `-s`.
 
-The resulting badge will by default look like this: `[tests | 2/5]` where 2 is the number of tests that have run successfully, and 5 is the total number of tests *minus the number of skipped tests*. The success percentage, defined as this ratio multiplied by 100, is displayed and can be further used to fail on threshold, see [below](#failing-on-threshold).
+The resulting badge will by default look like this: `[tests | 2/5]` where 2 is the number of tests that have run successfully, and 5 is the total number of tests *minus the number of skipped tests*. When all tests pass with success, the badge simply shows the number of tests: `[tests | 5]`. The success percentage, defined as this ratio multiplied by 100, is displayed and can be further used to fail on threshold, see [below](#failing-on-threshold).
 
 Finally, the color of the badge depends on the success percentage.
 
