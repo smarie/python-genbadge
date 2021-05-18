@@ -832,7 +832,7 @@ Commands:
 SUCCESS - Tests badge created: <span class="s1">&#39;(...)/tests-badge.svg&#39;</span>
 </code></pre></div>
 <p>Note that without the verbose flag, only the last line of this message is displayed. You can disable it entirely using the silent flag <code>-s</code>.</p>
-<p>The resulting badge will by default look like this: <code>[tests | 2/5]</code> where 2 is the number of tests that have run successfully, and 5 is the total number of tests <em>minus the number of skipped tests</em>. The success percentage, defined as this ratio multiplied by 100, is displayed and can be further used to fail on threshold, see <a href="#failing-on-threshold">below</a>.</p>
+<p>The resulting badge will by default look like this: <code>[tests | 2/5]</code> where 2 is the number of tests that have run successfully, and 5 is the total number of tests <em>minus the number of skipped tests</em>. When all tests pass with success, the badge simply shows the number of tests: <code>[tests | 5]</code>. The success percentage, defined as this ratio multiplied by 100, is displayed and can be further used to fail on threshold, see <a href="#failing-on-threshold">below</a>.</p>
 <p>Finally, the color of the badge depends on the success percentage.</p>
 <ul>
 <li>Less than 50%: red</li>
