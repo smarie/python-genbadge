@@ -98,7 +98,6 @@ def test_parse_tests():
     assert res.success_percentage == res.success * 100 / res.total_without_skipped
 
 
-
 def test_parse_cov():
     """Check that we can parse a coverage.xml file successfully"""
     res = parse_cov(str(TESTS_FOLDER / "reports/coverage/coverage.xml"))
