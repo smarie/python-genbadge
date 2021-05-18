@@ -1,9 +1,7 @@
-#  Authors:
-#            Sylvain MARIE <sylvain.marie@se.com>
+#  Authors: Sylvain MARIE <sylvain.marie@se.com>
 #            + All contributors to <https://github.com/smarie/python-genbadge>
 #
 #  License: 3-clause BSD, <https://github.com/smarie/python-genbadge/blob/master/LICENSE>
-
 from __future__ import division
 
 from .utils_badge import Badge
@@ -12,9 +10,10 @@ try:
     # security patch: see https://docs.python.org/3/library/xml.etree.elementtree.html
     import defusedxml
 except ImportError as e:
-    class FakeDefusedXmlImport(object):
+    ee = e  # save it
+    class FakeDefusedXmlImport(object):  # noqa
         def __getattribute__(self, item):
-            raise ImportError("Could not import `defusedxml` module, please install it. Caught: %r" % e)
+            raise ImportError("Could not import `defusedxml` module, please install it. Caught: %r" % ee)
     defusedxml = FakeDefusedXmlImport()
 
 

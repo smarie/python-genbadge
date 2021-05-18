@@ -5,7 +5,6 @@
 from __future__ import division
 
 from io import TextIOWrapper
-from math import floor
 
 try:
     from typing import Union
@@ -13,16 +12,17 @@ except ImportError:
     pass
 
 try:
-    # xunitparser is an optional dependency, do not fail if it cant be loaded
+    # xunitparser is an optional dependency, do not fail too soon if it cant be loaded
     import xunitparser
     # security patch: see https://docs.python.org/3/library/xml.etree.elementtree.html
     # to remove when https://github.com/laurentb/xunitparser/issues/14 is fixed
     from defusedxml import ElementTree
-    setattr(xunitparser, "ElementTree", ElementTree)
+    xunitparser.ElementTree = ElementTree
 except ImportError as e:
-    class FakeXunitParserImport(object):
+    ee = e  # save it
+    class FakeXunitParserImport(object):  # noqa
         def __getattribute__(self, item):
-            raise ImportError("Could not import `xunitparser` module, please install it")
+            raise ImportError("Could not import `xunitparser` module, please install it. Caught: %r" % ee)
     xunitparser = FakeXunitParserImport()
 
 from .utils_badge import Badge

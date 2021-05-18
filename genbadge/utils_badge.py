@@ -1,3 +1,7 @@
+#  Authors: Sylvain MARIE <sylvain.marie@se.com>
+#            + All contributors to <https://github.com/smarie/python-genbadge>
+#
+#  License: 3-clause BSD, <https://github.com/smarie/python-genbadge/blob/master/LICENSE>
 import os
 
 from PIL import ImageFont
@@ -178,7 +182,7 @@ def get_local_badge_template():
     except IOError:
         # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
         import genbadge
-        reload(genbadge)
+        reload(genbadge)  # noqa
         template = resource_string("genbadge", template_path).decode('utf8')
 
     return template
@@ -204,13 +208,13 @@ def preferred_width_of(txt, font_name, font_size):
     try:
         # Try from name only - this works if the font is known by the OS
         font = ImageFont.truetype(font=font_file, size=font_size)
-    except (IOError, OSError):
+    except OSError:
         # Font not found: use the embedded font file from the package
         font_path = resource_filename("genbadge", font_file)
         if not os.path.exists(font_path):
             # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
             import genbadge
-            reload(genbadge)
+            reload(genbadge)  # noqa
             font_path = resource_filename("genbadge", font_file)
 
         font = ImageFont.truetype(font=font_path, size=font_size)

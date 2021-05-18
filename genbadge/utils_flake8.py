@@ -1,9 +1,7 @@
-#  Authors:
-#            Sylvain MARIE <sylvain.marie@se.com>
+#  Authors: Sylvain MARIE <sylvain.marie@se.com>
 #            + All contributors to <https://github.com/smarie/python-genbadge>
 #
 #  License: 3-clause BSD, <https://github.com/smarie/python-genbadge/blob/master/LICENSE>
-
 from __future__ import division
 
 from warnings import warn
@@ -13,12 +11,13 @@ from .utils_badge import Badge
 
 
 try:
-    # flake8-html is an optional dependency, do not fail if it cant be loaded
+    # flake8-html is an optional dependency, do not fail too soon if it cant be loaded
     import flake8_html
 except ImportError as e:
-    class FakeFlake8HtmlImport(object):
+    ee = e  # save it
+    class FakeFlake8HtmlImport(object):  # noqa
         def __getattribute__(self, item):
-            raise ImportError("Could not import `flake8_html` module, please install it")
+            raise ImportError("Could not import `flake8_html` module, please install it. Caught: %r" % ee)
     flake8_html = FakeFlake8HtmlImport()
 
 
