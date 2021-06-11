@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.2 - technical release
+
+ - Fixed the release message.
+
 ### 1.0.1 - bugfix - `defusedxml` import
 
  - `genbadge coverage` command: fixed `ImporError` with `defusedxml`. Fixed [#14](https://github.com/smarie/python-genbadge/issues/14).
