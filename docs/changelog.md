@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.1 - bugfix - `defusedxml` import
+
+ - `genbadge coverage` command: fixed `ImporError` with `defusedxml`. Fixed [#14](https://github.com/smarie/python-genbadge/issues/14).
+
 ### 1.0.0 - security patch + simplified tests badge
 
  - The tests badge now simplifies when the success rate is 100%, which is the case in the vast majority of projects. Fixes [#12](https://github.com/smarie/python-genbadge/issues/12)

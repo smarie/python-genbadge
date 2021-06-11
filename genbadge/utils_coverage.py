@@ -8,13 +8,13 @@ from .utils_badge import Badge
 
 try:
     # security patch: see https://docs.python.org/3/library/xml.etree.elementtree.html
-    import defusedxml
+    import defusedxml.ElementTree as defused_etree
 except ImportError as e:
     ee = e  # save it
     class FakeDefusedXmlImport(object):  # noqa
         def __getattribute__(self, item):
-            raise ImportError("Could not import `defusedxml` module, please install it. Caught: %r" % ee)
-    defusedxml = FakeDefusedXmlImport()
+            raise ImportError("Could not import `defusedxml.ElementTree`, please install `defusedxml`. Caught: %r" % ee)
+    defused_etree = FakeDefusedXmlImport()
 
 
 class CoverageStats(object):
@@ -121,7 +121,7 @@ class CovParser(object):
     """Parser class - inspired by the code in `xunitparser`"""
 
     def parse(self, source):
-        xml = defusedxml.ElementTree.parse(source)
+        xml = defused_etree.parse(source)
         root = xml.getroot()
         return self.parse_root(root)
 
