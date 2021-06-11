@@ -17,7 +17,9 @@ except ImportError as e:
     ee = e  # save it
     class FakeFlake8HtmlImport(object):  # noqa
         def __getattribute__(self, item):
-            raise ImportError("Could not import `flake8_html` module, please install it. Caught: %r" % ee)
+            raise ImportError("Could not import `flake8_html` module, please install it. "
+                              "Note that all dependencies for the flake8 command can be installed with "
+                              "`pip install genbadge[flake8]`. Caught: %r" % ee)
     flake8_html = FakeFlake8HtmlImport()
 
 

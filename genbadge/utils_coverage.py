@@ -13,7 +13,9 @@ except ImportError as e:
     ee = e  # save it
     class FakeDefusedXmlImport(object):  # noqa
         def __getattribute__(self, item):
-            raise ImportError("Could not import `defusedxml.ElementTree`, please install `defusedxml`. Caught: %r" % ee)
+            raise ImportError("Could not import `defusedxml.ElementTree`, please install `defusedxml`. "
+                              "Note that all dependencies for the coverage command can be installed with "
+                              "`pip install genbadge[coverage]`. Caught: %r" % ee)
     defused_etree = FakeDefusedXmlImport()
 
 

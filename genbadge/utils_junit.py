@@ -22,7 +22,9 @@ except ImportError as e:
     ee = e  # save it
     class FakeXunitParserImport(object):  # noqa
         def __getattribute__(self, item):
-            raise ImportError("Could not import `xunitparser` module, please install it. Caught: %r" % ee)
+            raise ImportError("Could not import `xunitparser` or `defusedxml` module, please install it. "
+                              "Note that all dependencies for the tests command can be installed with "
+                              "`pip install genbadge[tests]`. Caught: %r" % ee)
     xunitparser = FakeXunitParserImport()
 
 from .utils_badge import Badge
