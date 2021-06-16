@@ -13,26 +13,28 @@ See also:
   https://github.com/pypa/sampleproject
 """
 from setuptools import setup
+import pkg_resources
 
 
 # (1) check required versions (from https://medium.com/@daveshawley/safely-using-setup-cfg-for-metadata-1babbe54c108)
-import pkg_resources
-
 pkg_resources.require("setuptools>=39.2")
 pkg_resources.require("setuptools_scm")
 
+# (2) read the setup.cfg to grab useful metadata
+from setuptools.config import read_configuration
+conf_dict = read_configuration("setup.cfg")
+PKG_NAME = conf_dict['metadata']['name']
+URL = conf_dict['metadata']['url']
 
-# (2) Generate download url using git version
+# (3) Generate download url using git version
 from setuptools_scm import get_version  # noqa: E402
-
-URL = "https://github.com/smarie/python-genbadge"
 DOWNLOAD_URL = URL + "/tarball/" + get_version()
 
 
-# (3) Call setup() with as little args as possible
+# (4) Call setup() with as little args as possible
 setup(
     download_url=DOWNLOAD_URL,
     use_scm_version={
-        "write_to": "genbadge/_version.py"
+        "write_to": f"{PKG_NAME}/_version.py"
     },  # we can't put `use_scm_version` in setup.cfg yet unfortunately
 )
