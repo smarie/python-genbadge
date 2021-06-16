@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.3 - technical release
+
+ - `setup.py` is now using the contents of `setup.cfg` for download url and setuptools_scm. There is now a single configuration file. See [setuptools_scm#582](https://github.com/pypa/setuptools_scm/issues/582).
+
 ### 1.0.2 - technical release
 
  - Fixed the release message.
