@@ -117,6 +117,25 @@ def test_parse_cov():
     assert res.total_coverage == 100 * res.total_rate
 
 
+def test_parse_cov_nobranch_issue_15():
+    """Check that we can parse a coverage.xml file successfully with the no branch option"""
+    res = parse_cov(str(TESTS_FOLDER / "reports/coverage/coverage_nobranch.xml"))
+
+    assert res.branches_valid == 0
+    assert res.branches_covered == 0
+    assert res.branch_rate == 0
+
+    assert res.lines_valid == 390
+    assert res.lines_covered == 328
+    assert res.line_rate == res.lines_covered / res.lines_valid
+
+    assert res.branch_coverage == res.branch_rate * 100
+    assert res.line_coverage == res.line_rate * 100
+
+    assert res.total_rate == ((res.lines_covered + res.branches_covered) / (res.branches_valid + res.lines_valid))
+    assert res.total_coverage == 100 * res.total_rate
+
+
 def test_parse_flake8():
     """Check that we can parse a coverage.xml file successfully"""
     res = get_flake8_stats(str(TESTS_FOLDER / "reports/flake8/flake8stats.txt"))

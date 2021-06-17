@@ -37,11 +37,23 @@ class CoverageStats(object):
 
     @property
     def branch_rate(self):
-        return self.branches_covered / self.branches_valid
+        """
+        Note: in --no-branch situations, the number of branches is 0.
+        In that case, the branch rate is 0 in the coverage.xml.
+        We mimic the behaviour in this field to be consistent.
+        """
+        if self.branches_valid > 0:
+            return self.branches_covered / self.branches_valid
+        else:
+            return 0
 
     @property
     def line_rate(self):
-        return self.lines_covered / self.lines_valid
+        """See branch rate for the special case of division by zero"""
+        if self.lines_valid > 0:
+            return self.lines_covered / self.lines_valid
+        else:
+            return 0
 
     @property
     def branch_coverage(self):
@@ -56,8 +68,14 @@ class CoverageStats(object):
         """
         See XmlReport class in https://github.com/nedbat/coveragepy/blob/master/coverage/xmlreport.py
         for the formula.
+
+        See branch rate for the special case of division by zero.
         """
-        return (self.lines_covered + self.branches_covered) / (self.lines_valid + self.branches_valid)
+        denom = self.lines_valid + self.branches_valid
+        if denom > 0:
+            return (self.lines_covered + self.branches_covered) / denom
+        else:
+            return 0
 
     @property
     def total_coverage(self):
