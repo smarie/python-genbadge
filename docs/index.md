@@ -6,8 +6,6 @@
 
 [![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-genbadge/) [![PyPI](https://img.shields.io/pypi/v/genbadge.svg)](https://pypi.python.org/pypi/genbadge/) [![Downloads](https://pepy.tech/badge/genbadge)](https://pepy.tech/project/genbadge) [![Downloads per week](https://pepy.tech/badge/genbadge/week)](https://pepy.tech/project/genbadge) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-genbadge.svg)](https://github.com/smarie/python-genbadge/stargazers) [![codecov](https://codecov.io/gh/smarie/python-genbadge/branch/main/graph/badge.svg)](https://codecov.io/gh/smarie/python-genbadge)
 
-fsndklglkmf;
-
 `genbadge` provides a set of commandline utilities to generate badges for tools that do not provide one. It currently can create: 
 
  - [`tests`](#1-tests-badge) badges such as ![Tests Badge](./reports/junit/junit-badge.svg?dummy=8484744) from `pytest` or other `junit.xml`-generating framework,
