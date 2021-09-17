@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: genbadge/xunitparser_copy.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-3"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="genbadge.xunitparser_copy.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               genbadge/xunitparser_copy.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="S101">
+               <span class="count sev-3">
+                  6
+               </span>
+               <strong>S101:</strong> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="genbadge.xunitparser_copy.source.html#l169">
+                  <tt><i>169</i>             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="genbadge.xunitparser_copy.source.html#l171">
+                  <tt><i>171</i>             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">failures</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;failures&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="genbadge.xunitparser_copy.source.html#l173">
+                  <tt><i>173</i>             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">skipped</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;skip&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="genbadge.xunitparser_copy.source.html#l175">
+                  <tt><i>175</i>             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;tests&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="genbadge.xunitparser_copy.source.html#l180">
+                  <tt><i>180</i>         <span class="k">assert</span> <span class="n">root</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;testsuite&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="genbadge.xunitparser_copy.source.html#l224">
+                  <tt><i>224</i>                 <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">properties</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>
