@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.5 - Bugfix
+
+ - Removed dependency to `xunitparser` because its packaging relies on `use_2to3` which is not supported anymore in setuptools. Fixes [#18](https://github.com/smarie/python-genbadge/issues/18).
+
 ### 1.0.4 - Bugfix
 
  - `genbadge coverage`: fixed `ZeroDivisionError` when `coverage.xml` contains 0 branches (in particular when `--no-branch` option is set). Fixes [#15](https://github.com/smarie/python-genbadge/issues/15)

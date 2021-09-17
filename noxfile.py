@@ -114,7 +114,7 @@ def tests(session: PowerSession, coverage, pkg_specs):
         session.run2("python -m pytest --cache-clear -v %s/tests/" % pkg_name)
     else:
         # coverage + junit html reports + badge generation
-        session.install_reqs(phase="coverage", phase_reqs=["coverage", "pytest-html", "requests", "xunitparser"],
+        session.install_reqs(phase="coverage", phase_reqs=["coverage", "pytest-html", "requests"],
                              versions_dct=pkg_specs)
 
         # --coverage + junit html reports

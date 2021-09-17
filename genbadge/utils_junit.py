@@ -11,22 +11,8 @@ try:
 except ImportError:
     pass
 
-try:
-    # xunitparser is an optional dependency, do not fail too soon if it cant be loaded
-    import xunitparser
-    # security patch: see https://docs.python.org/3/library/xml.etree.elementtree.html
-    # to remove when https://github.com/laurentb/xunitparser/issues/14 is fixed
-    from defusedxml import ElementTree
-    xunitparser.ElementTree = ElementTree
-except ImportError as e:
-    ee = e  # save it
-    class FakeXunitParserImport(object):  # noqa
-        def __getattribute__(self, item):
-            raise ImportError("Could not import `xunitparser` or `defusedxml` module, please install it. "
-                              "Note that all dependencies for the tests command can be installed with "
-                              "`pip install genbadge[tests]`. Caught: %r" % ee)
-    xunitparser = FakeXunitParserImport()
-
+# use our own copy so as to use defusedxml and to be compliant with setuptools>=58
+from .xunitparser_copy import parse
 from .utils_badge import Badge
 
 
@@ -75,10 +61,10 @@ def get_test_stats(junit_xml_file='reports/junit/junit.xml'  # type: Union[str, 
     if isinstance(junit_xml_file, str):
         # assume a file path
         with open(junit_xml_file) as f:
-            ts, tr = xunitparser.parse(f)
+            ts, tr = parse(f)
     else:
         # assume a stream already
-        ts, tr = xunitparser.parse(junit_xml_file)
+        ts, tr = parse(junit_xml_file)
 
     runned = tr.testsRun
     skipped = len(tr.skipped)
