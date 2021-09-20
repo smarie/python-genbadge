@@ -22,7 +22,7 @@ from pkg_resources import resource_string, resource_filename
 
 COLORS = {
     'brightgreen': '#4c1',
-    'green': '#97CA00',
+    'green': '#97ca00',
     'yellowgreen': '#a4a61d',
     'yellow': '#dfb317',
     'orange': '#fe7d37',
