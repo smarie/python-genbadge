@@ -9,7 +9,7 @@
 	</clipPath>
 	<g clip-path="url(#r)">
 		<rect width="{{ left_width }}" height="20" fill="{{ label_color }}"/>
-		<rect x="{{ left_width }}" width="{{ right_width }}" height="20" fill="#97ca00"/>
+		<rect x="{{ left_width }}" width="{{ right_width }}" height="20" fill="{{ color }}"/>
 		<rect width="{{ total_width }}" height="20" fill="url(#s)"/>
 	</g>
 	<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110">
