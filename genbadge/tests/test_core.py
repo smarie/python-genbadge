@@ -73,6 +73,8 @@ def test_genbadge(tmpdir, use_shields):
         svgtxt = f.read()
     assert standardize_xml("\n" + svgtxt) == standardize_xml(refsvg_str)
 
+@pytest.mark.parametrize("use_shields", [False],  # TODO True but the contents are slightly different
+                                            ids="use_shields={}".format)
 def test_genbadge_red(tmpdir, use_shields):
     """Test that the `Badge` class works as expected"""
 
