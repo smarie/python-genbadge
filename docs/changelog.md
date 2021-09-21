@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.6 - Bugfix
+
+- Fixed the badge generator in "local" mode (badge created from local SVG template, not downloaded from shields.io). Fixes [#19](https://github.com/smarie/python-genbadge/issues/19). PR [#20](https://github.com/smarie/python-genbadge/pull/20) by [`texnofobix`](https://github.com/texnofobix).
+
 ### 1.0.5 - Bugfix
 
  - Removed dependency to `xunitparser` because its packaging relies on `use_2to3` which is not supported anymore in setuptools. Fixes [#18](https://github.com/smarie/python-genbadge/issues/18).
