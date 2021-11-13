@@ -5,6 +5,7 @@
 from __future__ import division
 
 from warnings import warn
+import os
 import re
 
 from .utils_badge import Badge
@@ -104,7 +105,8 @@ def get_flake8_stats(flake8_stats_file):
     return parse_flake8_stats(flake8_stats_txt)
 
 
-RE_TO_MATCH = re.compile(r"([0-9]+)\s+([A-Z0-9]+)\s.*")
+RE_TO_MATCH = re.compile(r"([0-9]+)\s+([A-Z0-9]+):*\s.*")
+SOURCE_MATCH = re.compile(r"([^:]+):\d+:\d+:\s+.*")
 
 
 def parse_flake8_stats(stats_txt  # type: str
@@ -115,7 +117,14 @@ def parse_flake8_stats(stats_txt  # type: str
     for line in stats_txt.splitlines():
         match = RE_TO_MATCH.match(line)
         if not match:
-            warn("Line in Flake8 statistics report does not match template and will be ignored: %r" % line)
+            smatch = SOURCE_MATCH.match(line)
+            if smatch:
+                source = smatch.group(1)
+                if not os.path.exists(source):
+                    warn("Source report line does not refer to file: %r" %line)
+            else:
+                # warn on lines that do not match stats or source report.
+                warn("Line in Flake8 statistics report does not match template and will be ignored: %r" % line)
         else:
             nb, code = match.groups()
             stats.add(int(nb), code)
