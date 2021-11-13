@@ -106,7 +106,7 @@ def get_flake8_stats(flake8_stats_file):
 
 
 RE_TO_MATCH = re.compile(r"([0-9]+)\s+([A-Z0-9]+):*\s.*")
-SOURCE_MATCH = re.compile(r"([^:]+):\d+:\s.*")
+SOURCE_MATCH = re.compile(r"([^:]+):\d+:\d+:\s+.*")
 
 
 def parse_flake8_stats(stats_txt  # type: str
