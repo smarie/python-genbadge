@@ -119,7 +119,7 @@ def parse_flake8_stats(stats_txt  # type: str
         if not match:
             smatch = SOURCE_MATCH.match(line)
             if smatch:
-                source = smatch.groups()
+                source = smatch.group(1)
                 if not os.path.exists(source):
                     warn("Source report line does not refer to file: %r" %line)
             else:
