@@ -167,7 +167,7 @@ FLAKE8_CMD = CmdReference(
         example_output_msg="SUCCESS - Flake8 badge created: %r\n",
         example_output_msg_long="""
 Flake8 statistics parsed successfully from %r
- - Total (20) = Critical (6) + Warning (9) + Info (5)
+ - Total (2225) = Critical (139) + Warning (825) + Info (1261)
 
 SUCCESS - Flake8 badge created: %r
 """,
