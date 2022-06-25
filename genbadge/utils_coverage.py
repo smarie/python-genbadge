@@ -121,7 +121,7 @@ def get_color(
 
 def get_coverage_badge(
     cov_stats,  # type: CoverageStats
-    left_txt: str = "coverage"
+    left_txt= "coverage" # type: str
 ):
     # type: (...) -> Badge
     """Return the badge from coverage results """

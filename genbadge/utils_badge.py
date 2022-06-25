@@ -61,23 +61,33 @@ class Badge:
         else:
             # download from requests
             import requests
-            url = 'https://img.shields.io/badge/%s-%s-%s.svg' % (self.left_txt, self.right_txt, self.color)
+            # url encode test
+            safe_left_txt = requests.utils.quote(self.left_txt, safe='')
+            safe_right_txt = requests.utils.quote(self.right_txt, safe='')
+            safe_color_txt = requests.utils.quote(self.color, safe='')         
+            url = 'https://img.shields.io/badge/%s-%s-%s.svg' % (safe_left_txt, safe_right_txt, safe_color_txt)
             response = requests.get(url, stream=True)
             return response.text
 
     def write_to(self,
                  path_or_stream,              # type: Union[TextIO, str, Path]
-                 use_shields=False  # type: bool
+                 use_shields=False,  # type: bool
+                 clear_left_txt=False  # type: bool 
                  ):
         """Write the SVG representation of this badge to the given file
 
         :param path_or_stream:
         :param use_shields:
+        :param clear_left_txt:
         :return:
         """
         # convert to a Path
         if isinstance(path_or_stream, str):
             path_or_stream = Path(path_or_stream)
+
+        svg = self.as_svg(use_shields=use_shields)
+        if clear_left_txt:
+            svg = svg.replace(">" + self.left_txt + "<", "><")
 
         # create parent dirs if needed
         if isinstance(path_or_stream, Path):
@@ -85,9 +95,9 @@ class Badge:
 
             # finally write to
             with open(str(path_or_stream), mode="wb") as f:
-                f.write(self.as_svg(use_shields=use_shields).encode("utf-8"))
+                f.write(svg.encode("utf-8"))
         else:
-            path_or_stream.write(self.as_svg(use_shields=use_shields))
+            path_or_stream.write(svg)
 
 
 def get_svg_badge(
