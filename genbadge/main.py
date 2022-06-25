@@ -24,6 +24,7 @@ INFILE_HELP_TMP = "An alternate %s file to read. '-' is supported and means <std
 OUTFILE_BADGE_HELP = ("An alternate SVG badge file to write to. '-' is supported and means <stdout>. Note that in this "
                       "case no other message will be printed to <stdout>. In particular the verbose flag will have no "
                       "effect.")
+NAME_HELP = ("An alternate SVG badge text name to displag on the left hand side of the badge.")
 SHIELDS_HELP = ("Indicates if badges should be generated using the shields.io HTTP API (default) or the local SVG file "
                 "template included.")
 VERBOSE_HELP = ("Use this flag to print details to stdout during the badge generation process. Note that this flag has "
@@ -49,6 +50,7 @@ def genbadge():
                   short_help="Generate a badge for the test results (e.g. from a junit.xml).")
 @click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_HELP_TMP % "test results XML")
 @click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
+@click.option('-n', '--name', type=str, default="tests", help=NAME_HELP)
 @click.option('-t', '--threshold', type=float,
               help="An optional success percentage threshold to use. The command will fail with exit code 1 if the"
                    "actual success percentage is strictly less than the provided value.")
@@ -58,6 +60,7 @@ def genbadge():
 def gen_tests_badge(
         input_file=None,
         output_file=None,
+        name=None,
         threshold=None,
         webshields=None,
         verbose=None,
@@ -71,6 +74,9 @@ def gen_tests_badge(
     By default the input file is the relative `./reports/junit/junit.xml` and
     the output file is `./tests-badge.svg`. You can change these settings with
     the `-i/--input_file` and `-o/--output-file` options.
+
+    By default the badge will have the name "flake8" as the left-hand side text.
+    You can change these settings with the `-n/--name` option.
 
     You can use the verbose flag `-v/--verbose` to display information on the
     input file contents, for verification.
@@ -119,7 +125,7 @@ def gen_tests_badge(
         )
 
     # Generate the badge
-    badge = get_tests_badge(test_stats)
+    badge = get_tests_badge(test_stats, name)
     badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
     if not silent and not is_stdout:
@@ -130,12 +136,14 @@ def gen_tests_badge(
                   short_help="Generate a badge for the coverage results (e.g. from a coverage.xml).")
 @click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_HELP_TMP % "coverage results XML")
 @click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
+@click.option('-n', '--name', type=str, default="coverage", help=NAME_HELP)
 @click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
 @click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
 @click.option('-s', '--silent', type=bool, default=False, is_flag=True, help=SILENT_HELP)
 def gen_coverage_badge(
         input_file=None,
         output_file=None,
+        name=None,
         webshields=None,
         verbose=None,
         silent=None
@@ -148,6 +156,9 @@ def gen_coverage_badge(
     By default the input file is the relative `./reports/coverage/coverage.xml`
     and the output file is `./coverage-badge.svg`. You can change these settings
     with the `-i/--input_file` and `-o/--output-file` options.
+    
+    By default the badge will have the name "flake8" as the left-hand side text.
+    You can change these settings with the `-n/--name` option.
 
     You can use the verbose flag `-v/--verbose` to display information on the
     input file contents, for verification.
@@ -180,7 +191,7 @@ def gen_coverage_badge(
            lcp=cov_stats.line_coverage, lc=cov_stats.lines_covered, lv=cov_stats.lines_valid))
 
     # Generate the badge
-    badge = get_coverage_badge(cov_stats)
+    badge = get_coverage_badge(cov_stats, name)
     badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
     if not silent and not is_stdout:
@@ -191,12 +202,14 @@ def gen_coverage_badge(
                   short_help="Generate a badge for the flake8 results (e.g. from a flake8stats.txt file).")
 @click.option('-i', '--input-file', type=click.File('rt'), help=INFILE_HELP_TMP % "flake8 results TXT")
 @click.option('-o', '--output-file', type=click.File('wt'), help=OUTFILE_BADGE_HELP)
+@click.option('-n', '--name', type=str, default="flake8", help=NAME_HELP)
 @click.option('-w/-l', '--webshields/--local', type=bool, default=True, help=SHIELDS_HELP)
 @click.option('-v', '--verbose', type=bool, default=False, is_flag=True, help=VERBOSE_HELP)
 @click.option('-s', '--silent', type=bool, default=False, is_flag=True, help=SILENT_HELP)
 def gen_flake8_badge(
         input_file=None,
         output_file=None,
+        name=None,
         webshields=None,
         verbose=None,
         silent=None
@@ -209,6 +222,9 @@ def gen_flake8_badge(
     By default the input file is the relative `./reports/flake8/flake8stats.txt`
     and the output file is `./flake8-badge.svg`. You can change these settings
     with the `-i/--input_file` and `-o/--output-file` options.
+
+    By default the badge will have the name "flake8" as the left-hand side text.
+    You can change these settings with the `-n/--name` option.
 
     You can use the verbose flag `-v/--verbose` to display information on the
     input file contents, for verification.
@@ -236,7 +252,7 @@ def gen_flake8_badge(
 """ % (input_file_path, flake8_stats.nb_total, flake8_stats.nb_critical, flake8_stats.nb_warning, flake8_stats.nb_info))
 
     # Generate the badge
-    badge = get_flake8_badge(flake8_stats)
+    badge = get_flake8_badge(flake8_stats, name)
     badge.write_to(output_file if is_stdout else output_file_path, use_shields=webshields)
 
     if not silent and not is_stdout:
