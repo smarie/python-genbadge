@@ -93,7 +93,7 @@ def get_color(
 
 def get_tests_badge(
         test_stats,  # type: TestStats
-        left_txt: str = "tests"
+        left_txt = "tests" # type: str
 ):
     # type: (...) -> Badge
     """Return the badge from test statistics """

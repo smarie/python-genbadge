@@ -77,7 +77,7 @@ def get_color(
 
 def get_flake8_badge(
     flake8_stats,  # type: Flake8Stats
-    left_txt: str = "flake8"
+    left_txt = "flake8" # type: str
 ):
     # type: (...) -> Badge
     """Return the badge from coverage results """
