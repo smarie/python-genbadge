@@ -60,6 +60,9 @@ SUCCESS - Tests badge created: %r
   output file is `./tests-badge.svg`. You can change these settings with the
   `-i/--input_file` and `-o/--output-file` options.
 
+  By default the badge will have the name "flake8" as the left-hand side text.
+  You can change these settings with the `-n/--name` option.
+
   You can use the verbose flag `-v/--verbose` to display information on the
   input file contents, for verification.
 
@@ -82,6 +85,8 @@ Options:
                                   this case no other message will be printed to
                                   <stdout>. In particular the verbose flag will
                                   have no effect.
+  -n, --name TEXT                 An alternate SVG badge text name to displag on
+                                  the left hand side of the badge.
   -t, --threshold FLOAT           An optional success percentage threshold to
                                   use. The command will fail with exit code 1 if
                                   theactual success percentage is strictly less
@@ -125,6 +130,9 @@ SUCCESS - Coverage badge created: %r
   and the output file is `./coverage-badge.svg`. You can change these settings
   with the `-i/--input_file` and `-o/--output-file` options.
 
+  By default the badge will have the name "flake8" as the left-hand side text.
+  You can change these settings with the `-n/--name` option.
+
   You can use the verbose flag `-v/--verbose` to display information on the
   input file contents, for verification.
 
@@ -144,6 +152,8 @@ Options:
                                   this case no other message will be printed to
                                   <stdout>. In particular the verbose flag will
                                   have no effect.
+  -n, --name TEXT                 An alternate SVG badge text name to displag on
+                                  the left hand side of the badge.
   -w, --webshields / -l, --local  Indicates if badges should be generated using
                                   the shields.io HTTP API (default) or the local
                                   SVG file template included.
@@ -181,6 +191,9 @@ SUCCESS - Flake8 badge created: %r
   and the output file is `./flake8-badge.svg`. You can change these settings
   with the `-i/--input_file` and `-o/--output-file` options.
 
+  By default the badge will have the name "flake8" as the left-hand side text.
+  You can change these settings with the `-n/--name` option.
+
   You can use the verbose flag `-v/--verbose` to display information on the
   input file contents, for verification.
 
@@ -198,6 +211,8 @@ Options:
                                   this case no other message will be printed to
                                   <stdout>. In particular the verbose flag will
                                   have no effect.
+  -n, --name TEXT                 An alternate SVG badge text name to displag on
+                                  the left hand side of the badge.
   -w, --webshields / -l, --local  Indicates if badges should be generated using
                                   the shields.io HTTP API (default) or the local
                                   SVG file template included.
