@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.0 - Option to change or remove the badge name
+
+- A new `-n/--name` commandline option can be used with all badge generation commands to override the badge label (left text). A `--noname` commandline flag can alternatively be used to remove the left part completely. PR [#25](https://github.com/smarie/python-genbadge/pull/25) by [`nefrob`](https://github.com/nefrob).
+
 ### 1.0.6 - Bugfix
 
 - Fixed the badge generator in "local" mode (badge created from local SVG template, not downloaded from shields.io). Fixes [#19](https://github.com/smarie/python-genbadge/issues/19). PR [#20](https://github.com/smarie/python-genbadge/pull/20) by [`texnofobix`](https://github.com/texnofobix).
