@@ -86,7 +86,12 @@ def tests(session: PowerSession, coverage, pkg_specs):
 
     # install all requirements
     # session.install_reqs(phase="pip", phase_reqs=("pip",), versions_dct=pkg_specs)
-    session.install_reqs(setup=True, install=True, tests=True, extras=("tests","coverage",), versions_dct=pkg_specs)
+    if session.python in (PY27, PY35):
+        # flake8-html>0.4.1 is not compliant with legacy python versions
+        # as it requires jinja2>=3.1.0 that is not available
+        session.install2("flake8-html>=0.4,<=0.4.1")
+    
+    session.install_reqs(setup=True, install=True, tests=True, extras=("all",), versions_dct=pkg_specs)
 
     # install CI-only dependencies
     # if install_ci_deps:
