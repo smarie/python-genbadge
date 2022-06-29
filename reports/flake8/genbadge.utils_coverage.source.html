@@ -6,7 +6,7 @@
       <link rel="stylesheet" href="styles.css">
    </head>
    <body>
-      <div id="masthead" class="sev-3"></div>
+      <div id="masthead" class="sev-2"></div>
       <div id="page">
          <h1>
             <a href="genbadge.utils_coverage.report.html">
@@ -383,87 +383,105 @@
                class="code sev- "><tt><i>122</i> <span class="k">def</span> <span class="nf">get_coverage_badge</span><span class="p">(</span></tt>
             </div>
             <div id="l123"
-               class="code sev- "><tt><i>123</i>     <span class="n">cov_stats</span>  <span class="c1"># type: CoverageStats</span></tt>
+               class="code sev- "><tt><i>123</i>     <span class="n">cov_stats</span><span class="p">,</span>  <span class="c1"># type: CoverageStats</span></tt>
             </div>
             <div id="l124"
-               class="code sev- "><tt><i>124</i> <span class="p">):</span></tt>
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E251
+                     </span>
+                     Unexpected spaces around keyword / parameter equals</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>124</i>     <span class="n">left_txt</span><span class="o">=</span> <span class="s2">&quot;coverage&quot;</span> <span class="c1"># type: str</span></tt>
             </div>
             <div id="l125"
-               class="code sev- "><tt><i>125</i>     <span class="c1"># type: (...) -&gt; Badge</span></tt>
+               class="code sev- "><tt><i>125</i> <span class="p">):</span></tt>
             </div>
             <div id="l126"
-               class="code sev- "><tt><i>126</i>     <span class="sd">&quot;&quot;&quot;Return the badge from coverage results &quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>126</i>     <span class="c1"># type: (...) -&gt; Badge</span></tt>
             </div>
             <div id="l127"
-               class="code sev- "><tt><i>127</i> &nbsp;</tt>
+               class="code sev- "><tt><i>127</i>     <span class="sd">&quot;&quot;&quot;Return the badge from coverage results &quot;&quot;&quot;</span></tt>
             </div>
             <div id="l128"
-               class="code sev- "><tt><i>128</i>     <span class="n">color</span> <span class="o">=</span> <span class="n">get_color</span><span class="p">(</span><span class="n">cov_stats</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>128</i> &nbsp;</tt>
             </div>
             <div id="l129"
-               class="code sev- "><tt><i>129</i> &nbsp;</tt>
+               class="code sev- "><tt><i>129</i>     <span class="n">color</span> <span class="o">=</span> <span class="n">get_color</span><span class="p">(</span><span class="n">cov_stats</span><span class="p">)</span></tt>
             </div>
             <div id="l130"
-               class="code sev- "><tt><i>130</i>     <span class="n">right_txt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%.2f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cov_stats</span><span class="o">.</span><span class="n">total_coverage</span><span class="p">,)</span></tt>
+               class="code sev- "><tt><i>130</i> &nbsp;</tt>
             </div>
             <div id="l131"
-               class="code sev- "><tt><i>131</i> &nbsp;</tt>
+               class="code sev- "><tt><i>131</i>     <span class="n">right_txt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%.2f%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cov_stats</span><span class="o">.</span><span class="n">total_coverage</span><span class="p">,)</span></tt>
             </div>
             <div id="l132"
-               class="code sev- "><tt><i>132</i>     <span class="k">return</span> <span class="n">Badge</span><span class="p">(</span><span class="n">left_txt</span><span class="o">=</span><span class="s2">&quot;coverage&quot;</span><span class="p">,</span> <span class="n">right_txt</span><span class="o">=</span><span class="n">right_txt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>132</i> &nbsp;</tt>
             </div>
             <div id="l133"
-               class="code sev- "><tt><i>133</i> &nbsp;</tt>
+               class="code sev- "><tt><i>133</i>     <span class="k">return</span> <span class="n">Badge</span><span class="p">(</span><span class="n">left_txt</span><span class="o">=</span><span class="n">left_txt</span><span class="p">,</span> <span class="n">right_txt</span><span class="o">=</span><span class="n">right_txt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span></tt>
             </div>
             <div id="l134"
                class="code sev- "><tt><i>134</i> &nbsp;</tt>
             </div>
             <div id="l135"
-               class="code sev- "><tt><i>135</i> <span class="k">def</span> <span class="nf">parse_cov</span><span class="p">(</span><span class="n">source</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>135</i> &nbsp;</tt>
             </div>
             <div id="l136"
-               class="code sev- "><tt><i>136</i>     <span class="sd">&quot;&quot;&quot;Parses the coverage.xml contents from source&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>136</i> <span class="k">def</span> <span class="nf">parse_cov</span><span class="p">(</span><span class="n">source</span><span class="p">):</span></tt>
             </div>
             <div id="l137"
-               class="code sev- "><tt><i>137</i>     <span class="k">return</span> <span class="n">CovParser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>137</i>     <span class="sd">&quot;&quot;&quot;Parses the coverage.xml contents from source&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l138"
-               class="code sev- "><tt><i>138</i> &nbsp;</tt>
+               class="code sev- "><tt><i>138</i>     <span class="k">return</span> <span class="n">CovParser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">)</span></tt>
             </div>
             <div id="l139"
                class="code sev- "><tt><i>139</i> &nbsp;</tt>
             </div>
             <div id="l140"
-               class="code sev- "><tt><i>140</i> <span class="k">class</span> <span class="nc">CovParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>140</i> &nbsp;</tt>
             </div>
             <div id="l141"
-               class="code sev- "><tt><i>141</i>     <span class="sd">&quot;&quot;&quot;Parser class - inspired by the code in `xunitparser`&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>141</i> <span class="k">class</span> <span class="nc">CovParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
             </div>
             <div id="l142"
-               class="code sev- "><tt><i>142</i> &nbsp;</tt>
+               class="code sev- "><tt><i>142</i>     <span class="sd">&quot;&quot;&quot;Parser class - inspired by the code in `xunitparser`&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l143"
-               class="code sev- "><tt><i>143</i>     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>143</i> &nbsp;</tt>
             </div>
             <div id="l144"
-               class="code sev- "><tt><i>144</i>         <span class="n">xml</span> <span class="o">=</span> <span class="n">defused_etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>144</i>     <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span></tt>
             </div>
             <div id="l145"
-               class="code sev- "><tt><i>145</i>         <span class="n">root</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>145</i>         <span class="n">xml</span> <span class="o">=</span> <span class="n">defused_etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">)</span></tt>
             </div>
             <div id="l146"
-               class="code sev- "><tt><i>146</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_root</span><span class="p">(</span><span class="n">root</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>146</i>         <span class="n">root</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span></tt>
             </div>
             <div id="l147"
-               class="code sev- "><tt><i>147</i> &nbsp;</tt>
+               class="code sev- "><tt><i>147</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_root</span><span class="p">(</span><span class="n">root</span><span class="p">)</span></tt>
             </div>
             <div id="l148"
-               class="code sev- "><tt><i>148</i>     <span class="k">def</span> <span class="nf">parse_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>148</i> &nbsp;</tt>
             </div>
             <div id="l149"
-               class="code sev- "><tt><i>149</i>         <span class="n">cov</span> <span class="o">=</span> <span class="n">CoverageStats</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>149</i>     <span class="k">def</span> <span class="nf">parse_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span></tt>
             </div>
             <div id="l150"
+               class="code sev- "><tt><i>150</i>         <span class="n">cov</span> <span class="o">=</span> <span class="n">CoverageStats</span><span class="p">()</span></tt>
+            </div>
+            <div id="l151"
                class="code sev-3  le">
                <ul class="violations">
                
@@ -473,103 +491,103 @@
                      </span>
                      Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.</li>
                
-               </ul><tt><i>150</i>         <span class="k">assert</span> <span class="n">root</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;coverage&#39;</span></tt>
-            </div>
-            <div id="l151"
-               class="code sev- "><tt><i>151</i> &nbsp;</tt>
+               </ul><tt><i>151</i>         <span class="k">assert</span> <span class="n">root</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;coverage&#39;</span></tt>
             </div>
             <div id="l152"
-               class="code sev- "><tt><i>152</i>         <span class="n">cov</span><span class="o">.</span><span class="n">complexity</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;complexity&#39;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>152</i> &nbsp;</tt>
             </div>
             <div id="l153"
-               class="code sev- "><tt><i>153</i> &nbsp;</tt>
+               class="code sev- "><tt><i>153</i>         <span class="n">cov</span><span class="o">.</span><span class="n">complexity</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;complexity&#39;</span><span class="p">))</span></tt>
             </div>
             <div id="l154"
-               class="code sev- "><tt><i>154</i>         <span class="n">cov</span><span class="o">.</span><span class="n">branches_covered</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;branches-covered&#39;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>154</i> &nbsp;</tt>
             </div>
             <div id="l155"
-               class="code sev- "><tt><i>155</i>         <span class="n">cov</span><span class="o">.</span><span class="n">branches_valid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;branches-valid&#39;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>155</i>         <span class="n">cov</span><span class="o">.</span><span class="n">branches_covered</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;branches-covered&#39;</span><span class="p">))</span></tt>
             </div>
             <div id="l156"
-               class="code sev- "><tt><i>156</i> &nbsp;</tt>
+               class="code sev- "><tt><i>156</i>         <span class="n">cov</span><span class="o">.</span><span class="n">branches_valid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;branches-valid&#39;</span><span class="p">))</span></tt>
             </div>
             <div id="l157"
-               class="code sev- "><tt><i>157</i>         <span class="n">cov</span><span class="o">.</span><span class="n">lines_covered</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lines-covered&#39;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>157</i> &nbsp;</tt>
             </div>
             <div id="l158"
-               class="code sev- "><tt><i>158</i>         <span class="n">cov</span><span class="o">.</span><span class="n">lines_valid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lines-valid&#39;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>158</i>         <span class="n">cov</span><span class="o">.</span><span class="n">lines_covered</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lines-covered&#39;</span><span class="p">))</span></tt>
             </div>
             <div id="l159"
-               class="code sev- "><tt><i>159</i> &nbsp;</tt>
+               class="code sev- "><tt><i>159</i>         <span class="n">cov</span><span class="o">.</span><span class="n">lines_valid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lines-valid&#39;</span><span class="p">))</span></tt>
             </div>
             <div id="l160"
-               class="code sev- "><tt><i>160</i>         <span class="c1"># recompute the rates for more precision, but make sure that&#39;s correct</span></tt>
+               class="code sev- "><tt><i>160</i> &nbsp;</tt>
             </div>
             <div id="l161"
-               class="code sev- "><tt><i>161</i>         <span class="n">branch_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;branch-rate&#39;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>161</i>         <span class="c1"># recompute the rates for more precision, but make sure that&#39;s correct</span></tt>
             </div>
             <div id="l162"
-               class="code sev- "><tt><i>162</i>         <span class="n">line_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;line-rate&#39;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>162</i>         <span class="n">branch_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;branch-rate&#39;</span><span class="p">))</span></tt>
             </div>
             <div id="l163"
-               class="code sev- "><tt><i>163</i> &nbsp;</tt>
+               class="code sev- "><tt><i>163</i>         <span class="n">line_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;line-rate&#39;</span><span class="p">))</span></tt>
             </div>
             <div id="l164"
-               class="code sev- "><tt><i>164</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_close</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">branch_rate</span><span class="p">,</span> <span class="n">branch_rate</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>164</i> &nbsp;</tt>
             </div>
             <div id="l165"
-               class="code sev- "><tt><i>165</i>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Computed branch rate (</span><span class="si">%s</span><span class="s2">) is different from the one in the file (</span><span class="si">%s</span><span class="s2">)&quot;</span></tt>
+               class="code sev- "><tt><i>165</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_close</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">branch_rate</span><span class="p">,</span> <span class="n">branch_rate</span><span class="p">):</span></tt>
             </div>
             <div id="l166"
-               class="code sev- "><tt><i>166</i>                              <span class="o">%</span> <span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">branch_rate</span><span class="p">,</span> <span class="n">branch_rate</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>166</i>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Computed branch rate (</span><span class="si">%s</span><span class="s2">) is different from the one in the file (</span><span class="si">%s</span><span class="s2">)&quot;</span></tt>
             </div>
             <div id="l167"
-               class="code sev- "><tt><i>167</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_close</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">line_rate</span><span class="p">,</span> <span class="n">line_rate</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>167</i>                              <span class="o">%</span> <span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">branch_rate</span><span class="p">,</span> <span class="n">branch_rate</span><span class="p">))</span></tt>
             </div>
             <div id="l168"
-               class="code sev- "><tt><i>168</i>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Computed line rate (</span><span class="si">%s</span><span class="s2">) is different from the one in the file (</span><span class="si">%s</span><span class="s2">)&quot;</span></tt>
+               class="code sev- "><tt><i>168</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_close</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">line_rate</span><span class="p">,</span> <span class="n">line_rate</span><span class="p">):</span></tt>
             </div>
             <div id="l169"
-               class="code sev- "><tt><i>169</i>                              <span class="o">%</span> <span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">line_rate</span><span class="p">,</span> <span class="n">line_rate</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>169</i>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Computed line rate (</span><span class="si">%s</span><span class="s2">) is different from the one in the file (</span><span class="si">%s</span><span class="s2">)&quot;</span></tt>
             </div>
             <div id="l170"
-               class="code sev- "><tt><i>170</i> &nbsp;</tt>
+               class="code sev- "><tt><i>170</i>                              <span class="o">%</span> <span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">line_rate</span><span class="p">,</span> <span class="n">line_rate</span><span class="p">))</span></tt>
             </div>
             <div id="l171"
-               class="code sev- "><tt><i>171</i>         <span class="c1"># for el in root:</span></tt>
+               class="code sev- "><tt><i>171</i> &nbsp;</tt>
             </div>
             <div id="l172"
-               class="code sev- "><tt><i>172</i>         <span class="c1">#     if el.tag == &#39;sources&#39;:</span></tt>
+               class="code sev- "><tt><i>172</i>         <span class="c1"># for el in root:</span></tt>
             </div>
             <div id="l173"
-               class="code sev- "><tt><i>173</i>         <span class="c1">#         self.parse_sources(el, ts)</span></tt>
+               class="code sev- "><tt><i>173</i>         <span class="c1">#     if el.tag == &#39;sources&#39;:</span></tt>
             </div>
             <div id="l174"
-               class="code sev- "><tt><i>174</i>         <span class="c1">#     if el.tag == &#39;packages&#39;:</span></tt>
+               class="code sev- "><tt><i>174</i>         <span class="c1">#         self.parse_sources(el, ts)</span></tt>
             </div>
             <div id="l175"
-               class="code sev- "><tt><i>175</i>         <span class="c1">#         self.parse_packages(el, ts)</span></tt>
+               class="code sev- "><tt><i>175</i>         <span class="c1">#     if el.tag == &#39;packages&#39;:</span></tt>
             </div>
             <div id="l176"
-               class="code sev- "><tt><i>176</i> &nbsp;</tt>
+               class="code sev- "><tt><i>176</i>         <span class="c1">#         self.parse_packages(el, ts)</span></tt>
             </div>
             <div id="l177"
-               class="code sev- "><tt><i>177</i>         <span class="k">return</span> <span class="n">cov</span></tt>
+               class="code sev- "><tt><i>177</i> &nbsp;</tt>
             </div>
             <div id="l178"
-               class="code sev- "><tt><i>178</i> &nbsp;</tt>
+               class="code sev- "><tt><i>178</i>         <span class="k">return</span> <span class="n">cov</span></tt>
             </div>
             <div id="l179"
                class="code sev- "><tt><i>179</i> &nbsp;</tt>
             </div>
             <div id="l180"
-               class="code sev- "><tt><i>180</i> <span class="k">def</span> <span class="nf">is_close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>180</i> &nbsp;</tt>
             </div>
             <div id="l181"
-               class="code sev- "><tt><i>181</i>     <span class="sd">&quot;&quot;&quot;Return True if there is at most a difference of 1 at the 2d decimal&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>181</i> <span class="k">def</span> <span class="nf">is_close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span></tt>
             </div>
             <div id="l182"
-               class="code sev- "><tt><i>182</i>     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.01</span></tt>
+               class="code sev- "><tt><i>182</i>     <span class="sd">&quot;&quot;&quot;Return True if there is at most a difference of 1 at the 2d decimal&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l183"
+               class="code sev- "><tt><i>183</i>     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.01</span></tt>
             </div>
             
          </div>
