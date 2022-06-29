@@ -92,7 +92,8 @@ def get_color(
 
 
 def get_tests_badge(
-        test_stats  # type: TestStats
+        test_stats,  # type: TestStats
+        left_txt = "tests" # type: str
 ):
     # type: (...) -> Badge
     """Return the badge from test statistics """
@@ -106,4 +107,4 @@ def get_tests_badge(
         # simplified badge showing the number of tests
         right_txt = "%s" % (test_stats.total_without_skipped,)
 
-    return Badge(left_txt="tests", right_txt=right_txt, color=color)
+    return Badge(left_txt=left_txt, right_txt=right_txt, color=color)

@@ -107,6 +107,8 @@ By default it assumes that
 
     - `-` can be used to denote `<stdout>`: e.g. `genbadge tests -o - > badge.svg`.
 
+ - the badge name (left-hand side text) is **tests**. You can change it with the `-n/--name` flag or clear it with `-n ""` (but keep the empty space). Alternatively if you want to completely remove the left-hand side of the badge you can use `--noname`.
+
  - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
 
 In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose `-v` flag:
@@ -204,6 +206,8 @@ By default it assumes that
 
     - `-` can be used to denote `<stdout>`: e.g. `genbadge coverage -o - > badge.svg`.
 
+ - the badge name (left-hand side text) is **coverage**. You can change it with the `-n/--name` flag or clear it with `-n ""` (but keep the empty space). Alternatively if you want to completely remove the left-hand side of the badge you can use `--noname`.
+
  - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
 
 In addition to generating the badge, executing the command will also display some details about the parsed file is you use the verbose `-v` flag:
@@ -280,6 +284,8 @@ By default it assumes that
  - the output file will be at `./flake8-badge.svg`. You can change it with the `-o/--output-file` flag
 
     - `-` can be used to denote `<stdout>`: e.g. `genbadge flake8 -o - > badge.svg`.
+
+ - the badge name (left-hand side text) is **flake8**. You can change it with the `-n/--name` flag or clear it with `-n ""` (but keep the empty space). Alternatively if you want to completely remove the left-hand side of the badge you can use `--noname`.
 
  - the badge should be generated using `shields.io` (requires an internet connection). If you prefer you can use `-l/--local` to use the included SVG file template (less mature but seems to work)
 
