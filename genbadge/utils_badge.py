@@ -230,5 +230,11 @@ def preferred_width_of(txt, font_name, font_size):
 
         font = ImageFont.truetype(font=font_path, size=font_size)
 
-    width = font.getsize(txt)[0]
+    # PLI.FreeTypeFont does not have a getsize() method, however, the FreeTypeFont class is not part of PLI's API.
+    # Thus, we can not use isinstance(font, FreeTypeFont) here.
+    getsize = getattr(font, "getsize", None)
+    if callable(getsize):
+        width = font.getsize(txt)[0]
+    else:
+        width = font.getbbox(txt)[2]  # exists for FreeTypeFont in PLI >= v10.0.0
     return round_up_to_odd(width)
