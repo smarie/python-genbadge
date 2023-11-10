@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.1.1 - Fixed support for latest Pillow and Python
+
+- Fixed support for Python 3.12 by adding `setuptools` requirement explicitly. Fixed
+  [#32](https://github.com/smarie/python-genbadge/issues/32).
+- Fixed support for `Pillow` version 10 or greater. PR [#33](https://github.com/smarie/python-genbadge/pull/33) by
+  [famura](https://github.com/famura).
+
 ### 1.1.0 - Option to change or remove the badge name
 
 - A new `-n/--name` commandline option can be used with all badge generation commands to override the badge label (left text). A `--noname` commandline flag can alternatively be used to remove the left part completely. PR [#25](https://github.com/smarie/python-genbadge/pull/25) by [`nefrob`](https://github.com/nefrob).
