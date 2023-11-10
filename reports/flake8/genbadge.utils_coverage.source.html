@@ -83,7 +83,7 @@
                class="code sev- "><tt><i>22</i> <span class="k">class</span> <span class="nc">CoverageStats</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
             </div>
             <div id="l23"
-               class="code sev- "><tt><i>23</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>23</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l24"
                class="code sev- "><tt><i>24</i> <span class="sd">    Contains the results from parsing the coverage.xml.</span></tt>
@@ -134,7 +134,7 @@
                class="code sev- "><tt><i>39</i>     <span class="k">def</span> <span class="nf">branch_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l40"
-               class="code sev- "><tt><i>40</i>         <span class="sd">&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>40</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l41"
                class="code sev- "><tt><i>41</i> <span class="sd">        Note: in --no-branch situations, the number of branches is 0.</span></tt>
@@ -170,7 +170,7 @@
                class="code sev- "><tt><i>51</i>     <span class="k">def</span> <span class="nf">line_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l52"
-               class="code sev- "><tt><i>52</i>         <span class="sd">&quot;&quot;&quot;See branch rate for the special case of division by zero&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>52</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;See branch rate for the special case of division by zero&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l53"
                class="code sev- "><tt><i>53</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines_valid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span></tt>
@@ -218,7 +218,7 @@
                class="code sev- "><tt><i>67</i>     <span class="k">def</span> <span class="nf">total_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l68"
-               class="code sev- "><tt><i>68</i>         <span class="sd">&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>68</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l69"
                class="code sev- "><tt><i>69</i> <span class="sd">        See XmlReport class in https://github.com/nedbat/coveragepy/blob/master/coverage/xmlreport.py</span></tt>
@@ -275,7 +275,7 @@
                class="code sev- "><tt><i>86</i>     <span class="c1"># type: (...) -&gt; CoverageStats</span></tt>
             </div>
             <div id="l87"
-               class="code sev- "><tt><i>87</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>87</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l88"
                class="code sev- "><tt><i>88</i> <span class="sd">    Reads a coverage.xml file</span></tt>
@@ -338,7 +338,7 @@
                class="code sev- "><tt><i>107</i> <span class="p">):</span></tt>
             </div>
             <div id="l108"
-               class="code sev- "><tt><i>108</i>     <span class="sd">&quot;&quot;&quot; Returns the badge color to use depending on the coverage rate &quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>108</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the badge color to use depending on the coverage rate &quot;&quot;&quot;</span></tt>
             </div>
             <div id="l109"
                class="code sev- "><tt><i>109</i> &nbsp;</tt>
@@ -410,7 +410,7 @@
                class="code sev- "><tt><i>126</i>     <span class="c1"># type: (...) -&gt; Badge</span></tt>
             </div>
             <div id="l127"
-               class="code sev- "><tt><i>127</i>     <span class="sd">&quot;&quot;&quot;Return the badge from coverage results &quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>127</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the badge from coverage results &quot;&quot;&quot;</span></tt>
             </div>
             <div id="l128"
                class="code sev- "><tt><i>128</i> &nbsp;</tt>
@@ -440,7 +440,7 @@
                class="code sev- "><tt><i>136</i> <span class="k">def</span> <span class="nf">parse_cov</span><span class="p">(</span><span class="n">source</span><span class="p">):</span></tt>
             </div>
             <div id="l137"
-               class="code sev- "><tt><i>137</i>     <span class="sd">&quot;&quot;&quot;Parses the coverage.xml contents from source&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>137</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses the coverage.xml contents from source&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l138"
                class="code sev- "><tt><i>138</i>     <span class="k">return</span> <span class="n">CovParser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">)</span></tt>
@@ -455,7 +455,7 @@
                class="code sev- "><tt><i>141</i> <span class="k">class</span> <span class="nc">CovParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
             </div>
             <div id="l142"
-               class="code sev- "><tt><i>142</i>     <span class="sd">&quot;&quot;&quot;Parser class - inspired by the code in `xunitparser`&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>142</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parser class - inspired by the code in `xunitparser`&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l143"
                class="code sev- "><tt><i>143</i> &nbsp;</tt>
@@ -584,7 +584,7 @@
                class="code sev- "><tt><i>181</i> <span class="k">def</span> <span class="nf">is_close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span></tt>
             </div>
             <div id="l182"
-               class="code sev- "><tt><i>182</i>     <span class="sd">&quot;&quot;&quot;Return True if there is at most a difference of 1 at the 2d decimal&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>182</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if there is at most a difference of 1 at the 2d decimal&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l183"
                class="code sev- "><tt><i>183</i>     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.01</span></tt>

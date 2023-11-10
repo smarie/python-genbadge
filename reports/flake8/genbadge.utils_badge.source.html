@@ -119,7 +119,7 @@
                class="code sev- "><tt><i>34</i> <span class="k">class</span> <span class="nc">Badge</span><span class="p">:</span></tt>
             </div>
             <div id="l35"
-               class="code sev- "><tt><i>35</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>35</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l36"
                class="code sev- "><tt><i>36</i> <span class="sd">    A small utility class for badges</span></tt>
@@ -173,7 +173,7 @@
                class="code sev- "><tt><i>52</i>                <span class="p">):</span></tt>
             </div>
             <div id="l53"
-               class="code sev- "><tt><i>53</i>         <span class="sd">&quot;&quot;&quot;Return a string containing the SVG representation of this badge</span></tt>
+               class="code sev- "><tt><i>53</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string containing the SVG representation of this badge</span></tt>
             </div>
             <div id="l54"
                class="code sev- "><tt><i>54</i> &nbsp;</tt>
@@ -272,7 +272,7 @@
                class="code sev- "><tt><i>76</i>                  <span class="p">):</span></tt>
             </div>
             <div id="l77"
-               class="code sev- "><tt><i>77</i>         <span class="sd">&quot;&quot;&quot;Write the SVG representation of this badge to the given file</span></tt>
+               class="code sev- "><tt><i>77</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the SVG representation of this badge to the given file</span></tt>
             </div>
             <div id="l78"
                class="code sev- "><tt><i>78</i> &nbsp;</tt>
@@ -371,7 +371,7 @@
                class="code sev- "><tt><i>109</i>     <span class="c1"># type: (...) -&gt; str</span></tt>
             </div>
             <div id="l110"
-               class="code sev- "><tt><i>110</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>110</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l111"
                class="code sev- "><tt><i>111</i> <span class="sd">    Reads the SVG template from the package,</span></tt>
@@ -431,7 +431,7 @@
                class="code sev- "><tt><i>129</i>     <span class="k">def</span> <span class="nf">process_text</span><span class="p">(</span><span class="n">left_margin</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span></tt>
             </div>
             <div id="l130"
-               class="code sev- "><tt><i>130</i>         <span class="sd">&quot;&quot;&quot;From renderText()</span></tt>
+               class="code sev- "><tt><i>130</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;From renderText()</span></tt>
             </div>
             <div id="l131"
                class="code sev- "><tt><i>131</i> <span class="sd">        https://github.com/badges/shields/blob/4415d07e8b5bf794e6675cea052cc644d0c81bb5/badge-maker/lib/badge-renderers.js#L113</span></tt>
@@ -608,7 +608,7 @@
                class="code sev- "><tt><i>188</i> <span class="k">def</span> <span class="nf">get_local_badge_template</span><span class="p">():</span></tt>
             </div>
             <div id="l189"
-               class="code sev- "><tt><i>189</i>     <span class="sd">&quot;&quot;&quot;Reads the SVG file template fgrom the package resources&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>189</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads the SVG file template fgrom the package resources&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l190"
                class="code sev- "><tt><i>190</i>     <span class="n">template_path</span> <span class="o">=</span> <span class="s2">&quot;badge-template.svg&quot;</span></tt>
@@ -740,10 +740,28 @@
                class="code sev- "><tt><i>232</i> &nbsp;</tt>
             </div>
             <div id="l233"
-               class="code sev- "><tt><i>233</i>     <span class="n">width</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">txt</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></tt>
+               class="code sev- "><tt><i>233</i>     <span class="c1"># PLI.FreeTypeFont does not have a getsize() method, however, the FreeTypeFont class is not part of PLI&#39;s API.</span></tt>
             </div>
             <div id="l234"
-               class="code sev- "><tt><i>234</i>     <span class="k">return</span> <span class="n">round_up_to_odd</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>234</i>     <span class="c1"># Thus, we can not use isinstance(font, FreeTypeFont) here.</span></tt>
+            </div>
+            <div id="l235"
+               class="code sev- "><tt><i>235</i>     <span class="n">getsize</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">font</span><span class="p">,</span> <span class="s2">&quot;getsize&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></tt>
+            </div>
+            <div id="l236"
+               class="code sev- "><tt><i>236</i>     <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">getsize</span><span class="p">):</span></tt>
+            </div>
+            <div id="l237"
+               class="code sev- "><tt><i>237</i>         <span class="n">width</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">txt</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></tt>
+            </div>
+            <div id="l238"
+               class="code sev- "><tt><i>238</i>     <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l239"
+               class="code sev- "><tt><i>239</i>         <span class="n">width</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getbbox</span><span class="p">(</span><span class="n">txt</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># exists for FreeTypeFont in PLI &gt;= v10.0.0</span></tt>
+            </div>
+            <div id="l240"
+               class="code sev- "><tt><i>240</i>     <span class="k">return</span> <span class="n">round_up_to_odd</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></tt>
             </div>
             
          </div>
