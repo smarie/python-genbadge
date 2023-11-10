@@ -186,8 +186,8 @@ def test_parse_flake8():
     """Check that we can parse a coverage.xml file successfully"""
     res = get_flake8_stats(str(TESTS_FOLDER / "reports/flake8/flake8stats.txt"))
 
-    assert res.nb_critical == 6
-    assert res.nb_warning == 9
-    assert res.nb_info == 5
+    assert res.nb_critical == 139
+    assert res.nb_warning == 825
+    assert res.nb_info == 1261
 
     assert res.nb_total == res.nb_critical + res.nb_warning + res.nb_info

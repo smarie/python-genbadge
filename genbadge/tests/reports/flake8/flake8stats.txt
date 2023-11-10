@@ -1,11 +1,109 @@
+1     A001 variable "property" is shadowing a python builtin
+1     A003 class attribute "id" is shadowing a python builtin
+40    AAA01 no Act block found in test
 1     B014 Redundant exception types in `except (IOError, OSError):`.  Write `except OSError:`, which catches exactly the same exceptions.
+14    B901 blind except: statement
+38    B902 blind except Exception: statement
 7     C801 Copyright notice not present.
+22    C812 missing trailing comma
+17    C901 'xmls_hard_links_bulk' is too complex (13)
+4     CCE001 RateController.__call__ should be after RateController.setredis
+3     CM001: Redundant comment found
+2     D100 Missing docstring in public module
+1     D101 Missing docstring in public class
+4     D102 Missing docstring in public method
+54    D103 Missing docstring in public function
+1     D104 Missing docstring in public package
+8     D200 One-line docstring should fit on one line with quotes
+1     D202 No blank lines allowed after function docstring
+2     D204 1 blank line required after class docstring
+1     D205 1 blank line required between summary line and description
+12    D400 First line should end with a period
+4     D401 First line should be in imperative mood
+2     D403 First word of the first line should be properly capitalized
+1     D412 No blank lines allowed between a section header and its content
+49    DALL000 Module lacks __all__.
+10    DAR002 Empty description: e (1, 1)
+27    DAR101 Missing parameter(s) in Docstring: - api
+3     DAR102 Excess parameter(s) in Docstring: + fields
+1     DAR103 Parameter type mismatch:  ~sharenfs: expected str but was Optional[str, None]
+8     DAR201 Missing "Returns" in Docstring: - return
+2     DAR202 Excess "Returns" in Docstring: + return
+1     DAR203 Return type mismatch:  ~Return: expected str but was dict
+11    DAR401 Missing exception(s) in Raises section: -r CalledProcessError
+1     DAR402 Excess exception(s) in Raises section: +r SyntaxError
+23    E111 indentation is not a multiple of 4
+5     E115 expected an indented block (comment)
+6     E117 over-indented
 1     E122 continuation line missing indentation or outdented
+9     E124 closing bracket does not match visual indentation
+2     E127 continuation line over-indented for visual indent
+12    E128 continuation line under-indented for visual indent
+2     E202 whitespace before ')'
+102   E225 missing whitespace around operator
+252   E231 missing whitespace after ','
+10    E251 unexpected spaces around keyword / parameter equals
+4     E252 missing whitespace around parameter equals
+39    E261 at least two spaces before inline comment
+31    E262 inline comment should start with '# '
+52    E265 block comment should start with '# '
+21    E266 too many leading '#' for block comment
+2     E271 multiple spaces after keyword
+12    E302 expected 2 blank lines, found 1
+11    E303 too many blank lines (2)
 1     E303 too many blank lines (3)
+2     E305 expected 2 blank lines after class or function definition, found 1
+135   E501 line too long (124 > 79 characters)
+3     E502 the backslash is redundant between brackets
+2     E701 multiple statements on one line (colon)
+2     E703 statement ends with a semicolon
+4     E711 comparison to None should be 'if cond is None:'
+6     E712 comparison to True should be 'if cond is not True:' or 'if not cond:'
+1     E713 test for membership should be 'not in'
+14    E722 do not use bare 'except'
 1     F401 'math.floor' imported but unused
+70    F401 'traceback' imported but unused
+1     F403 'from batfs_api.api.controllers import *' used; unable to detect undefined names
+5     F405 'mount_to_vif' may be undefined, or defined from star imports: batfs_api.api.controllers
+1     F541 f-string is missing placeholders
+2     F811 redefinition of unused 'get_filesystem' from line 88
+32    F821 undefined name 'do_fastcmd'
 3     F821 undefined name 'TextIO'
 2     F841 local variable 'e' is assigned to but never used
+22    F841 local variable 'nprocs' is assigned to but never used
+29    I100 Import statements are in the wrong order. 'import urllib.error' should be before 'import urllib.request'
+1     I201 Missing newline between import groups. 'from pydantic import BaseModel' is identified as Third Party and 'from fastapi.responses import JSONResponse' is identified as Third Party.
+42    I202 Additional newline in a group of imports. 'from batfs_api.api.fs import fsunzip' is identified as Application and 'from batfs_api.api.query import check_basic_query_syntax' is identified as Application.
+6     IF100 IF100 don`t use "[on_true] if [expression] else [on_false]" syntax
+4     N400: Found backslash that is used for line breaking
+4     N802 function name 'GetController' should be lowercase
+9     N806 variable 'OK_destroy_properties' in function should be lowercase
+630   Q000 Single quotes found but double quotes preferred
+3     R100 raise in except handler without from
+18    R101 use bare raise in except handler
+4     RST206 Field list ends without a blank line; unexpected unindent.
+8     S001 found modulo formatter
 1     S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
 1     S314 Using xml.etree.ElementTree.parse to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib() is called
 1     S405 Using ElementTree to parse untrusted XML data is known to be vulnerable to XML attacks. Replace ElementTree with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.
+1     SCS100 use of os.path.abspath() and os.path.relpath() should be avoided in favor of os.path.realpath()
+4     SCS101 `eval()` and `exec()` represent a security risk and should be avoided
+2     SCS108 `assert` statements should not be present in production code
+5     SCS109 Use of builtin `open` for writing is discouraged in favor of `os.open` to allow for setting file permissions
+7     SIM102 Use a single if-statement instead of nested if-statements
+1     SIM105 Use 'contextlib.suppress(Exception)'
+4     SIM106 Handle error-cases first
+1     SIM110 Use 'return any(path.startswith(mount) for mount in list(mount_to_fsdev_hash.keys()))'
+1     SIM114 Use logical or (('/install_areas/' in request.query.destname) or ('/bac_areas/' in request.query.destname)) and a single body
+5     SIM115 Use context handler for opening files
+1     SIM119 Use a dataclass for 'class ZfsDataset'
+3     SIM120 Use 'class RateController:' instead of 'class RateController(object):'
+1     SIM203 Use 'mount_to_fsdev_hash not in globals()' instead of 'not mount_to_fsdev_hash in globals()'
+2     SIM210 Use 'bool(ret == 0)' instead of 'True if ret == 0 else False'
 1     T001 print found.
+2     T800: Missing spaces between parameter annotation and default value
+83    TH100 function missing type hints for arguments (szfs)
+75    TH101 function missing type hints for return value
+3     W291 trailing whitespace
+1     W292 no newline at end of file
+2     W293 blank line contains whitespace
