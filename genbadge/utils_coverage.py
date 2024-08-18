@@ -163,8 +163,11 @@ class CovParser(object):
         line_rate = float(root.attrib.get('line-rate'))
 
         if not is_close(cov.branch_rate, branch_rate):
-            raise ValueError("Computed branch rate (%s) is different from the one in the file (%s)"
-                             % (cov.branch_rate, branch_rate))
+            # if branch=true but there are no actual branches coverage will report
+            # branches-valid="0" and branch-rate="1"
+            if cov.branches_valid != 0 or branch_rate != 1.0:
+                raise ValueError("Computed branch rate (%s) is different from the one in the file (%s)"
+                                 % (cov.branch_rate, branch_rate))
         if not is_close(cov.line_rate, line_rate):
             raise ValueError("Computed line rate (%s) is different from the one in the file (%s)"
                              % (cov.line_rate, line_rate))
