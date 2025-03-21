@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.1.2 - (in progress)
+
+- Refactored project layout so that tests are not packaged in wheel.
+- `conda` is not the backend virtual environment anymore. Fixes [#35](https://github.com/smarie/python-genbadge/issues/35).
+
 ### 1.1.1 - Fixed support for latest Pillow and Python
 
 - Fixed support for Python 3.12 by adding `setuptools` requirement explicitly. Fixed
