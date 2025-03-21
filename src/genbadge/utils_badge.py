@@ -192,7 +192,7 @@ def get_local_badge_template():
         template = resource_string("genbadge", template_path).decode('utf8')
     except IOError:
         # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
-        import genbadge
+        from genbadge import genbadge
         reload(genbadge)  # noqa
         template = resource_string("genbadge", template_path).decode('utf8')
 
@@ -224,7 +224,7 @@ def preferred_width_of(txt, font_name, font_size):
         font_path = resource_filename("genbadge", font_file)
         if not os.path.exists(font_path):
             # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
-            import genbadge
+            from genbadge import genbadge
             reload(genbadge)  # noqa
             font_path = resource_filename("genbadge", font_file)
 

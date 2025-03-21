@@ -1,6 +1,5 @@
-from itertools import product
-from json import dumps
-
+import argparse
+import json
 import logging
 
 import nox  # noqa
@@ -10,28 +9,21 @@ import sys
 # add parent folder to python path so that we can import noxfile_utils.py
 # note that you need to "pip install -r noxfile-requiterements.txt" for this file to work.
 sys.path.append(str(Path(__file__).parent / "ci_tools"))
-from nox_utils import PY27, PY37, PY36, PY35, PY38, PY39, power_session, rm_folder, rm_file, PowerSession  # noqa
+from nox_utils import (PY27, PY37, PY36, PY35, PY38, PY39, PY310, PY311, PY312, PY313, install_reqs, rm_folder, rm_file,
+                       DONT_INSTALL)  # noqa
 
 
 pkg_name = "genbadge"
 gh_org = "smarie"
 gh_repo = "python-genbadge"
 
-ENVS = {
-    PY39: {"coverage": False, "pkg_specs": {"pip": ">19"}},
-    PY27: {"coverage": False, "pkg_specs": {"pip": ">10"}},
-    PY35: {"coverage": False, "pkg_specs": {"pip": ">10"}},
-    PY36: {"coverage": False, "pkg_specs": {"pip": ">19"}},
-    PY38: {"coverage": False, "pkg_specs": {"pip": ">19"}},
-    # IMPORTANT: this should be last so that the folder docs/reports is not deleted afterwards
-    PY37: {"coverage": True, "pkg_specs": {"pip": ">19"}},  # , "pytest-html": "1.9.0"
-}
 
 # set the default activated sessions, minimal for CI
-nox.options.sessions = ["tests", "flake8"]  # , "docs", "gh_pages"
+nox.options.sessions = ["tests", "flake8", "docs", "build"]  # , "docs", "gh_pages"
+nox.options.error_on_missing_interpreters = True
 nox.options.reuse_existing_virtualenvs = True  # this can be done using -r
 # if platform.system() == "Windows":  >> always use this for better control
-nox.options.default_venv_backend = "conda"
+nox.options.default_venv_backend = "virtualenv"
 # os.environ["NO_COLOR"] = "True"  # nox.options.nocolor = True does not work
 # nox.options.verbose = True
 
@@ -61,8 +53,27 @@ class Folders:
     flake8_badge = flake8_reports / "flake8-badge.svg"
 
 
-@power_session(envs=ENVS, logsdir=Folders.runlogs)
-def tests(session: PowerSession, coverage, pkg_specs):
+ENVS = {
+    PY313: {"coverage": False, "pkg_specs": {"pip": ">19"}},
+    PY312: {"coverage": False, "pkg_specs": {"pip": ">19"}},
+    PY311: {"coverage": False, "pkg_specs": {"pip": ">19"}},
+    PY310: {"coverage": False, "pkg_specs": {"pip": ">19"}},
+    PY39: {"coverage": False, "pkg_specs": {"pip": ">19"}},
+    PY38: {"coverage": False, "pkg_specs": {"pip": ">19"}},
+    PY27: {"coverage": False, "pkg_specs": {"pip": ">10"}},
+    PY35: {"coverage": False, "pkg_specs": {"pip": ">10"}},
+    PY36: {"coverage": False, "pkg_specs": {"pip": ">19"}},
+    # IMPORTANT: this should be last so that the folder docs/reports is not deleted afterwards
+    PY37: {"coverage": True, "pkg_specs": {"pip": ">19"}},  # , "pytest-html": "1.9.0"
+}
+
+ENV_PARAMS = tuple((k, v["coverage"], v["pkg_specs"]) for k, v in ENVS.items())
+ENV_IDS = tuple(ENVS.keys())
+
+
+@nox.session
+@nox.parametrize("python,coverage,pkg_specs", ENV_PARAMS, ids=ENV_IDS)
+def tests(session, coverage, pkg_specs):
     """Run the test suite, including test reports generation and coverage reports. """
 
     # As soon as this runs, we delete the target site and coverage files to avoid reporting wrong coverage/etc.
@@ -89,9 +100,9 @@ def tests(session: PowerSession, coverage, pkg_specs):
     if session.python in (PY27, PY35):
         # flake8-html>0.4.1 is not compliant with legacy python versions
         # as it requires jinja2>=3.1.0 that is not available
-        session.install2("flake8-html>=0.4,<=0.4.1")
+        session.install("flake8-html>=0.4,<=0.4.1")
     
-    session.install_reqs(setup=True, install=True, tests=True, extras=("all",), versions_dct=pkg_specs)
+    install_reqs(session, setup=True, install=True, tests=True, extras=("all",), versions_dct=pkg_specs)
 
     # install CI-only dependencies
     # if install_ci_deps:
@@ -99,95 +110,104 @@ def tests(session: PowerSession, coverage, pkg_specs):
 
     # list all (conda list alone does not work correctly on github actions)
     # session.run2("conda list")
-    conda_prefix = Path(session.bin)
-    if conda_prefix.name == "bin":
-        conda_prefix = conda_prefix.parent
-    session.run2("conda list", env={"CONDA_PREFIX": str(conda_prefix), "CONDA_DEFAULT_ENV": session.get_session_id()})
+    # conda_prefix = Path(session.bin)
+    # if conda_prefix.name == "bin":
+    #     conda_prefix = conda_prefix.parent
+    # session.run2("conda list", env={"CONDA_PREFIX": str(conda_prefix), "CONDA_DEFAULT_ENV": session.get_session_id()})
 
     # Fail if the assumed python version is not the actual one
-    session.run2("python ci_tools/check_python_version.py %s" % session.python)
-
-    # install self so that it is recognized by pytest
-    session.run2("pip install -e . --no-deps")
+    session.run("python", "ci_tools/check_python_version.py", session.python)
 
     # check that it can be imported even from a different folder
-    session.run2(['python', '-c', '"import os; os.chdir(\'./docs/\'); import %s"' % pkg_name])
+    # Important: do not surround the command into double quotes as in the shell !
+    # session.run('python', '-c', 'import os; os.chdir(\'./docs/\'); import %s' % pkg_name)
 
     # finally run all tests
     if not coverage:
+        # install self so that it is recognized by pytest
+        session.install(".", "--no-deps")
+
         # simple: pytest only
-        session.run2("python -m pytest --cache-clear -v %s/tests/" % pkg_name)
+        session.run("python", "-m", "pytest", "--cache-clear", "-v", "tests/")
     else:
+        # install self in "develop" mode so that coverage can be measured
+        session.install("-e", ".", "--no-deps")
+
         # coverage + junit html reports + badge generation
-        session.install_reqs(phase="coverage", phase_reqs=["coverage", "pytest-html", "requests"],
+        install_reqs(session, phase="coverage",
+                             phase_reqs=["coverage", "pytest-html", "requests"],
                              versions_dct=pkg_specs)
 
         # --coverage + junit html reports
-        session.run2("coverage run --source {pkg_name} "
-                     "-m pytest --cache-clear --junitxml={test_xml} --html={test_html} -v {pkg_name}/tests/"
-                     "".format(pkg_name=pkg_name, test_xml=Folders.test_xml, test_html=Folders.test_html))
-        session.run2("coverage report")
-        session.run2("coverage xml -o {covxml}".format(covxml=Folders.coverage_xml))
-        session.run2("coverage html -d {dst}".format(dst=Folders.coverage_reports))
+        session.run("coverage", "run", "--source", f"src/{pkg_name}",
+                    "-m", "pytest", "--cache-clear",
+                    f"--junitxml={Folders.test_xml}", f"--html={Folders.test_html}",
+                    "-v", "tests/")
+        session.run("coverage", "report")  # this shows in terminal + fails under XX%, same as --cov-report term --cov-fail-under=70  # noqa
+        session.run("coverage", "xml", "-o", f"{Folders.coverage_xml}")
+        session.run("coverage", "html", "-d", f"{Folders.coverage_reports}")
         # delete this intermediate file, it is not needed anymore
         rm_file(Folders.coverage_intermediate_file)
 
         # --generates the badge for the test results and fail build if less than x% tests pass
         nox_logger.info("Generating badge for tests coverage")
         # Use our own package to generate the badge
-        session.run2("genbadge tests -i %s -o %s -t 100" % (Folders.test_xml, Folders.test_badge))
-        session.run2("genbadge coverage -i %s -o %s" % (Folders.coverage_xml, Folders.coverage_badge))
+        session.run("genbadge", "tests", "-i", f"{Folders.test_xml}", "-o", f"{Folders.test_badge}", "-t", "100")
+        session.run("genbadge", "coverage", "-i", f"{Folders.coverage_xml}", "-o", f"{Folders.coverage_badge}")
 
 
-@power_session(python=PY38, logsdir=Folders.runlogs)
-def flake8(session: PowerSession):
+@nox.session(python=PY39)
+def flake8(session):
     """Launch flake8 qualimetry."""
 
     session.install("-r", str(Folders.ci_tools / "flake8-requirements.txt"))
-    session.run2("pip install -e .[flake8]")
+    session.install(".[flake8]")
 
     rm_folder(Folders.flake8_reports)
+    Folders.flake8_reports.mkdir(parents=True, exist_ok=True)
     rm_file(Folders.flake8_intermediate_file)
+
+    session.cd("src")
 
     # Options are set in `setup.cfg` file
     session.run("flake8", pkg_name, "--exit-zero", "--format=html", "--htmldir", str(Folders.flake8_reports),
                 "--statistics", "--tee", "--output-file", str(Folders.flake8_intermediate_file))
     # generate our badge
-    session.run2("genbadge flake8 -i %s -o %s" % (Folders.flake8_intermediate_file, Folders.flake8_badge))
+    session.run("genbadge", "flake8", "-i", f"{Folders.flake8_intermediate_file}", "-o", f"{Folders.flake8_badge}")
     rm_file(Folders.flake8_intermediate_file)
 
 
-@power_session(python=[PY37])
-def docs(session: PowerSession):
-    """Generates the doc and serves it on a local http server. Pass '-- build' to build statically instead."""
+@nox.session(python=PY39)
+def docs(session):
+    """Generates the doc. Pass '-- serve' to serve it on a local http server instead."""
 
-    session.install_reqs(phase="docs", phase_reqs=["mkdocs-material", "mkdocs", "pymdown-extensions", "pygments"])
+    install_reqs(session, phase="docs", phase_reqs=["mkdocs-material", "mkdocs", "pymdown-extensions", "pygments"])
 
     if session.posargs:
-        # use posargs instead of "serve"
-        session.run2("mkdocs -f ./docs/mkdocs.yml %s" % " ".join(session.posargs))
+        # use posargs instead of "build"
+        session.run("mkdocs", *session.posargs)
     else:
-        session.run2("mkdocs serve -f ./docs/mkdocs.yml")
+        session.run("mkdocs", "build")
 
 
-@power_session(python=[PY37])
-def publish(session: PowerSession):
+@nox.session(python=PY39)
+def publish(session):
     """Deploy the docs+reports on github pages. Note: this rebuilds the docs"""
 
-    session.install_reqs(phase="mkdocs", phase_reqs=["mkdocs-material", "mkdocs", "pymdown-extensions", "pygments"])
+    install_reqs(session, phase="publish", phase_reqs=["mkdocs-material", "mkdocs", "pymdown-extensions", "pygments"])
 
     # possibly rebuild the docs in a static way (mkdocs serve does not build locally)
-    session.run2("mkdocs build -f ./docs/mkdocs.yml")
+    session.run("mkdocs", "build")
 
     # check that the doc has been generated with coverage
     if not Folders.site_reports.exists():
-        raise ValueError("Test reports have not been built yet. Please run 'nox -s tests-3.7' first")
+        raise ValueError("Test reports have not been built yet. Please run 'nox -s tests(3.7)' first")
 
     # publish the docs
-    session.run2("mkdocs gh-deploy -f ./docs/mkdocs.yml")
+    session.run("mkdocs", "gh-deploy")
 
     # publish the coverage - now in github actions only
-    # session.install_reqs(phase="codecov", phase_reqs=["codecov", "keyring"])
+    # install_reqs(session, phase="codecov", phase_reqs=["codecov", "keyring"])
     # # keyring set https://app.codecov.io/gh/<org>/<repo> token
     # import keyring  # (note that this import is not from the session env but the main nox env)
     # codecov_token = keyring.get_password("https://app.codecov.io/gh/<org>/<repo>>", "token")
@@ -195,9 +215,9 @@ def publish(session: PowerSession):
     # session.run2('codecov -t %s -f %s' % (codecov_token, Folders.coverage_xml))
 
 
-@power_session(python=[PY37])
-def release(session: PowerSession):
-    """Create a release on github corresponding to the latest tag"""
+def _build(session):
+    """Common code used by build and release sessions"""
+    install_reqs(session, setup=True, phase="setup.py#dist", phase_reqs=["setuptools_scm"])
 
     # Get current tag using setuptools_scm and make sure this is not a dirty/dev one
     from setuptools_scm import get_version  # (note that this import is not from the session env but the main nox env)
@@ -207,12 +227,39 @@ def release(session: PowerSession):
     def my_scheme(version_):
         version.append(version_)
         return guess_next_dev_version(version_)
+
     current_tag = get_version(".", version_scheme=my_scheme)
 
     # create the package
-    session.install_reqs(phase="setup.py#dist", phase_reqs=["setuptools_scm"])
     rm_folder(Folders.dist)
-    session.run2("python setup.py sdist bdist_wheel")
+
+    session.run("python", "setup.py", "sdist", "bdist_wheel")
+
+    # Make sure that the generated _version.py file exists and is compliant with python 2.7
+    version_py = Path(f"src/{pkg_name}/_version.py")
+    if not version_py.exists():
+        raise ValueError("Error with setuptools_scm: _version.py file not generated")
+
+    if ":" in version_py.read_text():
+        raise ValueError("Error with setuptools_scm: _version.py file contains annotations")
+
+    return current_tag, version
+
+
+@nox.session(python=PY39)
+def build(session):
+    """Same as release but just builds"""
+
+    current_tag, version = _build(session)
+    print(f"current tag: {current_tag}")
+    print(f"version: {version}")
+
+
+@nox.session(python=PY39)
+def release(session):
+    """Create a release on github corresponding to the latest tag"""
+
+    current_tag, version = _build(session)
 
     if version[0].dirty or not version[0].exact:
         raise ValueError("You need to execute this action on a clean tag version with no local changes.")
@@ -239,41 +286,40 @@ def release(session: PowerSession):
     if publish_on_pypi:
         # keyring set https://upload.pypi.org/legacy/ your-username
         # keyring set https://test.pypi.org/legacy/ your-username
-        session.install_reqs(phase="PyPi", phase_reqs=["twine"])
-        session.run2("twine upload dist/* -u smarie")  # -r testpypi
+        install_reqs(session, phase="PyPi", phase_reqs=["twine"])
+        session.run("twine", "upload", "dist/*", "-u", "smarie")  # -r testpypi
 
     # create the github release
-    session.install_reqs(phase="release", phase_reqs=["click", "PyGithub"])
-    session.run2("python ci_tools/github_release.py -s {gh_token} "
-                 "--repo-slug {gh_org}/{gh_repo} -cf ./docs/changelog.md "
-                 "-d https://{gh_org}.github.io/{gh_repo}/changelog {tag}"
-                 "".format(gh_token=gh_token, gh_org=gh_org, gh_repo=gh_repo, tag=current_tag))
+    install_reqs(session, phase="release", phase_reqs=["click", "PyGithub"])
+    session.run("python", "ci_tools/github_release.py", "-s", gh_token,
+                "--repo-slug", f"{gh_org}/{gh_repo}", "-cf", "./docs/changelog.md",
+                "-d", f"https://{gh_org}.github.io/{gh_repo}/changelog", current_tag)
 
 
-@nox.session(python=False)
-def gha_list(session):
-    """(mandatory arg: <base_session_name>) Prints all sessions available for <base_session_name>, for GithubActions."""
-
-    # see https://stackoverflow.com/q/66747359/7262247
-
-    # get the desired base session to generate the list for
-    if len(session.posargs) != 1:
-        raise ValueError("This session has a mandatory argument: <base_session_name>")
-    session_func = globals()[session.posargs[0]]
-
-    # list all sessions for this base session
-    try:
-        session_func.parametrize
-    except AttributeError:
-        sessions_list = ["%s-%s" % (session_func.__name__, py) for py in session_func.python]
-    else:
-        sessions_list = ["%s-%s(%s)" % (session_func.__name__, py, param)
-                         for py, param in product(session_func.python, session_func.parametrize)]
-
-    # print the list so that it can be caught by GHA.
-    # Note that json.dumps is optional since this is a list of string.
-    # However it is to remind us that GHA expects a well-formatted json list of strings.
-    print(dumps(sessions_list))
+# @nox.session(python=False)
+# def gha_list(session):
+#     """(mandatory arg: <base_session_name>) Prints all sessions available for <base_session_name>, for GithubActions."""
+#
+#     # see https://stackoverflow.com/q/66747359/7262247
+#
+#     # get the desired base session to generate the list for
+#     if len(session.posargs) != 1:
+#         raise ValueError("This session has a mandatory argument: <base_session_name>")
+#     session_func = globals()[session.posargs[0]]
+#
+#     # list all sessions for this base session
+#     try:
+#         session_func.parametrize
+#     except AttributeError:
+#         sessions_list = ["%s-%s" % (session_func.__name__, py) for py in session_func.python]
+#     else:
+#         sessions_list = ["%s-%s(%s)" % (session_func.__name__, py, param)
+#                          for py, param in product(session_func.python, session_func.parametrize)]
+#
+#     # print the list so that it can be caught by GHA.
+#     # Note that json.dumps is optional since this is a list of string.
+#     # However it is to remind us that GHA expects a well-formatted json list of strings.
+#     print(json.dumps(sessions_list))
 
 
 # if __name__ == '__main__':
