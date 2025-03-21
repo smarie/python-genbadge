@@ -9,7 +9,7 @@ import sys
 # add parent folder to python path so that we can import noxfile_utils.py
 # note that you need to "pip install -r noxfile-requiterements.txt" for this file to work.
 sys.path.append(str(Path(__file__).parent / "ci_tools"))
-from nox_utils import (PY27, PY37, PY36, PY35, PY38, PY39, PY310, PY311, PY312, PY313, install_reqs, rm_folder, rm_file,
+from nox_utils import (PY38, PY39, PY310, PY311, PY312, PY313, install_reqs, rm_folder, rm_file,
                        DONT_INSTALL)  # noqa
 
 
@@ -59,12 +59,8 @@ ENVS = {
     PY311: {"coverage": False, "pkg_specs": {"pip": ">19"}},
     PY310: {"coverage": False, "pkg_specs": {"pip": ">19"}},
     PY39: {"coverage": False, "pkg_specs": {"pip": ">19"}},
-    PY38: {"coverage": False, "pkg_specs": {"pip": ">19"}},
-    PY27: {"coverage": False, "pkg_specs": {"pip": ">10"}},
-    PY35: {"coverage": False, "pkg_specs": {"pip": ">10"}},
-    PY36: {"coverage": False, "pkg_specs": {"pip": ">19"}},
     # IMPORTANT: this should be last so that the folder docs/reports is not deleted afterwards
-    PY37: {"coverage": True, "pkg_specs": {"pip": ">19"}},  # , "pytest-html": "1.9.0"
+    PY38: {"coverage": True, "pkg_specs": {"pip": ">19"}},  # , "pytest-html": "1.9.0"
 }
 
 ENV_PARAMS = tuple((k, v["coverage"], v["pkg_specs"]) for k, v in ENVS.items())
@@ -97,10 +93,10 @@ def tests(session, coverage, pkg_specs):
 
     # install all requirements
     # session.install_reqs(phase="pip", phase_reqs=("pip",), versions_dct=pkg_specs)
-    if session.python in (PY27, PY35):
-        # flake8-html>0.4.1 is not compliant with legacy python versions
-        # as it requires jinja2>=3.1.0 that is not available
-        session.install("flake8-html>=0.4,<=0.4.1")
+    # if session.python in (PY27, PY35):
+    #     # flake8-html>0.4.1 is not compliant with legacy python versions
+    #     # as it requires jinja2>=3.1.0 that is not available
+    #     session.install("flake8-html>=0.4,<=0.4.1")
     
     install_reqs(session, setup=True, install=True, tests=True, extras=("all",), versions_dct=pkg_specs)
 
@@ -201,7 +197,7 @@ def publish(session):
 
     # check that the doc has been generated with coverage
     if not Folders.site_reports.exists():
-        raise ValueError("Test reports have not been built yet. Please run 'nox -s tests(3.7)' first")
+        raise ValueError("Test reports have not been built yet. Please run 'nox -s tests(3.8)' first")
 
     # publish the docs
     session.run("mkdocs", "gh-deploy")
