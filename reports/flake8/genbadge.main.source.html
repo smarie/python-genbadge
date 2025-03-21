@@ -32,19 +32,19 @@
                class="code sev- "><tt><i>5</i> <span class="k">try</span><span class="p">:</span></tt>
             </div>
             <div id="l6"
-               class="code sev- "><tt><i>6</i>     <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span></tt>
+               class="code sev- "><tt><i>6</i>     <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span></tt>
             </div>
             <div id="l7"
                class="code sev- "><tt><i>7</i> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span></tt>
             </div>
             <div id="l8"
-               class="code sev- "><tt><i>8</i>     <span class="kn">from</span> <span class="nn">pathlib2</span> <span class="kn">import</span> <span class="n">Path</span>  <span class="c1"># python 2</span></tt>
+               class="code sev- "><tt><i>8</i>     <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>  <span class="c1"># python 2</span></tt>
             </div>
             <div id="l9"
                class="code sev- "><tt><i>9</i> &nbsp;</tt>
             </div>
             <div id="l10"
-               class="code sev- "><tt><i>10</i> <span class="kn">import</span> <span class="nn">click</span></tt>
+               class="code sev- "><tt><i>10</i> <span class="kn">import</span><span class="w"> </span><span class="nn">click</span></tt>
             </div>
             <div id="l11"
                class="code sev- "><tt><i>11</i> &nbsp;</tt>
@@ -53,13 +53,13 @@
                class="code sev- "><tt><i>12</i> &nbsp;</tt>
             </div>
             <div id="l13"
-               class="code sev- "><tt><i>13</i> <span class="kn">from</span> <span class="nn">.utils_junit</span> <span class="kn">import</span> <span class="n">get_test_stats</span><span class="p">,</span> <span class="n">get_tests_badge</span></tt>
+               class="code sev- "><tt><i>13</i> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils_junit</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_test_stats</span><span class="p">,</span> <span class="n">get_tests_badge</span></tt>
             </div>
             <div id="l14"
-               class="code sev- "><tt><i>14</i> <span class="kn">from</span> <span class="nn">.utils_coverage</span> <span class="kn">import</span> <span class="n">get_coverage_badge</span><span class="p">,</span> <span class="n">get_coverage_stats</span></tt>
+               class="code sev- "><tt><i>14</i> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils_coverage</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_coverage_badge</span><span class="p">,</span> <span class="n">get_coverage_stats</span></tt>
             </div>
             <div id="l15"
-               class="code sev- "><tt><i>15</i> <span class="kn">from</span> <span class="nn">.utils_flake8</span> <span class="kn">import</span> <span class="n">get_flake8_stats</span><span class="p">,</span> <span class="n">get_flake8_badge</span></tt>
+               class="code sev- "><tt><i>15</i> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils_flake8</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_flake8_stats</span><span class="p">,</span> <span class="n">get_flake8_badge</span></tt>
             </div>
             <div id="l16"
                class="code sev- "><tt><i>16</i> &nbsp;</tt>
@@ -131,7 +131,7 @@
                class="code sev- "><tt><i>38</i> <span class="nd">@click</span><span class="o">.</span><span class="n">group</span><span class="p">()</span></tt>
             </div>
             <div id="l39"
-               class="code sev- "><tt><i>39</i> <span class="k">def</span> <span class="nf">genbadge</span><span class="p">():</span></tt>
+               class="code sev- "><tt><i>39</i> <span class="k">def</span><span class="w"> </span><span class="nf">genbadge</span><span class="p">():</span></tt>
             </div>
             <div id="l40"
                class="code sev- "><tt><i>40</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
@@ -200,7 +200,7 @@
                class="code sev- "><tt><i>61</i> <span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--silent&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">is_flag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">SILENT_HELP</span><span class="p">)</span></tt>
             </div>
             <div id="l62"
-               class="code sev- "><tt><i>62</i> <span class="k">def</span> <span class="nf">gen_tests_badge</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>62</i> <span class="k">def</span><span class="w"> </span><span class="nf">gen_tests_badge</span><span class="p">(</span></tt>
             </div>
             <div id="l63"
                class="code sev- "><tt><i>63</i>         <span class="n">input_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span></tt>
@@ -560,7 +560,7 @@
                class="code sev- "><tt><i>160</i> <span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--silent&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">is_flag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">SILENT_HELP</span><span class="p">)</span></tt>
             </div>
             <div id="l161"
-               class="code sev- "><tt><i>161</i> <span class="k">def</span> <span class="nf">gen_coverage_badge</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>161</i> <span class="k">def</span><span class="w"> </span><span class="nf">gen_coverage_badge</span><span class="p">(</span></tt>
             </div>
             <div id="l162"
                class="code sev- "><tt><i>162</i>         <span class="n">input_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span></tt>
@@ -878,7 +878,7 @@
                class="code sev- "><tt><i>242</i> <span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--silent&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">is_flag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">SILENT_HELP</span><span class="p">)</span></tt>
             </div>
             <div id="l243"
-               class="code sev- "><tt><i>243</i> <span class="k">def</span> <span class="nf">gen_flake8_badge</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>243</i> <span class="k">def</span><span class="w"> </span><span class="nf">gen_flake8_badge</span><span class="p">(</span></tt>
             </div>
             <div id="l244"
                class="code sev- "><tt><i>244</i>         <span class="n">input_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span></tt>
@@ -1127,7 +1127,7 @@
                class="code sev- "><tt><i>310</i> &nbsp;</tt>
             </div>
             <div id="l311"
-               class="code sev- "><tt><i>311</i> <span class="k">def</span> <span class="nf">_process_infile</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">default_in_file</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>311</i> <span class="k">def</span><span class="w"> </span><span class="nf">_process_infile</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">default_in_file</span><span class="p">):</span></tt>
             </div>
             <div id="l312"
                class="code sev- "><tt><i>312</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Common in file processor&quot;&quot;&quot;</span></tt>
@@ -1169,7 +1169,7 @@
                class="code sev- "><tt><i>324</i> &nbsp;</tt>
             </div>
             <div id="l325"
-               class="code sev- "><tt><i>325</i> <span class="k">def</span> <span class="nf">_process_outfile</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">default_out_file</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>325</i> <span class="k">def</span><span class="w"> </span><span class="nf">_process_outfile</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">default_out_file</span><span class="p">):</span></tt>
             </div>
             <div id="l326"
                class="code sev- "><tt><i>326</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Common out file processor&quot;&quot;&quot;</span></tt>

@@ -29,13 +29,13 @@
                class="code sev- "><tt><i>4</i> <span class="c1">#  License: 3-clause BSD, &lt;https://github.com/smarie/python-genbadge/blob/master/LICENSE&gt;</span></tt>
             </div>
             <div id="l5"
-               class="code sev- "><tt><i>5</i> <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span></tt>
+               class="code sev- "><tt><i>5</i> <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">division</span></tt>
             </div>
             <div id="l6"
                class="code sev- "><tt><i>6</i> &nbsp;</tt>
             </div>
             <div id="l7"
-               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">TextIOWrapper</span></tt>
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextIOWrapper</span></tt>
             </div>
             <div id="l8"
                class="code sev- "><tt><i>8</i> &nbsp;</tt>
@@ -44,7 +44,7 @@
                class="code sev- "><tt><i>9</i> <span class="k">try</span><span class="p">:</span></tt>
             </div>
             <div id="l10"
-               class="code sev- "><tt><i>10</i>     <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span></tt>
+               class="code sev- "><tt><i>10</i>     <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span></tt>
             </div>
             <div id="l11"
                class="code sev- "><tt><i>11</i> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span></tt>
@@ -59,10 +59,10 @@
                class="code sev- "><tt><i>14</i> <span class="c1"># use our own copy so as to use defusedxml and to be compliant with setuptools&gt;=58</span></tt>
             </div>
             <div id="l15"
-               class="code sev- "><tt><i>15</i> <span class="kn">from</span> <span class="nn">.xunitparser_copy</span> <span class="kn">import</span> <span class="n">parse</span></tt>
+               class="code sev- "><tt><i>15</i> <span class="kn">from</span><span class="w"> </span><span class="nn">.xunitparser_copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse</span></tt>
             </div>
             <div id="l16"
-               class="code sev- "><tt><i>16</i> <span class="kn">from</span> <span class="nn">.utils_badge</span> <span class="kn">import</span> <span class="n">Badge</span></tt>
+               class="code sev- "><tt><i>16</i> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils_badge</span><span class="w"> </span><span class="kn">import</span> <span class="n">Badge</span></tt>
             </div>
             <div id="l17"
                class="code sev- "><tt><i>17</i> &nbsp;</tt>
@@ -71,7 +71,7 @@
                class="code sev- "><tt><i>18</i> &nbsp;</tt>
             </div>
             <div id="l19"
-               class="code sev- "><tt><i>19</i> <span class="k">class</span> <span class="nc">TestStats</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>19</i> <span class="k">class</span><span class="w"> </span><span class="nc">TestStats</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
             </div>
             <div id="l20"
                class="code sev- "><tt><i>20</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
@@ -86,7 +86,7 @@
                class="code sev- "><tt><i>23</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
             </div>
             <div id="l24"
-               class="code sev- "><tt><i>24</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runned</span><span class="p">,</span> <span class="n">skipped</span><span class="p">,</span> <span class="n">failed</span><span class="p">,</span> <span class="n">errors</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>24</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runned</span><span class="p">,</span> <span class="n">skipped</span><span class="p">,</span> <span class="n">failed</span><span class="p">,</span> <span class="n">errors</span><span class="p">):</span></tt>
             </div>
             <div id="l25"
                class="code sev- "><tt><i>25</i>         <span class="bp">self</span><span class="o">.</span><span class="n">runned</span> <span class="o">=</span> <span class="n">runned</span></tt>
@@ -107,7 +107,7 @@
                class="code sev- "><tt><i>30</i>     <span class="nd">@property</span></tt>
             </div>
             <div id="l31"
-               class="code sev- "><tt><i>31</i>     <span class="k">def</span> <span class="nf">success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>31</i>     <span class="k">def</span><span class="w"> </span><span class="nf">success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l32"
                class="code sev- "><tt><i>32</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">runned</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">skipped</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">failed</span></tt>
@@ -119,7 +119,7 @@
                class="code sev- "><tt><i>34</i>     <span class="nd">@property</span></tt>
             </div>
             <div id="l35"
-               class="code sev- "><tt><i>35</i>     <span class="k">def</span> <span class="nf">total_with_skipped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>35</i>     <span class="k">def</span><span class="w"> </span><span class="nf">total_with_skipped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l36"
                class="code sev- "><tt><i>36</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">runned</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span></tt>
@@ -131,7 +131,7 @@
                class="code sev- "><tt><i>38</i>     <span class="nd">@property</span></tt>
             </div>
             <div id="l39"
-               class="code sev- "><tt><i>39</i>     <span class="k">def</span> <span class="nf">total_without_skipped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>39</i>     <span class="k">def</span><span class="w"> </span><span class="nf">total_without_skipped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l40"
                class="code sev- "><tt><i>40</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">runned</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">skipped</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span></tt>
@@ -143,7 +143,7 @@
                class="code sev- "><tt><i>42</i>     <span class="nd">@property</span></tt>
             </div>
             <div id="l43"
-               class="code sev- "><tt><i>43</i>     <span class="k">def</span> <span class="nf">success_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>43</i>     <span class="k">def</span><span class="w"> </span><span class="nf">success_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l44"
                class="code sev- "><tt><i>44</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">runned</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span></tt>
@@ -161,7 +161,7 @@
                class="code sev- "><tt><i>48</i> &nbsp;</tt>
             </div>
             <div id="l49"
-               class="code sev- "><tt><i>49</i>     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>49</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l50"
                class="code sev- "><tt><i>50</i>         <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span></tt>
@@ -173,7 +173,7 @@
                class="code sev- "><tt><i>52</i> &nbsp;</tt>
             </div>
             <div id="l53"
-               class="code sev- "><tt><i>53</i> <span class="k">def</span> <span class="nf">get_test_stats</span><span class="p">(</span><span class="n">junit_xml_file</span><span class="o">=</span><span class="s1">&#39;reports/junit/junit.xml&#39;</span>  <span class="c1"># type: Union[str, TextIOWrapper]</span></tt>
+               class="code sev- "><tt><i>53</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_test_stats</span><span class="p">(</span><span class="n">junit_xml_file</span><span class="o">=</span><span class="s1">&#39;reports/junit/junit.xml&#39;</span>  <span class="c1"># type: Union[str, TextIOWrapper]</span></tt>
             </div>
             <div id="l54"
                class="code sev- "><tt><i>54</i>                    <span class="p">):</span></tt>
@@ -245,7 +245,7 @@
                class="code sev- "><tt><i>76</i> &nbsp;</tt>
             </div>
             <div id="l77"
-               class="code sev- "><tt><i>77</i> <span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>77</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_color</span><span class="p">(</span></tt>
             </div>
             <div id="l78"
                class="code sev- "><tt><i>78</i>         <span class="n">test_stats</span>  <span class="c1"># type: TestStats</span></tt>
@@ -296,7 +296,7 @@
                class="code sev- "><tt><i>93</i> &nbsp;</tt>
             </div>
             <div id="l94"
-               class="code sev- "><tt><i>94</i> <span class="k">def</span> <span class="nf">get_tests_badge</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>94</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_tests_badge</span><span class="p">(</span></tt>
             </div>
             <div id="l95"
                class="code sev- "><tt><i>95</i>         <span class="n">test_stats</span><span class="p">,</span>  <span class="c1"># type: TestStats</span></tt>

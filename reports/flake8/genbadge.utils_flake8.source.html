@@ -29,22 +29,22 @@
                class="code sev- "><tt><i>4</i> <span class="c1">#  License: 3-clause BSD, &lt;https://github.com/smarie/python-genbadge/blob/master/LICENSE&gt;</span></tt>
             </div>
             <div id="l5"
-               class="code sev- "><tt><i>5</i> <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span></tt>
+               class="code sev- "><tt><i>5</i> <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">division</span></tt>
             </div>
             <div id="l6"
                class="code sev- "><tt><i>6</i> &nbsp;</tt>
             </div>
             <div id="l7"
-               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span></tt>
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span></tt>
             </div>
             <div id="l8"
-               class="code sev- "><tt><i>8</i> <span class="kn">import</span> <span class="nn">re</span></tt>
+               class="code sev- "><tt><i>8</i> <span class="kn">import</span><span class="w"> </span><span class="nn">re</span></tt>
             </div>
             <div id="l9"
                class="code sev- "><tt><i>9</i> &nbsp;</tt>
             </div>
             <div id="l10"
-               class="code sev- "><tt><i>10</i> <span class="kn">from</span> <span class="nn">.utils_badge</span> <span class="kn">import</span> <span class="n">Badge</span></tt>
+               class="code sev- "><tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils_badge</span><span class="w"> </span><span class="kn">import</span> <span class="n">Badge</span></tt>
             </div>
             <div id="l11"
                class="code sev- "><tt><i>11</i> &nbsp;</tt>
@@ -59,7 +59,7 @@
                class="code sev- "><tt><i>14</i>     <span class="c1"># flake8-html is an optional dependency, do not fail too soon if it cant be loaded</span></tt>
             </div>
             <div id="l15"
-               class="code sev- "><tt><i>15</i>     <span class="kn">import</span> <span class="nn">flake8_html</span></tt>
+               class="code sev- "><tt><i>15</i>     <span class="kn">import</span><span class="w"> </span><span class="nn">flake8_html</span></tt>
             </div>
             <div id="l16"
                class="code sev- "><tt><i>16</i> <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span></tt>
@@ -68,10 +68,10 @@
                class="code sev- "><tt><i>17</i>     <span class="n">ee</span> <span class="o">=</span> <span class="n">e</span>  <span class="c1"># save it</span></tt>
             </div>
             <div id="l18"
-               class="code sev- "><tt><i>18</i>     <span class="k">class</span> <span class="nc">FakeFlake8HtmlImport</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  <span class="c1"># noqa</span></tt>
+               class="code sev- "><tt><i>18</i>     <span class="k">class</span><span class="w"> </span><span class="nc">FakeFlake8HtmlImport</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  <span class="c1"># noqa</span></tt>
             </div>
             <div id="l19"
-               class="code sev- "><tt><i>19</i>         <span class="k">def</span> <span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>19</i>         <span class="k">def</span><span class="w"> </span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span></tt>
             </div>
             <div id="l20"
                class="code sev- "><tt><i>20</i>             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Could not import `flake8_html` module, please install it. &quot;</span></tt>
@@ -92,7 +92,7 @@
                class="code sev- "><tt><i>25</i> &nbsp;</tt>
             </div>
             <div id="l26"
-               class="code sev- "><tt><i>26</i> <span class="k">class</span> <span class="nc">Flake8Stats</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>26</i> <span class="k">class</span><span class="w"> </span><span class="nc">Flake8Stats</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></tt>
             </div>
             <div id="l27"
                class="code sev- "><tt><i>27</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
@@ -107,7 +107,7 @@
                class="code sev- "><tt><i>30</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
             </div>
             <div id="l31"
-               class="code sev- "><tt><i>31</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>31</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
             </div>
             <div id="l32"
                class="code sev- "><tt><i>32</i>                  <span class="n">nb_critical</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_warning</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_info</span><span class="o">=</span><span class="mi">0</span></tt>
@@ -131,7 +131,7 @@
                class="code sev- "><tt><i>38</i> &nbsp;</tt>
             </div>
             <div id="l39"
-               class="code sev- "><tt><i>39</i>     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>39</i>     <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
             </div>
             <div id="l40"
                class="code sev- "><tt><i>40</i>             <span class="n">nb</span><span class="p">,</span>   <span class="c1"># type: int</span></tt>
@@ -185,7 +185,7 @@
                class="code sev- "><tt><i>56</i>     <span class="nd">@property</span></tt>
             </div>
             <div id="l57"
-               class="code sev- "><tt><i>57</i>     <span class="k">def</span> <span class="nf">nb_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>57</i>     <span class="k">def</span><span class="w"> </span><span class="nf">nb_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l58"
                class="code sev- "><tt><i>58</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_critical</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_warning</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_info</span></tt>
@@ -197,7 +197,7 @@
                class="code sev- "><tt><i>60</i> &nbsp;</tt>
             </div>
             <div id="l61"
-               class="code sev- "><tt><i>61</i> <span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>61</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_color</span><span class="p">(</span></tt>
             </div>
             <div id="l62"
                class="code sev- "><tt><i>62</i>         <span class="n">flake8_stats</span>  <span class="c1"># type: Flake8Stats</span></tt>
@@ -248,7 +248,7 @@
                class="code sev- "><tt><i>77</i> &nbsp;</tt>
             </div>
             <div id="l78"
-               class="code sev- "><tt><i>78</i> <span class="k">def</span> <span class="nf">get_flake8_badge</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>78</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_flake8_badge</span><span class="p">(</span></tt>
             </div>
             <div id="l79"
                class="code sev- "><tt><i>79</i>     <span class="n">flake8_stats</span><span class="p">,</span>  <span class="c1"># type: Flake8Stats</span></tt>
@@ -305,7 +305,7 @@
                class="code sev- "><tt><i>91</i> &nbsp;</tt>
             </div>
             <div id="l92"
-               class="code sev- "><tt><i>92</i> <span class="k">def</span> <span class="nf">get_flake8_stats</span><span class="p">(</span><span class="n">flake8_stats_file</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>92</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_flake8_stats</span><span class="p">(</span><span class="n">flake8_stats_file</span><span class="p">):</span></tt>
             </div>
             <div id="l93"
                class="code sev- "><tt><i>93</i>     <span class="c1"># type: (...) -&gt; Flake8Stats</span></tt>
@@ -362,7 +362,7 @@
                class="code sev- "><tt><i>110</i> &nbsp;</tt>
             </div>
             <div id="l111"
-               class="code sev- "><tt><i>111</i> <span class="k">def</span> <span class="nf">parse_flake8_stats</span><span class="p">(</span><span class="n">stats_txt</span>  <span class="c1"># type: str</span></tt>
+               class="code sev- "><tt><i>111</i> <span class="k">def</span><span class="w"> </span><span class="nf">parse_flake8_stats</span><span class="p">(</span><span class="n">stats_txt</span>  <span class="c1"># type: str</span></tt>
             </div>
             <div id="l112"
                class="code sev- "><tt><i>112</i>                        <span class="p">):</span></tt>

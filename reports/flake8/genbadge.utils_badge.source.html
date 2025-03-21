@@ -29,16 +29,16 @@
                class="code sev- "><tt><i>4</i> <span class="c1">#  License: 3-clause BSD, &lt;https://github.com/smarie/python-genbadge/blob/master/LICENSE&gt;</span></tt>
             </div>
             <div id="l5"
-               class="code sev- "><tt><i>5</i> <span class="kn">import</span> <span class="nn">os</span></tt>
+               class="code sev- "><tt><i>5</i> <span class="kn">import</span><span class="w"> </span><span class="nn">os</span></tt>
             </div>
             <div id="l6"
-               class="code sev- "><tt><i>6</i> <span class="kn">import</span> <span class="nn">sys</span></tt>
+               class="code sev- "><tt><i>6</i> <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span></tt>
             </div>
             <div id="l7"
                class="code sev- "><tt><i>7</i> &nbsp;</tt>
             </div>
             <div id="l8"
-               class="code sev- "><tt><i>8</i> <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFont</span></tt>
+               class="code sev- "><tt><i>8</i> <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageFont</span></tt>
             </div>
             <div id="l9"
                class="code sev- "><tt><i>9</i> &nbsp;</tt>
@@ -47,13 +47,13 @@
                class="code sev- "><tt><i>10</i> <span class="k">try</span><span class="p">:</span></tt>
             </div>
             <div id="l11"
-               class="code sev- "><tt><i>11</i>     <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span></tt>
+               class="code sev- "><tt><i>11</i>     <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span></tt>
             </div>
             <div id="l12"
                class="code sev- "><tt><i>12</i> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span></tt>
             </div>
             <div id="l13"
-               class="code sev- "><tt><i>13</i>     <span class="kn">from</span> <span class="nn">pathlib2</span> <span class="kn">import</span> <span class="n">Path</span>  <span class="c1"># python 2</span></tt>
+               class="code sev- "><tt><i>13</i>     <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>  <span class="c1"># python 2</span></tt>
             </div>
             <div id="l14"
                class="code sev- "><tt><i>14</i> &nbsp;</tt>
@@ -62,7 +62,7 @@
                class="code sev- "><tt><i>15</i> <span class="k">try</span><span class="p">:</span></tt>
             </div>
             <div id="l16"
-               class="code sev- "><tt><i>16</i>     <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span></tt>
+               class="code sev- "><tt><i>16</i>     <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span></tt>
             </div>
             <div id="l17"
                class="code sev- "><tt><i>17</i> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span></tt>
@@ -74,7 +74,7 @@
                class="code sev- "><tt><i>19</i> &nbsp;</tt>
             </div>
             <div id="l20"
-               class="code sev- "><tt><i>20</i> <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_string</span><span class="p">,</span> <span class="n">resource_filename</span></tt>
+               class="code sev- "><tt><i>20</i> <span class="kn">from</span><span class="w"> </span><span class="nn">pkg_resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">resource_string</span><span class="p">,</span> <span class="n">resource_filename</span></tt>
             </div>
             <div id="l21"
                class="code sev- "><tt><i>21</i> &nbsp;</tt>
@@ -116,7 +116,7 @@
                class="code sev- "><tt><i>33</i> &nbsp;</tt>
             </div>
             <div id="l34"
-               class="code sev- "><tt><i>34</i> <span class="k">class</span> <span class="nc">Badge</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>34</i> <span class="k">class</span><span class="w"> </span><span class="nc">Badge</span><span class="p">:</span></tt>
             </div>
             <div id="l35"
                class="code sev- "><tt><i>35</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
@@ -128,7 +128,7 @@
                class="code sev- "><tt><i>37</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
             </div>
             <div id="l38"
-               class="code sev- "><tt><i>38</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>38</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
             </div>
             <div id="l39"
                class="code sev- "><tt><i>39</i>                  <span class="n">left_txt</span><span class="p">,</span>   <span class="c1"># type: str</span></tt>
@@ -155,7 +155,7 @@
                class="code sev- "><tt><i>46</i> &nbsp;</tt>
             </div>
             <div id="l47"
-               class="code sev- "><tt><i>47</i>     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>47</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l48"
                class="code sev- "><tt><i>48</i>         <span class="k">return</span> <span class="s2">&quot;[ </span><span class="si">%s</span><span class="s2"> | </span><span class="si">%s</span><span class="s2"> ]  color: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_txt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_txt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span></tt>
@@ -164,7 +164,7 @@
                class="code sev- "><tt><i>49</i> &nbsp;</tt>
             </div>
             <div id="l50"
-               class="code sev- "><tt><i>50</i>     <span class="k">def</span> <span class="nf">as_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>50</i>     <span class="k">def</span><span class="w"> </span><span class="nf">as_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
             </div>
             <div id="l51"
                class="code sev- "><tt><i>51</i>                <span class="n">use_shields</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># type: bool</span></tt>
@@ -203,7 +203,7 @@
                class="code sev- "><tt><i>62</i>             <span class="c1"># download from requests</span></tt>
             </div>
             <div id="l63"
-               class="code sev- "><tt><i>63</i>             <span class="kn">import</span> <span class="nn">requests</span></tt>
+               class="code sev- "><tt><i>63</i>             <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span></tt>
             </div>
             <div id="l64"
                class="code sev- "><tt><i>64</i>             <span class="c1"># url encode test</span></tt>
@@ -239,7 +239,7 @@
                class="code sev- "><tt><i>71</i> &nbsp;</tt>
             </div>
             <div id="l72"
-               class="code sev- "><tt><i>72</i>     <span class="k">def</span> <span class="nf">write_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>72</i>     <span class="k">def</span><span class="w"> </span><span class="nf">write_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
             </div>
             <div id="l73"
                class="code sev-1  le">
@@ -350,7 +350,7 @@
                class="code sev- "><tt><i>102</i> &nbsp;</tt>
             </div>
             <div id="l103"
-               class="code sev- "><tt><i>103</i> <span class="k">def</span> <span class="nf">get_svg_badge</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>103</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_svg_badge</span><span class="p">(</span></tt>
             </div>
             <div id="l104"
                class="code sev- "><tt><i>104</i>         <span class="n">label_txt</span><span class="p">,</span>    <span class="c1"># type: str</span></tt>
@@ -428,7 +428,7 @@
                class="code sev- "><tt><i>128</i> &nbsp;</tt>
             </div>
             <div id="l129"
-               class="code sev- "><tt><i>129</i>     <span class="k">def</span> <span class="nf">process_text</span><span class="p">(</span><span class="n">left_margin</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>129</i>     <span class="k">def</span><span class="w"> </span><span class="nf">process_text</span><span class="p">(</span><span class="n">left_margin</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span></tt>
             </div>
             <div id="l130"
                class="code sev- "><tt><i>130</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;From renderText()</span></tt>
@@ -605,7 +605,7 @@
                class="code sev- "><tt><i>187</i> &nbsp;</tt>
             </div>
             <div id="l188"
-               class="code sev- "><tt><i>188</i> <span class="k">def</span> <span class="nf">get_local_badge_template</span><span class="p">():</span></tt>
+               class="code sev- "><tt><i>188</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_local_badge_template</span><span class="p">():</span></tt>
             </div>
             <div id="l189"
                class="code sev- "><tt><i>189</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads the SVG file template fgrom the package resources&quot;&quot;&quot;</span></tt>
@@ -626,7 +626,7 @@
                class="code sev- "><tt><i>194</i>         <span class="c1"># error when running on python 2 inside the CliInvoker from click with a change of os.cwd.</span></tt>
             </div>
             <div id="l195"
-               class="code sev- "><tt><i>195</i>         <span class="kn">import</span> <span class="nn">genbadge</span></tt>
+               class="code sev- "><tt><i>195</i>         <span class="kn">import</span><span class="w"> </span><span class="nn">genbadge</span></tt>
             </div>
             <div id="l196"
                class="code sev- "><tt><i>196</i>         <span class="n">reload</span><span class="p">(</span><span class="n">genbadge</span><span class="p">)</span>  <span class="c1"># noqa</span></tt>
@@ -647,7 +647,7 @@
                class="code sev- "><tt><i>201</i> &nbsp;</tt>
             </div>
             <div id="l202"
-               class="code sev- "><tt><i>202</i> <span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span><span class="n">color_str</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>202</i> <span class="k">def</span><span class="w"> </span><span class="nf">get_color</span><span class="p">(</span><span class="n">color_str</span><span class="p">):</span></tt>
             </div>
             <div id="l203"
                class="code sev- "><tt><i>203</i>     <span class="k">try</span><span class="p">:</span></tt>
@@ -677,7 +677,7 @@
                class="code sev- "><tt><i>211</i> &nbsp;</tt>
             </div>
             <div id="l212"
-               class="code sev- "><tt><i>212</i> <span class="k">def</span> <span class="nf">round_up_to_odd</span><span class="p">(</span><span class="n">val</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>212</i> <span class="k">def</span><span class="w"> </span><span class="nf">round_up_to_odd</span><span class="p">(</span><span class="n">val</span><span class="p">):</span></tt>
             </div>
             <div id="l213"
                class="code sev- "><tt><i>213</i>     <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="n">val</span></tt>
@@ -689,7 +689,7 @@
                class="code sev- "><tt><i>215</i> &nbsp;</tt>
             </div>
             <div id="l216"
-               class="code sev- "><tt><i>216</i> <span class="k">def</span> <span class="nf">preferred_width_of</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">font_name</span><span class="p">,</span> <span class="n">font_size</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>216</i> <span class="k">def</span><span class="w"> </span><span class="nf">preferred_width_of</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">font_name</span><span class="p">,</span> <span class="n">font_size</span><span class="p">):</span></tt>
             </div>
             <div id="l217"
                class="code sev- "><tt><i>217</i>     <span class="c1"># Increase chances of pixel grid alignment.</span></tt>
@@ -722,7 +722,7 @@
                class="code sev- "><tt><i>226</i>             <span class="c1"># error when running on python 2 inside the CliInvoker from click with a change of os.cwd.</span></tt>
             </div>
             <div id="l227"
-               class="code sev- "><tt><i>227</i>             <span class="kn">import</span> <span class="nn">genbadge</span></tt>
+               class="code sev- "><tt><i>227</i>             <span class="kn">import</span><span class="w"> </span><span class="nn">genbadge</span></tt>
             </div>
             <div id="l228"
                class="code sev- "><tt><i>228</i>             <span class="n">reload</span><span class="p">(</span><span class="n">genbadge</span><span class="p">)</span>  <span class="c1"># noqa</span></tt>

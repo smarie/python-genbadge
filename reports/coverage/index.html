@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Coverage report</title>
-    <link rel="icon" sizes="32x32" href="favicon_32.png">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <script type="text/javascript" src="coverage_html.js" defer></script>
+    <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
+    <link rel="stylesheet" href="style_cb_8e611ae1.css" type="text/css">
+    <script src="coverage_html_cb_6fb7b396.js" defer></script>
 </head>
 <body class="indexfile">
 <header>
     <div class="content">
         <h1>Coverage report:
-            <span class="pc_cov">81%</span>
+            <span class="pc_cov">78%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
             <label for="help_panel_state">
-                <img id="keyboard_icon" src="keybd_closed.png" alt="Show/hide keyboard shortcuts" />
+                <img id="keyboard_icon" src="keybd_closed_cb_ce680311.png" alt="Show/hide keyboard shortcuts">
             </label>
             <div id="help_panel">
                 <p class="legend">Shortcuts on this page</p>
                 <div class="keyhelp">
                     <p>
-                        <kbd>n</kbd>
+                        <kbd>f</kbd>
                         <kbd>s</kbd>
                         <kbd>m</kbd>
                         <kbd>x</kbd>
@@ -43,11 +43,20 @@
             </div>
         </aside>
         <form id="filter_container">
-            <input id="filter" type="text" value="" placeholder="filter..." />
+            <input id="filter" type="text" value="" placeholder="filter...">
+            <div>
+                <input id="hide100" type="checkbox" >
+                <label for="hide100">hide covered</label>
+            </div>
         </form>
+        <h2>
+                <a class="button current">Files</a>
+                <a class="button" href="function_index.html">Functions</a>
+                <a class="button" href="class_index.html">Classes</a>
+        </h2>
         <p class="text">
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-11-10 20:37 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.1">coverage.py v7.6.1</a>,
+            created at 2025-03-21 20:13 +0000
         </p>
     </div>
 </header>
@@ -55,18 +64,18 @@
     <table class="index" data-sortable>
         <thead>
             <tr class="tablehead" title="Click to sort">
-                <th class="name left" aria-sort="none" data-shortcut="n">Module</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="b">branches</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="p">partial</th>
-                <th class="right" aria-sort="none" data-shortcut="c">coverage</th>
+                <th id="file" class="name left" aria-sort="none" data-shortcut="f">File<span class="arrows"></span></th>
+                <th id="statements" aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements<span class="arrows"></span></th>
+                <th id="missing" aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing<span class="arrows"></span></th>
+                <th id="excluded" aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded<span class="arrows"></span></th>
+                <th id="branches" aria-sort="none" data-default-sort-order="descending" data-shortcut="b">branches<span class="arrows"></span></th>
+                <th id="partial" aria-sort="none" data-default-sort-order="descending" data-shortcut="p">partial<span class="arrows"></span></th>
+                <th id="coverage" class="right" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
             </tr>
         </thead>
         <tbody>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa___init___py.html">genbadge/__init__.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d___init___py.html">src/genbadge/__init__.py</a></td>
                 <td>4</td>
                 <td>0</td>
                 <td>4</td>
@@ -74,8 +83,8 @@
                 <td>0</td>
                 <td class="right" data-ratio="4 4">100%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa__version_py.html">genbadge/_version.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d__version_py.html">src/genbadge/_version.py</a></td>
                 <td>2</td>
                 <td>0</td>
                 <td>0</td>
@@ -83,35 +92,17 @@
                 <td>0</td>
                 <td class="right" data-ratio="2 2">100%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa_main_py.html">genbadge/main.py</a></td>
-                <td>129</td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d_main_py.html">src/genbadge/main.py</a></td>
+                <td>130</td>
                 <td>16</td>
                 <td>2</td>
                 <td>44</td>
                 <td>9</td>
-                <td class="right" data-ratio="146 173">84%</td>
+                <td class="right" data-ratio="147 174">84%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_8d3a89da19ee0d20_test_core_py.html">genbadge/tests/test_core.py</a></td>
-                <td>83</td>
-                <td>2</td>
-                <td>2</td>
-                <td>4</td>
-                <td>2</td>
-                <td class="right" data-ratio="83 87">95%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_8d3a89da19ee0d20_test_readme_common_py.html">genbadge/tests/test_readme_common.py</a></td>
-                <td>137</td>
-                <td>5</td>
-                <td>2</td>
-                <td>36</td>
-                <td>6</td>
-                <td class="right" data-ratio="162 173">94%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa_utils_badge_py.html">genbadge/utils_badge.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d_utils_badge_py.html">src/genbadge/utils_badge.py</a></td>
                 <td>103</td>
                 <td>13</td>
                 <td>4</td>
@@ -119,52 +110,52 @@
                 <td>5</td>
                 <td class="right" data-ratio="103 123">84%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa_utils_coverage_py.html">genbadge/utils_coverage.py</a></td>
-                <td>79</td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d_utils_coverage_py.html">src/genbadge/utils_coverage.py</a></td>
+                <td>85</td>
                 <td>15</td>
                 <td>0</td>
                 <td>18</td>
                 <td>5</td>
-                <td class="right" data-ratio="73 97">75%</td>
+                <td class="right" data-ratio="79 103">77%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa_utils_flake8_py.html">genbadge/utils_flake8.py</a></td>
-                <td>57</td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d_utils_flake8_py.html">src/genbadge/utils_flake8.py</a></td>
+                <td>58</td>
                 <td>13</td>
                 <td>0</td>
                 <td>18</td>
                 <td>3</td>
-                <td class="right" data-ratio="55 75">73%</td>
+                <td class="right" data-ratio="56 76">74%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa_utils_junit_py.html">genbadge/utils_junit.py</a></td>
-                <td>49</td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d_utils_junit_py.html">src/genbadge/utils_junit.py</a></td>
+                <td>53</td>
                 <td>8</td>
                 <td>2</td>
                 <td>14</td>
                 <td>3</td>
-                <td class="right" data-ratio="46 63">73%</td>
+                <td class="right" data-ratio="50 67">75%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160653144a4a8fa_xunitparser_copy_py.html">genbadge/xunitparser_copy.py</a></td>
-                <td>155</td>
+            <tr class="region">
+                <td class="name left"><a href="z_54579382f1cf822d_xunitparser_copy_py.html">src/genbadge/xunitparser_copy.py</a></td>
+                <td>164</td>
                 <td>40</td>
                 <td>0</td>
                 <td>56</td>
                 <td>14</td>
-                <td class="right" data-ratio="147 211">70%</td>
+                <td class="right" data-ratio="156 220">71%</td>
             </tr>
         </tbody>
         <tfoot>
             <tr class="total">
                 <td class="name left">Total</td>
-                <td>798</td>
-                <td>112</td>
-                <td>16</td>
-                <td>210</td>
-                <td>47</td>
-                <td class="right" data-ratio="821 1008">81%</td>
+                <td>599</td>
+                <td>105</td>
+                <td>12</td>
+                <td>170</td>
+                <td>39</td>
+                <td class="right" data-ratio="597 769">78%</td>
             </tr>
         </tfoot>
     </table>
@@ -175,16 +166,16 @@
 <footer>
     <div class="content">
         <p>
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-11-10 20:37 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.1">coverage.py v7.6.1</a>,
+            created at 2025-03-21 20:13 +0000
         </p>
     </div>
     <aside class="hidden">
-        <a id="prevFileLink" class="nav" href="d_a160653144a4a8fa_xunitparser_copy_py.html"/>
-        <a id="nextFileLink" class="nav" href="d_a160653144a4a8fa___init___py.html"/>
-        <button type="button" class="button_prev_file" data-shortcut="["/>
-        <button type="button" class="button_next_file" data-shortcut="]"/>
-        <button type="button" class="button_show_hide_help" data-shortcut="?"/>
+        <a id="prevFileLink" class="nav" href="z_54579382f1cf822d_xunitparser_copy_py.html"></a>
+        <a id="nextFileLink" class="nav" href="z_54579382f1cf822d___init___py.html"></a>
+        <button type="button" class="button_prev_file" data-shortcut="["></button>
+        <button type="button" class="button_next_file" data-shortcut="]"></button>
+        <button type="button" class="button_show_hide_help" data-shortcut="?"></button>
     </aside>
 </footer>
 </body>
