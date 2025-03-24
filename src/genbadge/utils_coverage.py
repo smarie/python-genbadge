@@ -24,13 +24,14 @@ class CoverageStats(object):
     Contains the results from parsing the coverage.xml.
     """
     def __init__(self,
-                 branches_covered=None, branches_valid=None,
-                 complexity=None, lines_covered=None, lines_valid=None
+                 branches_covered=None, branches_valid=None, branch_option=None,
+                 complexity=None, lines_covered=None, lines_valid=None,
                  ):
         self.complexity = complexity
 
         self.branches_covered = branches_covered
         self.branches_valid = branches_valid
+        self.branch_option = branch_option
 
         self.lines_covered = lines_covered
         self.lines_valid = lines_valid
@@ -40,10 +41,14 @@ class CoverageStats(object):
         """
         Note: in --no-branch situations, the number of branches is 0.
         In that case, the branch rate is 0 in the coverage.xml.
-        We mimic the behaviour in this field to be consistent.
+        But in --branch situations without actual branches,
+        the number of branches is also 0 but the branch rate is 1.
+        We mimic both behaviours in this field to be consistent.
         """
         if self.branches_valid > 0:
             return self.branches_covered / self.branches_valid
+        elif self.branch_option:
+            return 1
         else:
             return 0
 
@@ -162,12 +167,13 @@ class CovParser(object):
         branch_rate = float(root.attrib.get('branch-rate'))
         line_rate = float(root.attrib.get('line-rate'))
 
+        # detect whether the --branch option were set or not
+        # so CoverageStats knows how to distinguish between them
+        cov.branch_option = cov.branches_valid > 0 or branch_rate == 1.0
+
         if not is_close(cov.branch_rate, branch_rate):
-            # if branch=true but there are no actual branches coverage will report
-            # branches-valid="0" and branch-rate="1"
-            if cov.branches_valid != 0 or branch_rate != 1.0:
-                raise ValueError("Computed branch rate (%s) is different from the one in the file (%s)"
-                                 % (cov.branch_rate, branch_rate))
+            raise ValueError("Computed branch rate (%s) is different from the one in the file (%s)"
+                             % (cov.branch_rate, branch_rate))
         if not is_close(cov.line_rate, line_rate):
             raise ValueError("Computed line rate (%s) is different from the one in the file (%s)"
                              % (cov.line_rate, line_rate))
