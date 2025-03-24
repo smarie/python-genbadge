@@ -50,7 +50,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-genbadge/_version.py
+src/genbadge/_version.py
 
 # Translations
 *.mo
