@@ -1,7 +1,12 @@
 # Changelog
 
-### 1.1.2 - (in progress)
+### 1.1.2 - Bugfix and new packaging
 
+- Fix branch coverage rate comparison when used with --branch without actual branches. Fixes
+  [#23](https://github.com/smarie/python-genbadge/issues/23). PR
+  [#37](https://github.com/smarie/python-genbadge/pull/37) by [marcegeek](https://github.com/marcegeek).
+- Removed python 2.7, 3.5, 3.6 and 3.7 from CI. This version is the last where python versions < 3.8 are officially 
+  supported.
 - Refactored project layout so that tests are not packaged in wheel.
 - `conda` is not the backend virtual environment anymore. Fixes [#35](https://github.com/smarie/python-genbadge/issues/35).
 
