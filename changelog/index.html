@@ -282,9 +282,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#112-in-progress" class="md-nav__link">
+  <a href="#112-bugfix-and-new-packaging" class="md-nav__link">
     <span class="md-ellipsis">
-      1.1.2 - (in progress)
+      1.1.2 - Bugfix and new packaging
     </span>
   </a>
   
@@ -451,9 +451,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#112-in-progress" class="md-nav__link">
+  <a href="#112-bugfix-and-new-packaging" class="md-nav__link">
     <span class="md-ellipsis">
-      1.1.2 - (in progress)
+      1.1.2 - Bugfix and new packaging
     </span>
   </a>
   
@@ -605,8 +605,13 @@
 
 
 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
-<h3 id="112-in-progress">1.1.2 - (in progress)<a class="headerlink" href="#112-in-progress" title="Permanent link">&para;</a></h3>
+<h3 id="112-bugfix-and-new-packaging">1.1.2 - Bugfix and new packaging<a class="headerlink" href="#112-bugfix-and-new-packaging" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Fix branch coverage rate comparison when used with --branch without actual branches. Fixes
+  <a href="https://github.com/smarie/python-genbadge/issues/23">#23</a>. PR
+  <a href="https://github.com/smarie/python-genbadge/pull/37">#37</a> by <a href="https://github.com/marcegeek">marcegeek</a>.</li>
+<li>Removed python 2.7, 3.5, 3.6 and 3.7 from CI. This version is the last where python versions &lt; 3.8 are officially 
+  supported.</li>
 <li>Refactored project layout so that tests are not packaged in wheel.</li>
 <li><code>conda</code> is not the backend virtual environment anymore. Fixes <a href="https://github.com/smarie/python-genbadge/issues/35">#35</a>.</li>
 </ul>
