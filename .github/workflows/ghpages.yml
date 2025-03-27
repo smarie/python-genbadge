@@ -1,10 +1,18 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy Static Website from gh-pages branch to Pages
+name: Deploy Static Website from gh-pages branch
 
 on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["gh-pages"]
+
+  # Since the pushes made by the workflow using GITHUB_TOKEN do not trigger the above,
+  # Add an explicit trigger for workflow completion
+  workflow_run:
+      workflows: ['Build']
+      types: [completed]
+      branches:
+          - 'main'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
