@@ -17,7 +17,17 @@ try:
 except ImportError:  # pragma: no cover
     pass
 
-from pkg_resources import resource_string, resource_filename
+# Migration from pkg_resources to importlib.resources
+try:
+    # Python 3.9+
+    from importlib.resources import files, as_file
+except ImportError:
+    try:
+        # Python 3.7-3.8 (importlib_resources backport)
+        from importlib_resources import files, as_file
+    except ImportError:
+        files = None
+        as_file = None
 
 
 COLORS = {
@@ -185,16 +195,38 @@ def get_svg_badge(
     return template
 
 
+def _resource_string(package, resource_name):
+    """Fallback for importlib.resources in older Python versions."""
+    if files and as_file:
+        with as_file(files(package) / resource_name) as f:
+            return f.read_bytes()
+    else:
+        # Fallback to pkg_resources for older Python versions
+        from pkg_resources import resource_string
+
+        return resource_string(package, resource_name)
+
+def _resource_filename(package, resource_name):
+    """Fallback for importlib.resources in older Python versions."""
+    if files and as_file:
+        with as_file(files(package) / resource_name) as f:
+            return str(f)
+    else:
+        # Fallback to pkg_resources for older Python versions
+        from pkg_resources import resource_filename
+
+        return resource_filename(package, resource_name)
+
 def get_local_badge_template():
     """Reads the SVG file template fgrom the package resources"""
     template_path = "badge-template.svg"
     try:
-        template = resource_string("genbadge", template_path).decode('utf8')
+        template = _resource_string("genbadge", template_path).decode('utf8')
     except IOError:
         # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
         import genbadge
         reload(genbadge)  # noqa
-        template = resource_string("genbadge", template_path).decode('utf8')
+        template = _resource_string("genbadge", template_path).decode('utf8')
 
     return template
 
@@ -221,12 +253,12 @@ def preferred_width_of(txt, font_name, font_size):
         font = ImageFont.truetype(font=font_file, size=font_size)
     except (IOError if sys.version_info < (3,) else OSError):
         # Font not found: use the embedded font file from the package
-        font_path = resource_filename("genbadge", font_file)
+        font_path = _resource_filename("genbadge", font_file)
         if not os.path.exists(font_path):
             # error when running on python 2 inside the CliInvoker from click with a change of os.cwd.
             import genbadge
             reload(genbadge)  # noqa
-            font_path = resource_filename("genbadge", font_file)
+            font_path = _resource_filename("genbadge", font_file)
 
         font = ImageFont.truetype(font=font_path, size=font_size)
 
