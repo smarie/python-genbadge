@@ -21,11 +21,11 @@ except ImportError:  # pragma: no cover
 try:
     # Python 3.9+
     from importlib.resources import files, as_file
-except ImportError:
+except ImportError:  # pragma: no cover
     try:
         # Python 3.7-3.8 (importlib_resources backport)
         from importlib_resources import files, as_file
-    except ImportError:
+    except ImportError:  # pragma: no cover
         files = None
         as_file = None
 
