@@ -1,17 +1,17 @@
 # Changelog
 
-### 1.1.3 - In Progress
+### 1.1.3 - Bugfix and removal of deprecated dependency
 
-- Fix UserWarning for pkg_resources by migrating to importlib.resources. Fixes
+- Fixed `UserWarning` for `pkg_resources` by migrating to `importlib.resources`. Fixes
   [#44](https://github.com/smarie/python-genbadge/issues/44). PR
   [#45](https://github.com/smarie/python-genbadge/pull/45) by [vonsteer](https://github.com/vonsteer).
-- Fix help exit_code issue when using newer versions of Python. Fixes 
+- Fixed help exit code issue when using newer versions of Python. Fixes 
   [#46](https://github.com/smarie/python-genbadge/issues/46). PR
   [#45](https://github.com/smarie/python-genbadge/pull/45) by [vonsteer](https://github.com/vonsteer).
 
 ### 1.1.2 - Bugfix and new packaging
 
-- Fix branch coverage rate comparison when used with --branch without actual branches. Fixes
+- Fixed branch coverage rate comparison when used with --branch without actual branches. Fixes
   [#23](https://github.com/smarie/python-genbadge/issues/23). PR
   [#37](https://github.com/smarie/python-genbadge/pull/37) by [marcegeek](https://github.com/marcegeek).
 - Removed python 2.7, 3.5, 3.6 and 3.7 from CI. This version is the last where python versions < 3.8 are officially 
