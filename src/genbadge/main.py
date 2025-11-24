@@ -35,8 +35,9 @@ SILENT_HELP = ("When this flag is active nothing will be written to stdout. Note
                "is used as the output file.")
 
 
-@click.group()
-def genbadge():
+@click.group(invoke_without_command=True)
+@click.pass_context
+def genbadge(ctx):
     """
     Commandline utility to generate badges.
     To get help on each command use:
@@ -44,7 +45,9 @@ def genbadge():
         genbadge <cmd> --help
 
     """
-    pass
+    if ctx.invoked_subcommand is None:
+        click.echo(ctx.get_help())
+        ctx.exit(0)
 
 
 @genbadge.command(name="tests",
