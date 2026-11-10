@@ -41,7 +41,7 @@ class TestStats(object):
 
     @property
     def success_percentage(self):
-        if self.runned > 0:
+        if self.runned > 0 and self.total_without_skipped > 0:
             return self.success * 100 / self.total_without_skipped
         else:
             return 100

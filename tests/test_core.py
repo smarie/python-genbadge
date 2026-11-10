@@ -15,7 +15,7 @@ except ImportError:  # pragma: no cover
 from genbadge import Badge
 from genbadge.utils_badge import get_local_badge_template
 from genbadge.utils_coverage import parse_cov
-from genbadge.utils_junit import get_test_stats
+from genbadge.utils_junit import TestStats, get_test_stats
 from genbadge.utils_flake8 import get_flake8_stats
 
 
@@ -142,6 +142,17 @@ def test_parse_tests():
     assert res.total_without_skipped == res.runned - res.skipped + res.errors
 
     assert res.success_percentage == res.success * 100 / res.total_without_skipped
+
+
+def test_success_percentage_all_skipped():
+    """A run where every test was skipped must report 100%, not crash.
+
+    Regression test: with runned > 0 but total_without_skipped == 0 the
+    percentage divided by zero (ZeroDivisionError).
+    """
+    res = TestStats(runned=5, skipped=5, failed=0, errors=0)
+    assert res.total_without_skipped == 0
+    assert res.success_percentage == 100
 
 
 def test_parse_cov():
